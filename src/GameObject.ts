@@ -8,6 +8,7 @@
 abstract class GameObject {
     
     public shape:egret.Shape = null;
+    public mask:egret.DisplayObject | egret.Rectangle = null;
     
     public static objects: GameObject[] = [];
     public static display: egret.DisplayObjectContainer;
@@ -58,7 +59,7 @@ abstract class GameObject {
     //shapeの削除など、destroy後に後処理が必要なら記述
     addDestroyMethod(){}
 
-    private delete(){
+    protected delete(){
         this.addDestroyMethod();
         if( this.shape ){
             GameObject.display.removeChild(this.shape);

@@ -1,4 +1,4 @@
-class Box extends GameObject{
+abstract class Box extends GameObject{
     
     constructor(x : number, y : number, width : number, height : number, color:number) {
         super();
@@ -13,6 +13,8 @@ class Box extends GameObject{
         }
 
         this.shape = new egret.Shape();
+        this.shape.anchorOffsetX += width/2;
+        this.shape.anchorOffsetY += height/2;
         this.shape.x = x;
         this.shape.y = y;
         this.shape.graphics.beginFill(color);
@@ -22,7 +24,7 @@ class Box extends GameObject{
         
     }
 
-    updateContent(){};
+    //updateContent(){};
 
 }
 
@@ -85,4 +87,6 @@ class MyBox extends Box{
     constructor(x : number, y : number, width : number, height : number, color:number) {
         super(x, y, width, height, color);
     }
+
+    updateContent(){}
 }

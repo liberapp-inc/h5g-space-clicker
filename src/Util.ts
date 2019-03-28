@@ -72,6 +72,8 @@ class Util{
 
         tf.textColor = color;
 
+        tf.multiline = true;
+
 
         return tf;
     }

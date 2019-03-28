@@ -20,6 +20,8 @@ var Box = (function (_super) {
             GameObject.display.removeChild(this.shape);
         }
         this.shape = new egret.Shape();
+        this.shape.anchorOffsetX += width / 2;
+        this.shape.anchorOffsetY += height / 2;
         this.shape.x = x;
         this.shape.y = y;
         this.shape.graphics.beginFill(color);
@@ -27,8 +29,6 @@ var Box = (function (_super) {
         this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);
     };
-    Box.prototype.updateContent = function () { };
-    ;
     return Box;
 }(GameObject));
 __reflect(Box.prototype, "Box");
@@ -74,6 +74,7 @@ var MyBox = (function (_super) {
     function MyBox(x, y, width, height, color) {
         return _super.call(this, x, y, width, height, color) || this;
     }
+    MyBox.prototype.updateContent = function () { };
     return MyBox;
 }(Box));
 __reflect(MyBox.prototype, "MyBox");

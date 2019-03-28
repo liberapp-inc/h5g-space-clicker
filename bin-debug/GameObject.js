@@ -17,6 +17,7 @@ r.prototype = e.prototype, t.prototype = new r();
 var GameObject = (function () {
     function GameObject() {
         this.shape = null;
+        this.mask = null;
         this.destroyFlag = false;
         GameObject.objects.push(this);
     }

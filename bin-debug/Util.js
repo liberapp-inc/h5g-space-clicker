@@ -59,6 +59,7 @@ var Util = (function () {
         tf.scaleX = ratio;
         tf.scaleY = ratio;
         tf.textColor = color;
+        tf.multiline = true;
         return tf;
     };
     Util.myStrokeText = function (x, y, text, size, ratio, color, font, stColor, stSize) {
