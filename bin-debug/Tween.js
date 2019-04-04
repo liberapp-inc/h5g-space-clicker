@@ -59,6 +59,29 @@ var MyTween = (function () {
             }
         });
     };
+    MyTween.enemyFadeOut = function (object, objectClass) {
+        if (objectClass == undefined) {
+            objectClass = null;
+        }
+        egret.Tween.get(object)
+            .to({ alpha: 0.2 }, 1000)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+            //destroyを実装しているクラスにだけ実行したかったが、
+            //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
+            //destroyできなかったので場合分けしていないので注意
+            if (objectClass != undefined || objectClass != null) {
+                objectClass.destroy();
+                GameScene.createEnemy();
+            }
+        });
+    };
+    MyTween.knockBack = function (object) {
+        var objectPosY = object.y;
+        egret.Tween.get(object)
+            .to({ y: objectPosY - 500 }, 100, egret.Ease.elasticIn)
+            .to({ y: objectPosY }, 200, egret.Ease.sineIn);
+    };
     return MyTween;
 }());
 __reflect(MyTween.prototype, "MyTween");
@@ -70,7 +93,7 @@ var FadeOut = (function () {
             objectClass = null;
         }
         egret.Tween.get(object)
-            .to({ alpha: 0.5 }, 1000)
+            .to({ alpha: 0.2 }, 1000)
             .call(function () {
             egret.Tween.removeTweens(object);
             //destroyを実装しているクラスにだけ実行したかったが、
@@ -84,4 +107,10 @@ var FadeOut = (function () {
     return FadeOut;
 }());
 __reflect(FadeOut.prototype, "FadeOut");
+var EnemyFadeOut = (function () {
+    function EnemyFadeOut() {
+    }
+    return EnemyFadeOut;
+}());
+__reflect(EnemyFadeOut.prototype, "EnemyFadeOut");
 //# sourceMappingURL=Tween.js.map

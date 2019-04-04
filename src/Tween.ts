@@ -53,10 +53,40 @@ class MyTween {
             });
     }
 
+    static enemyFadeOut(object : any, objectClass?:any){
+
+        if(objectClass == undefined){
+            objectClass = null;
+        }
+
+        egret.Tween.get(object) 
+            .to({alpha:0.2}, 1000)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+
+                //destroyを実装しているクラスにだけ実行したかったが、
+                //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
+                //destroyできなかったので場合分けしていないので注意
+                if(objectClass != undefined || objectClass != null){
+                    objectClass.destroy();
+                    GameScene.createEnemy();
+                }
+            });
+    }
+    
+    static knockBack(object : any){
+
+        let objectPosY : number = object.y;
+
+        egret.Tween.get(object) 
+            .to({y:objectPosY - 50}, 100, egret.Ease.elasticIn)
+            .to({y:objectPosY}, 200, egret.Ease.sineIn);
+    }
+
 }
 
 class FadeOut {
-    
+
     static fadeOut(object : any, objectClass?:any){
 
         if(objectClass == undefined){
@@ -64,7 +94,7 @@ class FadeOut {
         }
 
         egret.Tween.get(object) 
-            .to({alpha:0.5 }, 1000)
+            .to({alpha:0.2}, 1000)
             .call(()=> {
                 egret.Tween.removeTweens(object);
 
@@ -75,5 +105,11 @@ class FadeOut {
             });
     }
     
+
+}
+
+class EnemyFadeOut{
+
+
 
 }

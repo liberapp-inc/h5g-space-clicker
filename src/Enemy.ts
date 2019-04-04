@@ -54,6 +54,7 @@ class RectEnemy extends Enemy{
     private setObject(x : number, y : number, width : number, height : number){
         this.object = new egret.DisplayObjectContainer();
         this.object.anchorOffsetX += width/2;
+        this.object.anchorOffsetY += height/2;
         this.object.x = x;
         this.object.y = y;
         this.object.width = width;

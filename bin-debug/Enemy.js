@@ -58,6 +58,7 @@ var RectEnemy = (function (_super) {
     RectEnemy.prototype.setObject = function (x, y, width, height) {
         this.object = new egret.DisplayObjectContainer();
         this.object.anchorOffsetX += width / 2;
+        this.object.anchorOffsetY += height / 2;
         this.object.x = x;
         this.object.y = y;
         this.object.width = width;

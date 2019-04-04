@@ -88,14 +88,16 @@ class Player extends GameObject{
                 if(b.collisionFlag == false){
                     if(e.object.y >= b.object.y && e.deadFlag == false){
                         e.hp -= Player.bulletDamage;
+                        MyTween.knockBack(e.object);
                         b.destroy();
                         b.collisionFlag = true;
                         if(e.hp <= 0 ){
                             e.hp = 0;
                             e.deadFlag = true;
+                            Money.I.money += e.dropMoney;
                             //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                             //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
-                            MyTween.fadeOut(e.object, e);
+                            MyTween.enemyFadeOut(e.object, e);
 
                             //e.destroy();
                         }

@@ -23,9 +23,9 @@ var GameScene = (function (_super) {
         return _this;
     }
     GameScene.prototype.createStage = function () {
-        this.createEnemy();
+        GameScene.createEnemy();
     };
-    GameScene.prototype.createEnemy = function () {
+    GameScene.createEnemy = function () {
         var createEnemy = 1; //Util.randomInt(RandomEnemy.NONE, RandomEnemy.TRIANGLE);
         switch (createEnemy) {
             case RandomEnemy.RECT:

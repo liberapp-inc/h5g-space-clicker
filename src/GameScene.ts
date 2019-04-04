@@ -17,10 +17,10 @@ class GameScene extends GameObject{
     }
 
     createStage(){
-        this.createEnemy();
+        GameScene.createEnemy();
     }
 
-    createEnemy(){
+    static createEnemy(){
         let createEnemy : number = 1;//Util.randomInt(RandomEnemy.NONE, RandomEnemy.TRIANGLE);
 
         switch(createEnemy){
