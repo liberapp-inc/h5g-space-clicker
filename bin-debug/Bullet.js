@@ -14,6 +14,7 @@ var Bullet = (function (_super) {
     function Bullet(x, y, width, height, color) {
         var _this = _super.call(this) || this;
         _this.object = null;
+        _this.collisionFlag = false;
         _this.setObject(x, y, width, height);
         _this.setShape(x, y, width, height, color);
         _this.object.scaleX = 0.5;

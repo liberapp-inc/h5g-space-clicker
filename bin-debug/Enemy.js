@@ -21,10 +21,24 @@ var Enemy = (function (_super) {
         _this.object = null;
         _this.dropMoney = 10;
         _this.hp = 0;
+        _this.hpTextField = null;
+        _this.hpTextFieldColor = 0xff0000;
         return _this;
     }
+    Enemy.prototype.setHpText = function () {
+        this.hpTextField = Util.myText(0, 0, this.hp.toString(), 100, 0.5, this.hpTextFieldColor, true);
+        this.object.addChild(this.hpTextField);
+    };
     Enemy.prototype.addDestroyMethod = function () {
         Money.I.money += this.dropMoney;
+    };
+    Enemy.prototype.updateContent = function () {
+        this.hpTextField.text = this.hp.toString();
+    };
+    Enemy.prototype.delete = function () {
+        if (this.shape) {
+            GameObject.display.removeChild(this.object);
+        }
     };
     return Enemy;
 }(GameObject));
@@ -37,6 +51,7 @@ var RectEnemy = (function (_super) {
         _this.setShape(x, y, width, height, color);
         _this.hp = hp;
         _this.dropMoney = dropMoney;
+        _this.setHpText();
         return _this;
     }
     RectEnemy.prototype.setObject = function (x, y, width, height) {
@@ -59,16 +74,6 @@ var RectEnemy = (function (_super) {
         this.shape.graphics.drawRect(0, 0, width, height);
         this.shape.graphics.endFill();
         this.object.addChild(this.shape);
-    };
-    RectEnemy.prototype.addDestroyMethod = function () {
-        Money.I.money += this.dropMoney;
-    };
-    RectEnemy.prototype.delete = function () {
-        if (this.shape) {
-            GameObject.display.removeChild(this.object);
-        }
-    };
-    RectEnemy.prototype.updateContent = function () {
     };
     return RectEnemy;
 }(Enemy));

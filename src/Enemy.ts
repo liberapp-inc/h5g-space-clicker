@@ -9,16 +9,33 @@ abstract class Enemy extends GameObject{
     public object : egret.DisplayObjectContainer = null;
     public dropMoney : number = 10;
     public hp : number = 0;
+    public hpTextField : egret.TextField = null;
+    public hpTextFieldColor : number = 0xff0000;
 
     constructor() {
         super();
+
     }
 
+    setHpText(){
+        this.hpTextField = Util.myText(0, 0, this.hp.toString(), 100, 0.5, this.hpTextFieldColor, true);
+        this.object.addChild(this.hpTextField);
+    }
 
     addDestroyMethod(){
         Money.I.money += this.dropMoney;
     }
 
+    updateContent() {
+        this.hpTextField.text = this.hp.toString();
+
+    }
+
+    protected delete(){
+        if( this.shape ){
+            GameObject.display.removeChild(this.object);
+        }
+    }
 
 }
 
@@ -30,6 +47,7 @@ class RectEnemy extends Enemy{
         this.setShape(x, y, width, height, color);
         this.hp = hp;
         this.dropMoney = dropMoney;
+        this.setHpText();
 
     }
 
@@ -61,16 +79,15 @@ class RectEnemy extends Enemy{
         
     }
 
-    addDestroyMethod(){
+/*    addDestroyMethod(){
         Money.I.money += this.dropMoney;
-    }
+    }*/
 
-    protected delete(){
+/*    protected delete(){
         if( this.shape ){
             GameObject.display.removeChild(this.object);
         }
-    }
+    }*/
 
-    updateContent(){
-    }
+
 }

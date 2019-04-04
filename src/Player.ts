@@ -3,8 +3,9 @@ class Player extends GameObject{
     static I : Player = null;
     static object : egret.DisplayObjectContainer = null;
     static shotTimer : egret.Timer = null;
-    static shotInterval :number = 300;
+    static shotInterval :number = 1000;
     static bullet : Bullet[] = [];
+    static bulletDamage : number = 1;
     static bulletMoveSpeed : number = 5;
 
 
@@ -82,6 +83,23 @@ class Player extends GameObject{
             if(b.object.y < 0){
                 b.destroy();
             }
+            //Enemyとの接触判定
+            GameScene.enemy.forEach(e =>{
+                if(b.collisionFlag == false){
+                    if(e.object.y >= b.object.y){
+                        e.hp -= Player.bulletDamage;
+                        b.destroy();
+                        b.collisionFlag = true;
+                        if(e.hp <= 0){
+                            e.hp = 0;
+                            e.destroy();
+                        }
+
+                    }
+
+                }
+
+            });
         });
     }
 }

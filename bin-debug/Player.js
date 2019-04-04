@@ -67,13 +67,28 @@ var Player = (function (_super) {
             if (b.object.y < 0) {
                 b.destroy();
             }
+            //Enemyとの接触判定
+            GameScene.enemy.forEach(function (e) {
+                if (b.collisionFlag == false) {
+                    if (e.object.y >= b.object.y) {
+                        e.hp -= Player.bulletDamage;
+                        b.destroy();
+                        b.collisionFlag = true;
+                        if (e.hp <= 0) {
+                            e.hp = 0;
+                            e.destroy();
+                        }
+                    }
+                }
+            });
         });
     };
     Player.I = null;
     Player.object = null;
     Player.shotTimer = null;
-    Player.shotInterval = 300;
+    Player.shotInterval = 1000;
     Player.bullet = [];
+    Player.bulletDamage = 1;
     Player.bulletMoveSpeed = 5;
     return Player;
 }(GameObject));

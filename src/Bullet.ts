@@ -1,6 +1,7 @@
 class Bullet extends GameObject{
 
     public object : egret.DisplayObjectContainer = null;
+    public collisionFlag : boolean = false;
     //static bulletColor : number = Util.color(255,255,255);
 
 
