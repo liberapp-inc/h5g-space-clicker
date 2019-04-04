@@ -79,7 +79,7 @@ var MyTween = (function () {
     MyTween.knockBack = function (object) {
         var objectPosY = object.y;
         egret.Tween.get(object)
-            .to({ y: objectPosY - 500 }, 100, egret.Ease.elasticIn)
+            .to({ y: objectPosY - 50 }, 100, egret.Ease.elasticIn)
             .to({ y: objectPosY }, 200, egret.Ease.sineIn);
     };
     return MyTween;

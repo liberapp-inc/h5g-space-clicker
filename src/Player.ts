@@ -94,7 +94,7 @@ class Player extends GameObject{
                         if(e.hp <= 0 ){
                             e.hp = 0;
                             e.deadFlag = true;
-                            Money.I.money += e.dropMoney;
+                            Money.addMoney(e.dropMoney);
                             //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                             //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
                             MyTween.enemyFadeOut(e.object, e);

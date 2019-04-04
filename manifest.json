@@ -13,11 +13,12 @@
 	],
 	"game": [
 		"bin-debug/GameObject.js",
-		"bin-debug/GameScene.js",
+		"bin-debug/Kill.js",
 		"bin-debug/Bullet.js",
 		"bin-debug/Enemy.js",
 		"bin-debug/Ball.js",
 		"bin-debug/GameOver.js",
+		"bin-debug/GameScene.js",
 		"bin-debug/Box.js",
 		"bin-debug/Main.js",
 		"bin-debug/Money.js",
