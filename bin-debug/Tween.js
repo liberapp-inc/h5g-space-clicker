@@ -40,12 +40,48 @@ var Tween = (function (_super) {
     return Tween;
 }(egret.DisplayObjectContainer));
 __reflect(Tween.prototype, "Tween");
-var EnemyFadeOut = (function (_super) {
-    __extends(EnemyFadeOut, _super);
-    function EnemyFadeOut() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var MyTween = (function () {
+    function MyTween() {
     }
-    return EnemyFadeOut;
-}(Tween));
-__reflect(EnemyFadeOut.prototype, "EnemyFadeOut");
+    MyTween.fadeOut = function (object, objectClass) {
+        if (objectClass == undefined) {
+            objectClass = null;
+        }
+        egret.Tween.get(object)
+            .to({ alpha: 0.5 }, 1000)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+            //destroyを実装しているクラスにだけ実行したかったが、
+            //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
+            //destroyできなかったので場合分けしていないので注意
+            if (objectClass != undefined || objectClass != null) {
+                objectClass.destroy();
+            }
+        });
+    };
+    return MyTween;
+}());
+__reflect(MyTween.prototype, "MyTween");
+var FadeOut = (function () {
+    function FadeOut() {
+    }
+    FadeOut.fadeOut = function (object, objectClass) {
+        if (objectClass == undefined) {
+            objectClass = null;
+        }
+        egret.Tween.get(object)
+            .to({ alpha: 0.5 }, 1000)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+            //destroyを実装しているクラスにだけ実行したかったが、
+            //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
+            //destroyできなかったので場合分けしていないので注意
+            if (objectClass != undefined || objectClass != null) {
+                objectClass.destroy();
+            }
+        });
+    };
+    return FadeOut;
+}());
+__reflect(FadeOut.prototype, "FadeOut");
 //# sourceMappingURL=Tween.js.map

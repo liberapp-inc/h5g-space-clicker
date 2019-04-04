@@ -86,13 +86,18 @@ class Player extends GameObject{
             //Enemyとの接触判定
             GameScene.enemy.forEach(e =>{
                 if(b.collisionFlag == false){
-                    if(e.object.y >= b.object.y){
+                    if(e.object.y >= b.object.y && e.deadFlag == false){
                         e.hp -= Player.bulletDamage;
                         b.destroy();
                         b.collisionFlag = true;
-                        if(e.hp <= 0){
+                        if(e.hp <= 0 ){
                             e.hp = 0;
-                            e.destroy();
+                            e.deadFlag = true;
+                            //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
+                            //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
+                            MyTween.fadeOut(e.object, e);
+
+                            //e.destroy();
                         }
 
                     }

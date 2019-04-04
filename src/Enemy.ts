@@ -11,6 +11,7 @@ abstract class Enemy extends GameObject{
     public hp : number = 0;
     public hpTextField : egret.TextField = null;
     public hpTextFieldColor : number = 0xff0000;
+    public deadFlag : boolean = false;
 
     constructor() {
         super();
@@ -48,7 +49,6 @@ class RectEnemy extends Enemy{
         this.hp = hp;
         this.dropMoney = dropMoney;
         this.setHpText();
-
     }
 
     private setObject(x : number, y : number, width : number, height : number){

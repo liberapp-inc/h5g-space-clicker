@@ -23,6 +23,7 @@ var Enemy = (function (_super) {
         _this.hp = 0;
         _this.hpTextField = null;
         _this.hpTextFieldColor = 0xff0000;
+        _this.deadFlag = false;
         return _this;
     }
     Enemy.prototype.setHpText = function () {

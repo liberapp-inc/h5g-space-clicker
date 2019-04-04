@@ -1,6 +1,6 @@
 class Tween extends egret.DisplayObjectContainer {
 
-    public object : egret.DisplayObject = null;
+    public object : egret.DisplayObjectContainer = null;
 
     constructor() {
         super();
@@ -33,6 +33,47 @@ class Tween extends egret.DisplayObjectContainer {
     }
 }
 
-class EnemyFadeOut extends Tween{
+class MyTween {
+
+    static fadeOut(object : any, objectClass?:any){
+
+        if(objectClass == undefined){
+            objectClass = null;
+        }
+
+        egret.Tween.get(object) 
+            .to({alpha:0.5 }, 1000)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+
+                //destroyを実装しているクラスにだけ実行したかったが、
+                //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
+                //destroyできなかったので場合分けしていないので注意
+                if(objectClass != undefined || objectClass != null){objectClass.destroy();}
+            });
+    }
+
+}
+
+class FadeOut {
+    
+    static fadeOut(object : any, objectClass?:any){
+
+        if(objectClass == undefined){
+            objectClass = null;
+        }
+
+        egret.Tween.get(object) 
+            .to({alpha:0.5 }, 1000)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+
+                //destroyを実装しているクラスにだけ実行したかったが、
+                //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
+                //destroyできなかったので場合分けしていないので注意
+                if(objectClass != undefined || objectClass != null){objectClass.destroy();}
+            });
+    }
+    
 
 }
