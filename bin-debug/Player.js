@@ -95,6 +95,7 @@ var Player = (function (_super) {
     Player.bullet = [];
     Player.bulletDamage = 1;
     Player.bulletMoveSpeed = 5;
+    Player.salary = 1;
     return Player;
 }(GameObject));
 __reflect(Player.prototype, "Player");

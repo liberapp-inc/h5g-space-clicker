@@ -7,6 +7,7 @@ class Player extends GameObject{
     static bullet : Bullet[] = [];
     static bulletDamage : number = 1;
     static bulletMoveSpeed : number = 5;
+    static salary : number = 1;
 
 
     constructor(x : number, y : number, width : number, height : number, color:number) {
