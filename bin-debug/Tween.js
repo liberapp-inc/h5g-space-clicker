@@ -97,6 +97,19 @@ var MyTween = (function () {
             }
         });
     };
+    MyTween.autoSaveTextFadeInOut = function (object, objectClass) {
+        if (objectClass == undefined) {
+            objectClass = null;
+        }
+        object.alpha = 0;
+        egret.Tween.get(object)
+            .to({ alpha: 1 }, 10)
+            .wait(2000)
+            .to({ alpha: 0 }, 2000)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+        });
+    };
     return MyTween;
 }());
 __reflect(MyTween.prototype, "MyTween");

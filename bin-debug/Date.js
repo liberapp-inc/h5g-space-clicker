@@ -40,25 +40,32 @@ var CheckDate = (function (_super) {
         lastDate = parseInt(getLastDate);
         this.s = (now.getTime() - lastDate) / 1000; //sec
         this.s = parseInt(this.s.toString());
+        //AutoSave用テキスト
+        this.text = Util.myText(Game.width / 1.4, 0, "saving...", 80, 0.5, this.textColor, true);
+        this.text.alpha = 0;
+        GameObject.display.addChild(this.text);
     };
     //30sec毎にセーブ
     CheckDate.prototype.save = function () {
         CheckDate.timerCounter += 1;
         this.salary();
-        if (CheckDate.timerCounter >= 30) {
-            var getLastDate = (new Date().getTime()).toString(); //ms
-            window.localStorage.setItem("getLastDate", getLastDate);
-            CheckDate.timerCounter = 0;
-        }
+        this.autoSaveText();
     };
     CheckDate.prototype.updateContent = function () { };
     CheckDate.prototype.salary = function () {
         Money.I.money += Player.salary;
-        if (CheckDate.timerCounter >= 30) {
+        if (CheckDate.timerCounter >= 10) {
             window.localStorage.setItem("money", Money.I.money.toString());
         }
     };
     CheckDate.prototype.autoSaveText = function () {
+        if (CheckDate.timerCounter >= 10) {
+            var getLastDate = (new Date().getTime()).toString(); //ms
+            window.localStorage.setItem("getLastDate", getLastDate);
+            CheckDate.timerCounter = 0;
+            //AutoSaveTextの表示
+            MyTween.autoSaveTextFadeInOut(this.text);
+        }
     };
     CheckDate.I = null;
     CheckDate.dateTimer = null;

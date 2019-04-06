@@ -103,5 +103,22 @@ class MyTween {
             });
     }
 
+    static autoSaveTextFadeInOut(object : egret.TextField, objectClass?:DropMoney){
+
+        if(objectClass == undefined){
+            objectClass = null;
+        }
+
+        object.alpha = 0;
+
+        egret.Tween.get(object) 
+            .to({alpha:1} ,   10)
+            .wait(2000)
+            .to({alpha:0} ,   2000)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+            });
+    }
+
 }
 
