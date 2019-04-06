@@ -83,33 +83,25 @@ class MyTween {
             .to({y:objectPosY}, 200, egret.Ease.sineIn);
     }
 
-}
-
-class FadeOut {
-
-    static fadeOut(object : any, objectClass?:any){
+    static dropMoneyTextFadeOut(object : egret.TextField, objectClass?:DropMoney){
 
         if(objectClass == undefined){
             objectClass = null;
         }
 
+        let objectPosY : number = object.y;
+
         egret.Tween.get(object) 
-            .to({alpha:0.2}, 1000)
+            .to({y:objectPosY-100}  , 100)
+            .to({alpha:0.2}         , 900)
             .call(()=> {
                 egret.Tween.removeTweens(object);
-
-                //destroyを実装しているクラスにだけ実行したかったが、
-                //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
-                //destroyできなかったので場合分けしていないので注意
-                if(objectClass != undefined || objectClass != null){objectClass.destroy();}
+                if(objectClass != undefined || objectClass != null){
+                    objectClass.destroy();
+                   
+                }
             });
     }
-    
 
 }
 
-class EnemyFadeOut{
-
-
-
-}

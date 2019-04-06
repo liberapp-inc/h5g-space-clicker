@@ -26,11 +26,18 @@ var GameScene = (function (_super) {
         GameScene.createEnemy();
     };
     GameScene.createEnemy = function () {
-        var createEnemy = 1; //Util.randomInt(RandomEnemy.NONE, RandomEnemy.TRIANGLE);
+        var createEnemy = 2; //Util.randomInt(RandomEnemy.NONE, RandomEnemy.TRIANGLE);
         switch (createEnemy) {
             case RandomEnemy.RECT:
-                var e = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 4, Game.height / 6, Util.color(0, 0, 255), 3, 10);
-                GameScene.enemy.push(e);
+                var re = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 4, Game.height / 6, Util.color(0, 0, 255), 3, 10);
+                GameScene.enemy.push(re);
+                break;
+            case RandomEnemy.CIRCLE:
+                var cr = Game.width / 6; //radius
+                var cw = cr; //width
+                var ch = cr; //height
+                var ce = new CircleEnemy(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(0, 0, 255), 3, 10);
+                GameScene.enemy.push(ce);
                 break;
         }
     };

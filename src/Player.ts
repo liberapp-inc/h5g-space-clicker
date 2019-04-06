@@ -83,28 +83,27 @@ class Player extends GameObject{
             if(b.object.y < 0){
                 b.destroy();
             }
-            //Enemyとの接触判定
+            //Enemyとの接触判定(Enemyを一体ずつしか出さないならenemyをforEachする必要なし)
             GameScene.enemy.forEach(e =>{
-                if(b.collisionFlag == false){
-                    if(e.object.y >= b.object.y && e.deadFlag == false){
-                        e.hp -= Player.bulletDamage;
-                        MyTween.knockBack(e.object);
-                        b.destroy();
-                        b.collisionFlag = true;
-                        if(e.hp <= 0 ){
-                            e.hp = 0;
-                            e.deadFlag = true;
-                            Money.addMoney(e.dropMoney);
-                            //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
-                            //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
-                            MyTween.enemyFadeOut(e.object, e);
+                if(b.collisionFlag == false && e.object.y >= b.object.y && e.deadFlag == false){
+                    e.hp -= Player.bulletDamage;
+                    MyTween.knockBack(e.object);
+                    b.destroy();
+                    b.collisionFlag = true;
+                    if(e.hp <= 0 ){
+                        e.hp = 0;
+                        e.deadFlag = true;
+                        Money.addMoney(e.dropMoney);
+                        new DropMoney(0,0, "+ " + e.dropMoney.toString() +" Money", 80, 0.5, 0xff0000, true, e.object);
+                        //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
+                        //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
+                        MyTween.enemyFadeOut(e.object, e);
 
-                            //e.destroy();
-                        }
-
+                        //e.destroy();
                     }
 
                 }
+
 
             });
         });

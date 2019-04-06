@@ -82,35 +82,22 @@ var MyTween = (function () {
             .to({ y: objectPosY - 50 }, 100, egret.Ease.elasticIn)
             .to({ y: objectPosY }, 200, egret.Ease.sineIn);
     };
-    return MyTween;
-}());
-__reflect(MyTween.prototype, "MyTween");
-var FadeOut = (function () {
-    function FadeOut() {
-    }
-    FadeOut.fadeOut = function (object, objectClass) {
+    MyTween.dropMoneyTextFadeOut = function (object, objectClass) {
         if (objectClass == undefined) {
             objectClass = null;
         }
+        var objectPosY = object.y;
         egret.Tween.get(object)
-            .to({ alpha: 0.2 }, 1000)
+            .to({ y: objectPosY - 100 }, 100)
+            .to({ alpha: 0.2 }, 900)
             .call(function () {
             egret.Tween.removeTweens(object);
-            //destroyを実装しているクラスにだけ実行したかったが、
-            //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
-            //destroyできなかったので場合分けしていないので注意
             if (objectClass != undefined || objectClass != null) {
                 objectClass.destroy();
             }
         });
     };
-    return FadeOut;
+    return MyTween;
 }());
-__reflect(FadeOut.prototype, "FadeOut");
-var EnemyFadeOut = (function () {
-    function EnemyFadeOut() {
-    }
-    return EnemyFadeOut;
-}());
-__reflect(EnemyFadeOut.prototype, "EnemyFadeOut");
+__reflect(MyTween.prototype, "MyTween");
 //# sourceMappingURL=Tween.js.map

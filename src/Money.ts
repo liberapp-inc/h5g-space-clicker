@@ -46,3 +46,34 @@ class Money extends GameObject{
 
 
 }
+
+class DropMoney extends GameObject{
+
+    text:egret.TextField = null;
+    textColor : number = 0x00FF3B;
+
+    constructor(x:number, y:number, text:string, size:number, ratio:number, color:number, bold:boolean, display:egret.DisplayObjectContainer) {
+        super();
+
+        this.textColor = Util.color(0,255,0);
+
+        this.text = Util.myText(x, y, text, size, ratio, color, true);      
+        this.text.anchorOffsetX = this.text.width/2;
+        this.text.anchorOffsetY = this.text.height/2;
+/*        this.text.x = x;
+        this.text.y = y;*/
+        display.addChild( this.text );
+        MyTween.dropMoneyTextFadeOut(this.text, this);
+    }
+    
+    onDestroy() {
+/*        GameObject.display.removeChild( this.text );
+        this.text = null;*/
+    }
+
+    updateContent() {
+    }
+
+
+
+}
