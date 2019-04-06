@@ -24,7 +24,7 @@ var Kill = (function (_super) {
             window.localStorage.setItem("kill", kill);
         }
         _this.kill = parseInt(kill);
-        _this.text = Util.myText(0, 0, "KILL : " + _this.kill.toString() + " / 1000", 100, 0.5, _this.textColor, true);
+        _this.text = Util.myText(0, 50, "KILL : " + _this.kill.toString() + " / 1000", 100, 0.5, _this.textColor, true);
         GameObject.display.addChild(_this.text);
         return _this;
     }

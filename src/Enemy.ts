@@ -16,6 +16,7 @@ abstract class Enemy extends GameObject{
     constructor(x : number, y : number, width : number, height : number) {
         super();
         this.setObject(x, y, width, height);
+        //this.setHpText(x, y, width, height);
 
     }
 
@@ -29,18 +30,25 @@ abstract class Enemy extends GameObject{
             console.log("heightが0以下です");
         }
         this.object = new egret.DisplayObjectContainer();
+        this.object.width = width;
+        this.object.height = height;
         this.object.anchorOffsetX += width/2;
         this.object.anchorOffsetY += height/2;
         this.object.x = x;
         this.object.y = y;
-        this.object.width = width;
-        this.object.height = height;
         GameObject.display.addChild(this.object);
 
     }
 
-    setHpText(){
-        this.hpTextField = Util.myText(0, 0, this.hp.toString(), 100, 0.5, this.hpTextFieldColor, true);
+    setHpText(x : number, y : number, width : number, height : number){
+        this.hpTextField = Util.myText(0,0, this.hp.toString(), 100, 0.5, this.hpTextFieldColor, true);
+        this.hpTextField.width = this.object.width;
+        this.hpTextField.height = this.object.height;
+        this.hpTextField.anchorOffsetX += this.hpTextField.width/2;
+        this.hpTextField.anchorOffsetY += this.hpTextField.height/2;
+        this.hpTextField.x = 0;
+        this.hpTextField.y = 0;    
+
         this.object.addChild(this.hpTextField);
     }
 
@@ -69,7 +77,7 @@ class RectEnemy extends Enemy{
         this.setShape(x, y, width, height, color);
         this.hp = hp;
         this.dropMoney = dropMoney;
-        this.setHpText();
+        this.setHpText(x, y, width, height);
     }
 
 
@@ -101,7 +109,8 @@ class CircleEnemy extends Enemy{
         this.setShape(x, y, radius, color);
         this.hp = hp;
         this.dropMoney = dropMoney;
-        this.setHpText();
+        this.setHpText(x, y, width, height);
+
     }
 
 
@@ -115,23 +124,13 @@ class CircleEnemy extends Enemy{
         }
 
         this.shape = new egret.Shape();
-        this.object.anchorOffsetX -= radius/2;//Circleのアンカーは円の中心なのでRectにあわせて左上にもっていく
-        this.object.anchorOffsetY -= radius/2;
-        this.shape.x = 0;
-        this.shape.y = 0;
+        this.shape.x = this.object.anchorOffsetX;
+        this.shape.y = this.object.anchorOffsetY;
         this.shape.graphics.beginFill(color);
         this.shape.graphics.drawCircle(0, 0, radius);
         this.shape.graphics.endFill();
         this.object.addChild(this.shape);
-
-        
     }
 
-    setHpText(){
-        this.hpTextField = Util.myText(0, 0, this.hp.toString(), 100, 0.5, this.hpTextFieldColor, true);
-        this.hpTextField.anchorOffsetX = this.hpTextField.width/2;
-        this.hpTextField.anchorOffsetY = this.hpTextField.height/2;
-        this.object.addChild(this.hpTextField);
-    }
 
 }

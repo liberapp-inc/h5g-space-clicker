@@ -15,8 +15,7 @@ class Player extends GameObject{
         this.setPlayerObject(x, y, width, height);
         this.setShape(x, y, width, height, color);
 
-        Player.object.scaleX = 0.5;
-        Player.object.scaleY = 0.5;
+        Player.object.scaleX = Player.object.scaleY = 0.4;
 
         Player.shotTimer = new egret.Timer(Player.shotInterval,0);
         Player.shotTimer.addEventListener(egret.TimerEvent.TIMER,this.shot,this);
@@ -98,6 +97,8 @@ class Player extends GameObject{
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
                         MyTween.enemyFadeOut(e.object, e);
+
+                        Kill.I.addKill();
 
                         //e.destroy();
                     }

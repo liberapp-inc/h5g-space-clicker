@@ -26,7 +26,7 @@ var GameScene = (function (_super) {
         GameScene.createEnemy();
     };
     GameScene.createEnemy = function () {
-        var createEnemy = 2; //Util.randomInt(RandomEnemy.NONE, RandomEnemy.TRIANGLE);
+        var createEnemy = Util.randomInt(RandomEnemy.RECT, RandomEnemy.CIRCLE);
         switch (createEnemy) {
             case RandomEnemy.RECT:
                 var re = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 4, Game.height / 6, Util.color(0, 0, 255), 3, 10);

@@ -22,7 +22,7 @@ class Kill extends GameObject{
         }
         this.kill = parseInt( kill );
 
-        this.text = Util.myText(0, 0, "KILL : " + this.kill.toString() + " / 1000", 100, 0.5, this.textColor, true);
+        this.text = Util.myText(0, 50, "KILL : " + this.kill.toString() + " / 1000", 100, 0.5, this.textColor, true);
         GameObject.display.addChild( this.text );
 
 

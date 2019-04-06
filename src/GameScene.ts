@@ -21,7 +21,7 @@ class GameScene extends GameObject{
     }
 
     static createEnemy(){
-        let createEnemy : number = 2;//Util.randomInt(RandomEnemy.NONE, RandomEnemy.TRIANGLE);
+        let createEnemy : number = Util.randomInt(RandomEnemy.RECT, RandomEnemy.CIRCLE);
 
         switch(createEnemy){
             case RandomEnemy.RECT:

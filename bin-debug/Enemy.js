@@ -26,6 +26,7 @@ var Enemy = (function (_super) {
         _this.deadFlag = false;
         _this.setObject(x, y, width, height);
         return _this;
+        //this.setHpText(x, y, width, height);
     }
     Enemy.prototype.setObject = function (x, y, width, height) {
         if (width <= 0) {
@@ -37,16 +38,22 @@ var Enemy = (function (_super) {
             console.log("heightが0以下です");
         }
         this.object = new egret.DisplayObjectContainer();
+        this.object.width = width;
+        this.object.height = height;
         this.object.anchorOffsetX += width / 2;
         this.object.anchorOffsetY += height / 2;
         this.object.x = x;
         this.object.y = y;
-        this.object.width = width;
-        this.object.height = height;
         GameObject.display.addChild(this.object);
     };
-    Enemy.prototype.setHpText = function () {
+    Enemy.prototype.setHpText = function (x, y, width, height) {
         this.hpTextField = Util.myText(0, 0, this.hp.toString(), 100, 0.5, this.hpTextFieldColor, true);
+        this.hpTextField.width = this.object.width;
+        this.hpTextField.height = this.object.height;
+        this.hpTextField.anchorOffsetX += this.hpTextField.width / 2;
+        this.hpTextField.anchorOffsetY += this.hpTextField.height / 2;
+        this.hpTextField.x = 0;
+        this.hpTextField.y = 0;
         this.object.addChild(this.hpTextField);
     };
     Enemy.prototype.addDestroyMethod = function () {
@@ -71,7 +78,7 @@ var RectEnemy = (function (_super) {
         _this.setShape(x, y, width, height, color);
         _this.hp = hp;
         _this.dropMoney = dropMoney;
-        _this.setHpText();
+        _this.setHpText(x, y, width, height);
         return _this;
     }
     RectEnemy.prototype.setShape = function (x, y, width, height, color) {
@@ -96,7 +103,7 @@ var CircleEnemy = (function (_super) {
         _this.setShape(x, y, radius, color);
         _this.hp = hp;
         _this.dropMoney = dropMoney;
-        _this.setHpText();
+        _this.setHpText(x, y, width, height);
         return _this;
     }
     CircleEnemy.prototype.setShape = function (x, y, radius, color) {
@@ -108,20 +115,12 @@ var CircleEnemy = (function (_super) {
             console.log("radiusが0以下です");
         }
         this.shape = new egret.Shape();
-        this.object.anchorOffsetX -= radius / 2; //Circleのアンカーは円の中心なのでRectにあわせて左上にもっていく
-        this.object.anchorOffsetY -= radius / 2;
-        this.shape.x = 0;
-        this.shape.y = 0;
+        this.shape.x = this.object.anchorOffsetX;
+        this.shape.y = this.object.anchorOffsetY;
         this.shape.graphics.beginFill(color);
         this.shape.graphics.drawCircle(0, 0, radius);
         this.shape.graphics.endFill();
         this.object.addChild(this.shape);
-    };
-    CircleEnemy.prototype.setHpText = function () {
-        this.hpTextField = Util.myText(0, 0, this.hp.toString(), 100, 0.5, this.hpTextFieldColor, true);
-        this.hpTextField.anchorOffsetX = this.hpTextField.width / 2;
-        this.hpTextField.anchorOffsetY = this.hpTextField.height / 2;
-        this.object.addChild(this.hpTextField);
     };
     return CircleEnemy;
 }(Enemy));

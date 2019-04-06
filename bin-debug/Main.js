@@ -38,6 +38,7 @@ var Game = (function () {
         new Background();
         new GameScene();
         new Money();
+        new Kill();
         new Player(Game.width / 2, Game.height / 1.25, Game.width / 2.4, Game.height / 6, Util.color(255, 0, 0));
     };
     return Game;
