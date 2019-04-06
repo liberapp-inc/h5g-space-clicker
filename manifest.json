@@ -13,19 +13,20 @@
 	],
 	"game": [
 		"bin-debug/GameObject.js",
-		"bin-debug/GameScene.js",
+		"bin-debug/Main.js",
 		"bin-debug/Bullet.js",
 		"bin-debug/Date.js",
 		"bin-debug/Enemy.js",
 		"bin-debug/Ball.js",
 		"bin-debug/GameOver.js",
+		"bin-debug/GameScene.js",
 		"bin-debug/Box.js",
-		"bin-debug/Kill.js",
-		"bin-debug/Main.js",
-		"bin-debug/Money.js",
 		"bin-debug/Player.js",
-		"bin-debug/Score.js",
 		"bin-debug/Tween.js",
-		"bin-debug/Util.js"
+		"bin-debug/Util.js",
+		"bin-debug/UI/Button.js",
+		"bin-debug/UI/Kill.js",
+		"bin-debug/UI/Money.js",
+		"bin-debug/UI/Score.js"
 	]
 }
