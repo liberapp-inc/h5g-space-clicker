@@ -70,6 +70,14 @@ var Player = (function (_super) {
         var b = new Bullet(Game.width / 2, Game.height / 1.6, Game.width / 24, Game.height / 16, Util.color(255, 255, 0));
         Player.bullet.push(b);
     };
+    Player.prototype.resetTimer = function () {
+        Player.shotTimer.stop();
+        Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER, this.shot, this);
+        Player.shotTimer = new egret.Timer(Player.shotInterval, 0);
+        Player.shotTimer.addEventListener(egret.TimerEvent.TIMER, this.shot, this);
+        Player.shotTimer.start();
+        console.log(Player.shotInterval);
+    };
     Player.prototype.updateContent = function () {
         Player.bullet.forEach(function (b) {
             b.object.y -= Player.bulletMoveSpeed;

@@ -63,8 +63,6 @@ class Player extends GameObject{
         if( this.shape ){
             GameObject.display.removeChild(this.shape);        
         }
-
-
         this.shape = new egret.Shape();
         this.shape.x = 0;
         this.shape.y = 0;
@@ -98,6 +96,16 @@ class Player extends GameObject{
         Player.bullet.push(b);
     }
 
+    public resetTimer(){
+
+        Player.shotTimer.stop();
+        Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER,this.shot,this);
+        Player.shotTimer = new egret.Timer(Player.shotInterval,0);
+        Player.shotTimer.addEventListener(egret.TimerEvent.TIMER,this.shot,this);
+        Player.shotTimer.start();
+        console.log(Player.shotInterval);
+        
+    }
 
     updateContent(){
         Player.bullet.forEach(b => {
