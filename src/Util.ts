@@ -97,5 +97,18 @@ class Util{
         return tf;
     }
 
-    
+    static savelocalStrage(key :string, saveValue : number){
+        window.localStorage.setItem(key, saveValue.toString());
+    }
+
+    static loadLocalStrage(key : string, initialValue : number):number{
+        let stringValue :string =  window.localStorage.getItem(key); // string
+        if( stringValue == null ){
+            stringValue = initialValue.toString();
+            window.localStorage.setItem(key, stringValue.toString());
+        }
+        let value : number = parseInt(stringValue);
+        return value;
+    }
+
 }

@@ -15,12 +15,21 @@ var Player = (function (_super) {
         Player.I = _this;
         _this.setPlayerObject(x, y, width, height);
         _this.setShape(x, y, width, height, color);
+        _this.loadStatus();
         Player.object.scaleX = Player.object.scaleY = 0.4;
         Player.shotTimer = new egret.Timer(Player.shotInterval, 0);
         Player.shotTimer.addEventListener(egret.TimerEvent.TIMER, _this.shot, _this);
         Player.shotTimer.start();
         return _this;
     }
+    Player.prototype.loadStatus = function () {
+        Player.bulletDamage = Util.loadLocalStrage("Player.bulletDamage", Player.bulletDamage);
+        Player.bulletMoveSpeed = Util.loadLocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
+        Player.salary = Util.loadLocalStrage("Player.salary", Player.salary);
+        Player.damageLevelUpCost = Util.loadLocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
+        Player.speedLevelUpCost = Util.loadLocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
+        Player.salaryLevelUpCost = Util.loadLocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
+    };
     Player.prototype.setPlayerObject = function (x, y, width, height) {
         Player.object = new egret.DisplayObjectContainer();
         Player.object.anchorOffsetX += width / 2;

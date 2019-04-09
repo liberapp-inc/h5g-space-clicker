@@ -77,6 +77,18 @@ var Util = (function () {
         ];
         return tf;
     };
+    Util.savelocalStrage = function (key, saveValue) {
+        window.localStorage.setItem(key, saveValue.toString());
+    };
+    Util.loadLocalStrage = function (key, initialValue) {
+        var stringValue = window.localStorage.getItem(key); // string
+        if (stringValue == null) {
+            stringValue = initialValue.toString();
+            window.localStorage.setItem(key, stringValue.toString());
+        }
+        var value = parseInt(stringValue);
+        return value;
+    };
     return Util;
 }());
 __reflect(Util.prototype, "Util");

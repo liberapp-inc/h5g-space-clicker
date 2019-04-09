@@ -13,7 +13,7 @@ abstract class Button extends GameObject{
     constructor(x : number, y : number, width : number, height : number, index : string){
         super();
         this.setObject(x, y, width, height);
-
+        this.object.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.tap, this );
     }
 
     protected setObject(x : number, y : number, width : number, height : number){
@@ -32,6 +32,7 @@ abstract class Button extends GameObject{
         this.object.anchorOffsetY += height/2;
         this.object.x = x;
         this.object.y = y;
+        this.object.touchEnabled = true;
         GameObject.display.addChild(this.object);
 
     }
@@ -62,7 +63,7 @@ abstract class Button extends GameObject{
     setCostText(x : number, y : number, width : number, height : number, cost:number){
         const size :number = 60;
         const ratio :number = 0.5;
-        this.costText = Util.myText(x,y, "LEVEL UP\n" + cost.toString(), size, ratio, this.costTextColor, false);
+        this.costText = Util.myText(x,y, "Lv.UP\n" + cost.toString() + " MONEY", size, ratio, this.costTextColor, false);
         this.costText.width = this.object.width/ratio;
         this.costText.height = this.object.height/ratio;
         this.costText.textAlign = egret.HorizontalAlign.CENTER;
@@ -74,13 +75,17 @@ abstract class Button extends GameObject{
         if( this.shape ){
             GameObject.display.removeChild(this.object);
         }
+        if( this.object.hasEventListener ){
+            this.object.removeEventListener( egret.TouchEvent.TOUCH_BEGIN, this.tap, this );
+        }
+
     }
 
-    
+    abstract tap() :void;
 
 }
 
-class BulletDamageButton extends Button{
+class LevelUpBulletDamageButton extends Button{
 
     constructor(x : number, y : number, width : number, height : number,color:number, index : string){
         super(x, y, width, height, index);
@@ -109,6 +114,18 @@ class BulletDamageButton extends Button{
 
     updateContent(){
         this.parameterText.text = Player.bulletDamage.toString();
+        this.costText.text = "Lv.UP\n" + Player.damageLevelUpCost.toString() + " MONEY";
+    }
+
+    tap(){
+        if(Money.I.money >= Player.damageLevelUpCost){
+            Money.I.money -= Player.damageLevelUpCost;
+            Player.bulletDamage += 1;
+            Player.damageLevelUpCost +=100;
+            Util.savelocalStrage("Player.bulletDamage", Player.bulletDamage);
+            Util.savelocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
+
+        }
     }
 
 }

@@ -22,6 +22,7 @@ var Button = (function (_super) {
         _this.parameterText = null;
         _this.parameterTextColor = 0xffffff;
         _this.setObject(x, y, width, height);
+        _this.object.addEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.tap, _this);
         return _this;
     }
     Button.prototype.setObject = function (x, y, width, height) {
@@ -40,6 +41,7 @@ var Button = (function (_super) {
         this.object.anchorOffsetY += height / 2;
         this.object.x = x;
         this.object.y = y;
+        this.object.touchEnabled = true;
         GameObject.display.addChild(this.object);
     };
     Button.prototype.setIndexText = function (x, y, width, height, index) {
@@ -65,7 +67,7 @@ var Button = (function (_super) {
     Button.prototype.setCostText = function (x, y, width, height, cost) {
         var size = 60;
         var ratio = 0.5;
-        this.costText = Util.myText(x, y, "LEVEL UP\n" + cost.toString(), size, ratio, this.costTextColor, false);
+        this.costText = Util.myText(x, y, "Lv.UP\n" + cost.toString() + " MONEY", size, ratio, this.costTextColor, false);
         this.costText.width = this.object.width / ratio;
         this.costText.height = this.object.height / ratio;
         this.costText.textAlign = egret.HorizontalAlign.CENTER;
@@ -76,13 +78,16 @@ var Button = (function (_super) {
         if (this.shape) {
             GameObject.display.removeChild(this.object);
         }
+        if (this.object.hasEventListener) {
+            this.object.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.tap, this);
+        }
     };
     return Button;
 }(GameObject));
 __reflect(Button.prototype, "Button");
-var BulletDamageButton = (function (_super) {
-    __extends(BulletDamageButton, _super);
-    function BulletDamageButton(x, y, width, height, color, index) {
+var LevelUpBulletDamageButton = (function (_super) {
+    __extends(LevelUpBulletDamageButton, _super);
+    function LevelUpBulletDamageButton(x, y, width, height, color, index) {
         var _this = _super.call(this, x, y, width, height, index) || this;
         _this.setShape(x, y, width, height, color);
         _this.setIndexText(0, -100, width, height, index);
@@ -90,7 +95,7 @@ var BulletDamageButton = (function (_super) {
         _this.setCostText(0, 0, width, height, Player.damageLevelUpCost);
         return _this;
     }
-    BulletDamageButton.prototype.setShape = function (x, y, width, height, color) {
+    LevelUpBulletDamageButton.prototype.setShape = function (x, y, width, height, color) {
         if (this.shape) {
             GameObject.display.removeChild(this.shape);
         }
@@ -102,10 +107,20 @@ var BulletDamageButton = (function (_super) {
         this.shape.graphics.endFill();
         this.object.addChild(this.shape);
     };
-    BulletDamageButton.prototype.updateContent = function () {
+    LevelUpBulletDamageButton.prototype.updateContent = function () {
         this.parameterText.text = Player.bulletDamage.toString();
+        this.costText.text = "Lv.UP\n" + Player.damageLevelUpCost.toString() + " MONEY";
     };
-    return BulletDamageButton;
+    LevelUpBulletDamageButton.prototype.tap = function () {
+        if (Money.I.money >= Player.damageLevelUpCost) {
+            Money.I.money -= Player.damageLevelUpCost;
+            Player.bulletDamage += 1;
+            Player.damageLevelUpCost += 100;
+            Util.savelocalStrage("Player.bulletDamage", Player.bulletDamage);
+            Util.savelocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
+        }
+    };
+    return LevelUpBulletDamageButton;
 }(Button));
-__reflect(BulletDamageButton.prototype, "BulletDamageButton");
+__reflect(LevelUpBulletDamageButton.prototype, "LevelUpBulletDamageButton");
 //# sourceMappingURL=Button.js.map

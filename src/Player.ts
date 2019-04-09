@@ -22,6 +22,7 @@ class Player extends GameObject{
         Player.I = this;
         this.setPlayerObject(x, y, width, height);
         this.setShape(x, y, width, height, color);
+        this.loadStatus();
 
         Player.object.scaleX = Player.object.scaleY = 0.4;
 
@@ -30,6 +31,19 @@ class Player extends GameObject{
         Player.shotTimer.start();
 
 
+
+    }
+
+    private loadStatus(){
+
+        
+        Player.bulletDamage         = Util.loadLocalStrage("Player.bulletDamage", Player.bulletDamage);
+        Player.bulletMoveSpeed      = Util.loadLocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
+        Player.salary               = Util.loadLocalStrage("Player.salary", Player.salary);
+
+        Player.damageLevelUpCost    = Util.loadLocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
+        Player.speedLevelUpCost     = Util.loadLocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
+        Player.salaryLevelUpCost    = Util.loadLocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
 
     }
 
