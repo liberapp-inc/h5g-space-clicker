@@ -67,7 +67,7 @@ var Button = (function (_super) {
     Button.prototype.setCostText = function (x, y, width, height, cost) {
         var size = 60;
         var ratio = 0.5;
-        this.costText = Util.myText(x, y, "Lv.UP\n" + cost.toString() + " MONEY", size, ratio, this.costTextColor, false);
+        this.costText = Util.myText(x, y, "Lv.UP\n" + " MONEY\n" + cost.toString(), size, ratio, this.costTextColor, false);
         this.costText.width = this.object.width / ratio;
         this.costText.height = this.object.height / ratio;
         this.costText.textAlign = egret.HorizontalAlign.CENTER;
@@ -109,7 +109,7 @@ var LevelUpBulletDamageButton = (function (_super) {
     };
     LevelUpBulletDamageButton.prototype.updateContent = function () {
         this.parameterText.text = Player.bulletDamage.toString();
-        this.costText.text = "Lv.UP\n" + Player.damageLevelUpCost.toString() + " MONEY";
+        this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.damageLevelUpCost.toString();
     };
     LevelUpBulletDamageButton.prototype.tap = function () {
         if (Money.I.money >= Player.damageLevelUpCost) {
@@ -123,4 +123,84 @@ var LevelUpBulletDamageButton = (function (_super) {
     return LevelUpBulletDamageButton;
 }(Button));
 __reflect(LevelUpBulletDamageButton.prototype, "LevelUpBulletDamageButton");
+var LevelUpBulletSpeedButton = (function (_super) {
+    __extends(LevelUpBulletSpeedButton, _super);
+    function LevelUpBulletSpeedButton(x, y, width, height, color, index) {
+        var _this = _super.call(this, x, y, width, height, index) || this;
+        _this.setShape(x, y, width, height, color);
+        _this.setIndexText(0, -100, width, height, index);
+        _this.setParameterText(0, -50, width, height, Player.bulletMoveSpeed);
+        _this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
+        return _this;
+    }
+    LevelUpBulletSpeedButton.prototype.setShape = function (x, y, width, height, color) {
+        if (this.shape) {
+            GameObject.display.removeChild(this.shape);
+        }
+        this.shape = new egret.Shape();
+        this.shape.x = 0;
+        this.shape.y = 0;
+        this.shape.graphics.beginFill(color);
+        this.shape.graphics.drawRoundRect(0, 0, width, height, 30);
+        this.shape.graphics.endFill();
+        this.object.addChild(this.shape);
+    };
+    LevelUpBulletSpeedButton.prototype.updateContent = function () {
+        this.parameterText.text = Player.bulletMoveSpeed.toString();
+        this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.speedLevelUpCost.toString();
+    };
+    LevelUpBulletSpeedButton.prototype.tap = function () {
+        if (Money.I.money >= Player.speedLevelUpCost) {
+            Money.I.money -= Player.speedLevelUpCost;
+            Player.bulletMoveSpeed += 1;
+            Player.speedLevelUpCost += 100;
+            if (Player.shotInterval > 100) {
+                Player.shotInterval = 1000 - Player.bulletMoveSpeed * 10;
+            }
+            Util.savelocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
+            Util.savelocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
+            Util.savelocalStrage("Player.shotInterval", Player.shotInterval);
+        }
+    };
+    return LevelUpBulletSpeedButton;
+}(Button));
+__reflect(LevelUpBulletSpeedButton.prototype, "LevelUpBulletSpeedButton");
+var LevelUpSalaryButton = (function (_super) {
+    __extends(LevelUpSalaryButton, _super);
+    function LevelUpSalaryButton(x, y, width, height, color, index) {
+        var _this = _super.call(this, x, y, width, height, index) || this;
+        _this.setShape(x, y, width, height, color);
+        _this.setIndexText(0, -100, width, height, index);
+        _this.setParameterText(0, -50, width, height, Player.bulletMoveSpeed);
+        _this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
+        return _this;
+    }
+    LevelUpSalaryButton.prototype.setShape = function (x, y, width, height, color) {
+        if (this.shape) {
+            GameObject.display.removeChild(this.shape);
+        }
+        this.shape = new egret.Shape();
+        this.shape.x = 0;
+        this.shape.y = 0;
+        this.shape.graphics.beginFill(color);
+        this.shape.graphics.drawRoundRect(0, 0, width, height, 30);
+        this.shape.graphics.endFill();
+        this.object.addChild(this.shape);
+    };
+    LevelUpSalaryButton.prototype.updateContent = function () {
+        this.parameterText.text = Player.salary.toString();
+        this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.salaryLevelUpCost.toString();
+    };
+    LevelUpSalaryButton.prototype.tap = function () {
+        if (Money.I.money >= Player.salaryLevelUpCost) {
+            Money.I.money -= Player.salaryLevelUpCost;
+            Player.salary += 1;
+            Player.salaryLevelUpCost += 100;
+            Util.savelocalStrage("Player.salary", Player.salary);
+            Util.savelocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
+        }
+    };
+    return LevelUpSalaryButton;
+}(Button));
+__reflect(LevelUpSalaryButton.prototype, "LevelUpSalaryButton");
 //# sourceMappingURL=Button.js.map

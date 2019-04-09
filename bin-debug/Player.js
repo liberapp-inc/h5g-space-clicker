@@ -26,6 +26,7 @@ var Player = (function (_super) {
         Player.bulletDamage = Util.loadLocalStrage("Player.bulletDamage", Player.bulletDamage);
         Player.bulletMoveSpeed = Util.loadLocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
         Player.salary = Util.loadLocalStrage("Player.salary", Player.salary);
+        Player.shotInterval = Util.loadLocalStrage("Player.shotInterval", Player.shotInterval);
         Player.damageLevelUpCost = Util.loadLocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
         Player.speedLevelUpCost = Util.loadLocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
         Player.salaryLevelUpCost = Util.loadLocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
@@ -66,7 +67,7 @@ var Player = (function (_super) {
         return mask;
     };
     Player.prototype.shot = function () {
-        var b = new Bullet(Game.width / 2, Game.height / 1.35, Game.width / 12, Game.height / 12, Util.color(255, 255, 0));
+        var b = new Bullet(Game.width / 2, Game.height / 1.6, Game.width / 24, Game.height / 16, Util.color(255, 255, 0));
         Player.bullet.push(b);
     };
     Player.prototype.updateContent = function () {
@@ -86,7 +87,7 @@ var Player = (function (_super) {
                         e.hp = 0;
                         e.deadFlag = true;
                         Money.addMoney(e.dropMoney);
-                        new DropMoney(0, 0, "+ " + e.dropMoney.toString() + " Money", 80, 0.5, 0xff0000, true, e.object);
+                        new DropMoney(0, 0, "MONEY\n+" + e.dropMoney.toString(), 70, 0.5, 0xff0000, true, e.object);
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
                         MyTween.enemyFadeOut(e.object, e);

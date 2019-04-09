@@ -52,17 +52,15 @@ var DropMoney = (function (_super) {
         _this.textColor = 0x00FF3B;
         _this.textColor = Util.color(0, 255, 0);
         _this.text = Util.myText(x, y, text, size, ratio, color, true);
-        _this.text.anchorOffsetX = _this.text.width / 2;
-        _this.text.anchorOffsetY = _this.text.height / 2;
-        /*        this.text.x = x;
-                this.text.y = y;*/
+        _this.text.width = display.width / ratio;
+        _this.text.height = display.height / ratio;
+        _this.text.textAlign = egret.HorizontalAlign.CENTER;
+        _this.text.verticalAlign = egret.VerticalAlign.MIDDLE;
         display.addChild(_this.text);
         MyTween.dropMoneyTextFadeOut(_this.text, _this);
         return _this;
     }
     DropMoney.prototype.onDestroy = function () {
-        /*        GameObject.display.removeChild( this.text );
-                this.text = null;*/
     };
     DropMoney.prototype.updateContent = function () {
     };

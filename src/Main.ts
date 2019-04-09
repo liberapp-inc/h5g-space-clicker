@@ -33,10 +33,12 @@ class Game{
         new Background();
         new GameScene();
         new Money();
-        new LevelUpBulletDamageButton(Game.width/4, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Attack");
+        new LevelUpBulletDamageButton(Game.width/6, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Attack");
+        new LevelUpBulletSpeedButton(Game.width/2, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Speed");
+        new LevelUpSalaryButton(Game.width/1.2, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Salary");
         new Kill();
         new CheckDate();
-        new Player(Game.width/2, Game.height/1.25, Game.width/3.4, Game.height/8, Util.color(255,0,0));
+        new Player(Game.width/2, Game.height/1.5, Game.width/3.4, Game.height/8, Util.color(255,0,0));
 
     }
 

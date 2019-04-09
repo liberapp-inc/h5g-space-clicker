@@ -57,18 +57,16 @@ class DropMoney extends GameObject{
 
         this.textColor = Util.color(0,255,0);
 
-        this.text = Util.myText(x, y, text, size, ratio, color, true);      
-        this.text.anchorOffsetX = this.text.width/2;
-        this.text.anchorOffsetY = this.text.height/2;
-/*        this.text.x = x;
-        this.text.y = y;*/
+        this.text = Util.myText(x, y, text, size, ratio, color, true);  
+        this.text.width = display.width/ratio;
+        this.text.height = display.height/ratio;
+        this.text.textAlign = egret.HorizontalAlign.CENTER;
+        this.text.verticalAlign = egret.VerticalAlign.MIDDLE;
         display.addChild( this.text );
         MyTween.dropMoneyTextFadeOut(this.text, this);
     }
     
     onDestroy() {
-/*        GameObject.display.removeChild( this.text );
-        this.text = null;*/
     }
 
     updateContent() {

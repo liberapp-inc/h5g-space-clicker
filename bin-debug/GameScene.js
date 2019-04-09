@@ -29,14 +29,14 @@ var GameScene = (function (_super) {
         var createEnemy = Util.randomInt(RandomEnemy.RECT, RandomEnemy.CIRCLE);
         switch (createEnemy) {
             case RandomEnemy.RECT:
-                var re = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 4, Game.height / 6, Util.color(0, 0, 255), 10, 10);
+                var re = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 4, Game.height / 6, Util.color(0, 0, 255), 100, 100);
                 GameScene.enemy.push(re);
                 break;
             case RandomEnemy.CIRCLE:
                 var cr = Game.width / 6; //radius
                 var cw = cr; //width
                 var ch = cr; //height
-                var ce = new CircleEnemy(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(0, 0, 255), 10, 10);
+                var ce = new CircleEnemy(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(0, 0, 255), 100, 100);
                 GameScene.enemy.push(ce);
                 break;
         }

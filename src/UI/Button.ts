@@ -63,7 +63,7 @@ abstract class Button extends GameObject{
     setCostText(x : number, y : number, width : number, height : number, cost:number){
         const size :number = 60;
         const ratio :number = 0.5;
-        this.costText = Util.myText(x,y, "Lv.UP\n" + cost.toString() + " MONEY", size, ratio, this.costTextColor, false);
+        this.costText = Util.myText(x,y, "Lv.UP\n" + " MONEY\n" + cost.toString(), size, ratio, this.costTextColor, false);
         this.costText.width = this.object.width/ratio;
         this.costText.height = this.object.height/ratio;
         this.costText.textAlign = egret.HorizontalAlign.CENTER;
@@ -114,7 +114,7 @@ class LevelUpBulletDamageButton extends Button{
 
     updateContent(){
         this.parameterText.text = Player.bulletDamage.toString();
-        this.costText.text = "Lv.UP\n" + Player.damageLevelUpCost.toString() + " MONEY";
+        this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.damageLevelUpCost.toString();
     }
 
     tap(){
@@ -124,6 +124,97 @@ class LevelUpBulletDamageButton extends Button{
             Player.damageLevelUpCost +=100;
             Util.savelocalStrage("Player.bulletDamage", Player.bulletDamage);
             Util.savelocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
+
+        }
+    }
+
+}
+
+class LevelUpBulletSpeedButton extends Button{
+
+    constructor(x : number, y : number, width : number, height : number,color:number, index : string){
+        super(x, y, width, height, index);
+        this.setShape(x, y, width, height, color);
+        this.setIndexText(0, -100, width, height, index);
+        this.setParameterText(0, -50, width, height, Player.bulletMoveSpeed);
+        this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
+    }
+
+    setShape(x : number, y : number, width : number, height : number, color:number){
+        if( this.shape ){
+            GameObject.display.removeChild(this.shape);        
+        }
+
+
+        this.shape = new egret.Shape();
+        this.shape.x = 0;
+        this.shape.y = 0;
+        this.shape.graphics.beginFill(color);
+        this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
+        this.shape.graphics.endFill();
+        this.object.addChild(this.shape);
+
+        
+    }
+
+    updateContent(){
+        this.parameterText.text = Player.bulletMoveSpeed.toString();
+        this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.speedLevelUpCost.toString();
+    }
+
+    tap(){
+        if(Money.I.money >= Player.speedLevelUpCost){
+            Money.I.money -= Player.speedLevelUpCost;
+            Player.bulletMoveSpeed += 1;
+            Player.speedLevelUpCost +=100;
+            if(Player.shotInterval > 100){Player.shotInterval = 1000 - Player.bulletMoveSpeed*10;}
+            Util.savelocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
+            Util.savelocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
+            Util.savelocalStrage("Player.shotInterval", Player.shotInterval);
+
+        }
+    }
+
+}
+
+class LevelUpSalaryButton extends Button{
+
+    constructor(x : number, y : number, width : number, height : number,color:number, index : string){
+        super(x, y, width, height, index);
+        this.setShape(x, y, width, height, color);
+        this.setIndexText(0, -100, width, height, index);
+        this.setParameterText(0, -50, width, height, Player.bulletMoveSpeed);
+        this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
+    }
+
+    setShape(x : number, y : number, width : number, height : number, color:number){
+        if( this.shape ){
+            GameObject.display.removeChild(this.shape);        
+        }
+
+        this.shape = new egret.Shape();
+        this.shape.x = 0;
+        this.shape.y = 0;
+        this.shape.graphics.beginFill(color);
+        this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
+        this.shape.graphics.endFill();
+        this.object.addChild(this.shape);
+
+        
+    }
+
+    updateContent(){
+        this.parameterText.text = Player.salary.toString();
+        this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.salaryLevelUpCost.toString();
+    }
+
+    tap(){
+        if(Money.I.money >= Player.salaryLevelUpCost){
+            Money.I.money -= Player.salaryLevelUpCost;
+            Player.salary += 1;
+            Player.salaryLevelUpCost +=100;
+            Util.savelocalStrage("Player.salary", Player.salary);
+            Util.savelocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
 
         }
     }

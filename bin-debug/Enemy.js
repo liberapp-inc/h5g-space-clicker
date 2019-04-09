@@ -47,13 +47,17 @@ var Enemy = (function (_super) {
         GameObject.display.addChild(this.object);
     };
     Enemy.prototype.setHpText = function (x, y, width, height) {
-        this.hpTextField = Util.myText(0, 0, this.hp.toString(), 100, 0.5, this.hpTextFieldColor, true);
-        this.hpTextField.width = this.object.width;
-        this.hpTextField.height = this.object.height;
-        this.hpTextField.anchorOffsetX += this.hpTextField.width / 2;
-        this.hpTextField.anchorOffsetY += this.hpTextField.height / 2;
-        this.hpTextField.x = 0;
-        this.hpTextField.y = 0;
+        var size = 100;
+        var ratio = 0.5;
+        this.hpTextField = Util.myText(0, 0, this.hp.toString(), size, ratio, this.hpTextFieldColor, true);
+        this.hpTextField.width = this.object.width / ratio;
+        this.hpTextField.height = this.object.height / ratio;
+        this.hpTextField.textAlign = egret.HorizontalAlign.CENTER;
+        this.hpTextField.verticalAlign = egret.VerticalAlign.MIDDLE;
+        /*        this.hpTextField.anchorOffsetX += this.hpTextField.width/2;
+                this.hpTextField.anchorOffsetY += this.hpTextField.height/2;
+                this.hpTextField.x = 0;
+                this.hpTextField.y = 0;  */
         this.object.addChild(this.hpTextField);
     };
     Enemy.prototype.addDestroyMethod = function () {
