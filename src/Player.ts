@@ -9,6 +9,13 @@ class Player extends GameObject{
     static bulletMoveSpeed : number = 5;
     static salary : number = 1;
 
+    //statusアップ系
+/*    static damageLevel :number = 100;
+    static speedLevel :number = 100;
+    static salaryLevel :number = 100;*/
+    static damageLevelUpCost :number = 100;
+    static speedLevelUpCost :number = 100;
+    static salaryLevelUpCost :number = 100;
 
     constructor(x : number, y : number, width : number, height : number, color:number) {
         super();

@@ -15,7 +15,10 @@ var Button = (function (_super) {
         _this.object = null;
         _this.indexText = null;
         _this.indexTextColor = 0xffffff;
-        _this.parameter = 0;
+        //public cost : number = 0;
+        _this.costText = null;
+        _this.costTextColor = 0xffffff;
+        //public parameter : number = 0;
         _this.parameterText = null;
         _this.parameterTextColor = 0xffffff;
         _this.setObject(x, y, width, height);
@@ -40,29 +43,34 @@ var Button = (function (_super) {
         GameObject.display.addChild(this.object);
     };
     Button.prototype.setIndexText = function (x, y, width, height, index) {
-        this.indexText = Util.myText(x, y, index, 60, 0.5, this.indexTextColor, false);
+        var size = 80;
+        var ratio = 0.5;
+        this.indexText = Util.myText(x, y, index, size, ratio, this.indexTextColor, true);
+        this.indexText.width = this.object.width / ratio;
+        this.indexText.height = this.object.height / ratio;
         this.indexText.textAlign = egret.HorizontalAlign.CENTER;
-        this.indexText.verticalAlign = egret.VerticalAlign.MIDDLE;
-        this.indexText.width = this.object.width;
-        this.indexText.height = this.object.height;
-        this.indexText.anchorOffsetX += this.object.width / 2;
-        this.indexText.anchorOffsetY += this.object.height / 2;
-        this.indexText.x = this.object.width / 2;
-        this.indexText.y = this.object.height / 2;
-        console.log(this.indexText.width);
-        /*        this.indexText.anchorOffsetX = 0;
-                this.indexText.anchorOffsetY = 0;*/
+        //this.indexText.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.object.addChild(this.indexText);
     };
     Button.prototype.setParameterText = function (x, y, width, height, parameter) {
-        this.parameterText = Util.myText(x, y, parameter.toString(), 100, 0.5, this.parameterTextColor, false);
-        this.parameterText.width = this.object.width;
-        this.parameterText.height = this.object.height;
-        /*        this.parameterText.anchorOffsetX += this.parameterText.width/2;
-                this.parameterText.anchorOffsetY += this.parameterText.height/2;*/
-        /*        this.parameterText.x = 0;
-                this.parameterText.y = 0;  */
+        var size = 60;
+        var ratio = 0.5;
+        this.parameterText = Util.myText(x, y, parameter.toString(), size, ratio, this.parameterTextColor, false);
+        this.parameterText.width = this.object.width / ratio;
+        this.parameterText.height = this.object.height / ratio;
+        this.parameterText.textAlign = egret.HorizontalAlign.CENTER;
+        //this.parameterText.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.object.addChild(this.parameterText);
+    };
+    Button.prototype.setCostText = function (x, y, width, height, cost) {
+        var size = 60;
+        var ratio = 0.5;
+        this.costText = Util.myText(x, y, "LEVEL UP\n" + cost.toString(), size, ratio, this.costTextColor, false);
+        this.costText.width = this.object.width / ratio;
+        this.costText.height = this.object.height / ratio;
+        this.costText.textAlign = egret.HorizontalAlign.CENTER;
+        this.costText.verticalAlign = egret.VerticalAlign.MIDDLE;
+        this.object.addChild(this.costText);
     };
     Button.prototype.delete = function () {
         if (this.shape) {
@@ -77,8 +85,9 @@ var BulletDamageButton = (function (_super) {
     function BulletDamageButton(x, y, width, height, color, index) {
         var _this = _super.call(this, x, y, width, height, index) || this;
         _this.setShape(x, y, width, height, color);
-        _this.setIndexText(0, 0, width * 5, height, index);
-        _this.setParameterText(x, y + 50, width, height, Player.bulletDamage);
+        _this.setIndexText(0, -100, width, height, index);
+        _this.setParameterText(0, -50, width, height, Player.bulletDamage);
+        _this.setCostText(0, 0, width, height, Player.damageLevelUpCost);
         return _this;
     }
     BulletDamageButton.prototype.setShape = function (x, y, width, height, color) {
