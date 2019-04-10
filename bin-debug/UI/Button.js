@@ -154,8 +154,11 @@ var LevelUpBulletSpeedButton = (function (_super) {
             Money.I.money -= Player.speedLevelUpCost;
             Player.bulletMoveSpeed += 1;
             Player.speedLevelUpCost += 100;
-            if (Player.shotInterval > 100) {
-                Player.shotInterval = 1000 - Player.shotInterval;
+            if (Player.shotInterval >= 100) {
+                Player.shotInterval = 1000 - Player.bulletMoveSpeed * 5;
+                if (Player.shotInterval < 100) {
+                    Player.shotInterval = 100;
+                }
             }
             Player.I.resetTimer();
             Util.savelocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);

@@ -20,6 +20,7 @@ var Player = (function (_super) {
         Player.shotTimer = new egret.Timer(Player.shotInterval, 0);
         Player.shotTimer.addEventListener(egret.TimerEvent.TIMER, _this.shot, _this);
         Player.shotTimer.start();
+        GameObject.display.addEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.shot, _this);
         return _this;
     }
     Player.prototype.loadStatus = function () {
@@ -76,7 +77,6 @@ var Player = (function (_super) {
         Player.shotTimer = new egret.Timer(Player.shotInterval, 0);
         Player.shotTimer.addEventListener(egret.TimerEvent.TIMER, this.shot, this);
         Player.shotTimer.start();
-        console.log(Player.shotInterval);
     };
     Player.prototype.updateContent = function () {
         Player.bullet.forEach(function (b) {

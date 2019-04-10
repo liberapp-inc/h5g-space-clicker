@@ -30,6 +30,7 @@ class Player extends GameObject{
         Player.shotTimer.addEventListener(egret.TimerEvent.TIMER,this.shot,this);
         Player.shotTimer.start();
 
+        GameObject.display.addEventListener( egret.TouchEvent.TOUCH_BEGIN, this.shot, this );
 
 
     }
@@ -103,7 +104,6 @@ class Player extends GameObject{
         Player.shotTimer = new egret.Timer(Player.shotInterval,0);
         Player.shotTimer.addEventListener(egret.TimerEvent.TIMER,this.shot,this);
         Player.shotTimer.start();
-        console.log(Player.shotInterval);
         
     }
 

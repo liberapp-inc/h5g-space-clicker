@@ -167,12 +167,11 @@ class LevelUpBulletSpeedButton extends Button{
             Money.I.money -= Player.speedLevelUpCost;
             Player.bulletMoveSpeed += 1;
             Player.speedLevelUpCost +=100;
-            if(Player.shotInterval > 100){
-                Player.shotInterval = 1000 - Player.shotInterval*5;
+            if(Player.shotInterval >= 100){
+                Player.shotInterval = 1000 - Player.bulletMoveSpeed*5;
+                if(Player.shotInterval < 100){Player.shotInterval = 100;}
             }
-            else{
-                Player.shotInterval = 100;
-            }
+
             Player.I.resetTimer();
             Util.savelocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
             Util.savelocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
