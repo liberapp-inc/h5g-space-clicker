@@ -37,8 +37,8 @@ class Game{
         new LevelUpBulletSpeedButton(Game.width/2, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Speed");
         new LevelUpSalaryButton(Game.width/1.2, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Salary");
         new Kill();
-        new CheckDate();
         new Player(Game.width/2, Game.height/1.5, Game.width/3.4, Game.height/8, Util.color(255,0,0));
+        new CheckDate();
 
     }
 

@@ -1,3 +1,6 @@
+//時間報酬Money.I.money += this.s * Player.salary;の式があるので、
+//Playerをインスタンス化してからCheckDateをインスタンス化する必要あり
+
 class CheckDate extends GameObject{
 
     static I : CheckDate = null;

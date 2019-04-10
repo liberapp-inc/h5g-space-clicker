@@ -79,8 +79,8 @@ class MyTween {
         let objectPosY : number = object.y;
 
         egret.Tween.get(object) 
-            .to({y:objectPosY - 50}, 100, egret.Ease.elasticIn)
-            .to({y:objectPosY}, 200, egret.Ease.sineIn);
+            .to({y:objectPosY - 50}, 50, egret.Ease.elasticIn)
+            .to({y:objectPosY}, 50, egret.Ease.sineIn);
     }
 
     static dropMoneyTextFadeOut(object : egret.TextField, objectClass?:DropMoney){

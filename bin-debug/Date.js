@@ -1,3 +1,5 @@
+//時間報酬Money.I.money += this.s * Player.salary;の式があるので、
+//Playerをインスタンス化してからCheckDateをインスタンス化する必要あり
 var __reflect = (this && this.__reflect) || function (p, c, t) {
     p.__class__ = c, t ? t.push(c) : t = [c], p.__types__ = p.__types__ ? t.concat(p.__types__) : t;
 };
