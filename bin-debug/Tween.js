@@ -97,6 +97,11 @@ var MyTween = (function () {
             }
         });
     };
+    MyTween.enemyRotate = function (object, rotateSpeed_ms) {
+        var objectPosY = object.y;
+        egret.Tween.get(object, { loop: true })
+            .to({ rotation: 360 }, rotateSpeed_ms);
+    };
     MyTween.autoSaveTextFadeInOut = function (object, objectClass) {
         if (objectClass == undefined) {
             objectClass = null;

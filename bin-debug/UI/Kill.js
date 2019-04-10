@@ -18,12 +18,13 @@ var Kill = (function (_super) {
         _this.textColor = 0x00FF3B;
         Kill.I = _this;
         _this.textColor = Util.color(0, 255, 0);
-        var kill = window.localStorage.getItem("kill"); // string
-        if (kill == null) {
-            kill = "0";
-            window.localStorage.setItem("kill", kill);
-        }
-        _this.kill = parseInt(kill);
+        /*        let kill = window.localStorage.getItem("kill"); // string
+                if( kill == null ){
+                    kill = "0";
+                    window.localStorage.setItem("kill", kill);
+                }
+                this.kill = parseInt( kill );*/
+        _this.kill = Util.loadLocalStrage("kill", _this.kill);
         _this.text = Util.myText(0, 50, "KILL : " + _this.kill.toString() + " / 1000", 100, 0.5, _this.textColor, true);
         GameObject.display.addChild(_this.text);
         return _this;

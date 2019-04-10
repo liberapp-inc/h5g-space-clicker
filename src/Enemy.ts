@@ -139,3 +139,38 @@ class CircleEnemy extends Enemy{
 
 
 }
+
+class DoubleCircle extends CircleEnemy{
+
+    shape2 : egret.Shape = null;
+
+    constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
+        super(x, y, width, height, radius, color, hp, dropMoney);
+        this.shape.x -= radius/1.5;
+        this.setShape2(x, y, radius, color);
+
+    }
+
+    private setShape2(x : number, y : number, radius : number, color:number){
+        if( this.shape2 ){
+            GameObject.display.removeChild(this.shape2);        
+        }
+        if(radius <= 0){
+            radius = 1;
+            console.log("radiusが0以下です");
+        }
+
+        this.shape2 = new egret.Shape();
+        this.shape2.x = this.object.anchorOffsetX + radius/1.5;
+        this.shape2.y = this.object.anchorOffsetY;
+        this.shape2.graphics.beginFill(color);
+        this.shape2.graphics.drawCircle(0, 0, radius);
+        this.shape2.graphics.endFill();
+        this.object.addChildAt(this.shape2,0);
+    }
+
+    addDestroyMethod(){
+        egret.Tween.removeTweens(this.object);
+    }
+
+}

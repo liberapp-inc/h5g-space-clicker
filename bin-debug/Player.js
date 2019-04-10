@@ -78,6 +78,9 @@ var Player = (function (_super) {
         Player.shotTimer.addEventListener(egret.TimerEvent.TIMER, this.shot, this);
         Player.shotTimer.start();
     };
+    Player.prototype.addDestroyMethod = function () {
+        GameObject.display.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.shot, this);
+    };
     Player.prototype.updateContent = function () {
         Player.bullet.forEach(function (b) {
             b.object.y -= Player.bulletMoveSpeed;
@@ -88,6 +91,7 @@ var Player = (function (_super) {
             GameScene.enemy.forEach(function (e) {
                 if (b.collisionFlag == false && e.object.y >= b.object.y && e.deadFlag == false) {
                     e.hp -= Player.bulletDamage;
+                    console.log(e);
                     MyTween.knockBack(e.object);
                     b.destroy();
                     b.collisionFlag = true;

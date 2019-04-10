@@ -31,12 +31,12 @@ class Game{
         
         /* new メソッドを記入*/
         new Background();
+        new Kill();
         new GameScene();
         new Money();
         new LevelUpBulletDamageButton(Game.width/6, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Attack");
         new LevelUpBulletSpeedButton(Game.width/2, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Speed");
         new LevelUpSalaryButton(Game.width/1.2, Game.height/1.1, Game.width/4, Game.height/10.5, Util.color(255,0,0), "Salary");
-        new Kill();
         new Player(Game.width/2, Game.height/1.5, Game.width/3.4, Game.height/8, Util.color(255,0,0));
         new CheckDate();
 
@@ -48,9 +48,11 @@ class Game{
 
 class Background extends GameObject{
 
+    static I : Background = null;
+
     constructor() {
         super();
-
+        Background.I = this;
         this.shape = new egret.Shape();
         this.shape.graphics.beginFill(Util.color(0,0,0));
         this.shape.graphics.drawRect(0, 0, Game.width, Game.height);

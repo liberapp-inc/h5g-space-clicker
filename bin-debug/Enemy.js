@@ -129,4 +129,35 @@ var CircleEnemy = (function (_super) {
     return CircleEnemy;
 }(Enemy));
 __reflect(CircleEnemy.prototype, "CircleEnemy");
+var DoubleCircle = (function (_super) {
+    __extends(DoubleCircle, _super);
+    function DoubleCircle(x, y, width, height, radius, color, hp, dropMoney) {
+        var _this = _super.call(this, x, y, width, height, radius, color, hp, dropMoney) || this;
+        _this.shape2 = null;
+        _this.shape.x -= radius / 1.5;
+        _this.setShape2(x, y, radius, color);
+        return _this;
+    }
+    DoubleCircle.prototype.setShape2 = function (x, y, radius, color) {
+        if (this.shape2) {
+            GameObject.display.removeChild(this.shape2);
+        }
+        if (radius <= 0) {
+            radius = 1;
+            console.log("radiusが0以下です");
+        }
+        this.shape2 = new egret.Shape();
+        this.shape2.x = this.object.anchorOffsetX + radius / 1.5;
+        this.shape2.y = this.object.anchorOffsetY;
+        this.shape2.graphics.beginFill(color);
+        this.shape2.graphics.drawCircle(0, 0, radius);
+        this.shape2.graphics.endFill();
+        this.object.addChildAt(this.shape2, 0);
+    };
+    DoubleCircle.prototype.addDestroyMethod = function () {
+        egret.Tween.removeTweens(this.object);
+    };
+    return DoubleCircle;
+}(CircleEnemy));
+__reflect(DoubleCircle.prototype, "DoubleCircle");
 //# sourceMappingURL=Enemy.js.map

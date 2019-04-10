@@ -103,6 +103,12 @@ class MyTween {
             });
     }
 
+    static enemyRotate(object : any, rotateSpeed_ms : number){
+        let objectPosY : number = object.y;
+        egret.Tween.get(object,{loop:true})
+        .to({rotation:360}, rotateSpeed_ms);
+    }
+
     static autoSaveTextFadeInOut(object : egret.TextField, objectClass?:DropMoney){
 
         if(objectClass == undefined){
@@ -119,6 +125,8 @@ class MyTween {
                 egret.Tween.removeTweens(object);
             });
     }
+
+
 
 }
 
