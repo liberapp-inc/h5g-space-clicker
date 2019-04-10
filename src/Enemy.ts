@@ -37,6 +37,7 @@ abstract class Enemy extends GameObject{
         this.object.x = x;
         this.object.y = y;
         GameObject.display.addChild(this.object);
+        GameObject.display.swapChildren(this.object,Player.object);
 
     }
 
@@ -169,8 +170,38 @@ class DoubleCircle extends CircleEnemy{
         this.object.addChildAt(this.shape2,0);
     }
 
-    addDestroyMethod(){
-        egret.Tween.removeTweens(this.object);
+}
+
+class DoubleRect extends RectEnemy{
+
+    shape2 : egret.Shape = null;
+
+    constructor(x : number, y : number, width : number, height : number, color:number, hp:number, dropMoney:number) {
+        super(x, y, width, height, color, hp, dropMoney);
+        this.shape.x -= width/4;
+        this.shape.y -= height/4;
+        this.setShape2(x, y, width, height, color);
+
     }
+
+
+
+    private setShape2(x : number, y : number, width : number, height : number, color:number){
+        if( this.shape2 ){
+            GameObject.display.removeChild(this.shape2);        
+        }
+
+
+        this.shape2 = new egret.Shape();
+        this.shape2.x += width/4;
+        this.shape2.y += height/4;
+        this.shape2.graphics.beginFill(color);
+        this.shape2.graphics.drawRect(0, 0, width , height);
+        this.shape2.graphics.endFill();
+        this.object.addChild(this.shape2);
+
+        
+    }
+
 
 }

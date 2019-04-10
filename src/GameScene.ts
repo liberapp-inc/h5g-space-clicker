@@ -2,6 +2,7 @@ enum RandomEnemy{
     //NONE,
     RECT,
     CIRCLE,
+    DOUBLE_RECT,
     DOUBLE_CIRCLE,
     //TRIANGLE,
     BOSS_RECT,
@@ -76,6 +77,10 @@ class GameScene extends GameObject{
             cw = cr;//width
             ch = cr;//height
             e = new CircleEnemy(Game.width/2, Game.height/4, cw, ch, cr,Util.color(0,0,255), 10, 50);
+            GameScene.enemy.push(e);
+            break;
+            case RandomEnemy.DOUBLE_RECT:
+            e = new DoubleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, Util.color(10,130,180), 50, 200);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.DOUBLE_CIRCLE:

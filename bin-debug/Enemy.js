@@ -45,6 +45,7 @@ var Enemy = (function (_super) {
         this.object.x = x;
         this.object.y = y;
         GameObject.display.addChild(this.object);
+        GameObject.display.swapChildren(this.object, Player.object);
     };
     Enemy.prototype.setHpText = function (x, y, width, height) {
         var size = 100;
@@ -154,10 +155,32 @@ var DoubleCircle = (function (_super) {
         this.shape2.graphics.endFill();
         this.object.addChildAt(this.shape2, 0);
     };
-    DoubleCircle.prototype.addDestroyMethod = function () {
-        egret.Tween.removeTweens(this.object);
-    };
     return DoubleCircle;
 }(CircleEnemy));
 __reflect(DoubleCircle.prototype, "DoubleCircle");
+var DoubleRect = (function (_super) {
+    __extends(DoubleRect, _super);
+    function DoubleRect(x, y, width, height, color, hp, dropMoney) {
+        var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
+        _this.shape2 = null;
+        _this.shape.x -= width / 4;
+        _this.shape.y -= height / 4;
+        _this.setShape2(x, y, width, height, color);
+        return _this;
+    }
+    DoubleRect.prototype.setShape2 = function (x, y, width, height, color) {
+        if (this.shape2) {
+            GameObject.display.removeChild(this.shape2);
+        }
+        this.shape2 = new egret.Shape();
+        this.shape2.x += width / 4;
+        this.shape2.y += height / 4;
+        this.shape2.graphics.beginFill(color);
+        this.shape2.graphics.drawRect(0, 0, width, height);
+        this.shape2.graphics.endFill();
+        this.object.addChild(this.shape2);
+    };
+    return DoubleRect;
+}(RectEnemy));
+__reflect(DoubleRect.prototype, "DoubleRect");
 //# sourceMappingURL=Enemy.js.map

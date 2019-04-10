@@ -121,8 +121,6 @@ class Player extends GameObject{
             GameScene.enemy.forEach(e =>{
                 if(b.collisionFlag == false && e.object.y >= b.object.y && e.deadFlag == false){
                     e.hp -= Player.bulletDamage;
-                    console.log(e);
-                    
                     MyTween.knockBack(e.object);
                     b.destroy();
                     b.collisionFlag = true;

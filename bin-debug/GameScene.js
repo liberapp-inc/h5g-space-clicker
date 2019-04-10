@@ -13,10 +13,11 @@ var RandomEnemy;
     //NONE,
     RandomEnemy[RandomEnemy["RECT"] = 0] = "RECT";
     RandomEnemy[RandomEnemy["CIRCLE"] = 1] = "CIRCLE";
-    RandomEnemy[RandomEnemy["DOUBLE_CIRCLE"] = 2] = "DOUBLE_CIRCLE";
+    RandomEnemy[RandomEnemy["DOUBLE_RECT"] = 2] = "DOUBLE_RECT";
+    RandomEnemy[RandomEnemy["DOUBLE_CIRCLE"] = 3] = "DOUBLE_CIRCLE";
     //TRIANGLE,
-    RandomEnemy[RandomEnemy["BOSS_RECT"] = 3] = "BOSS_RECT";
-    RandomEnemy[RandomEnemy["BOSS_CIRCLE"] = 4] = "BOSS_CIRCLE";
+    RandomEnemy[RandomEnemy["BOSS_RECT"] = 4] = "BOSS_RECT";
+    RandomEnemy[RandomEnemy["BOSS_CIRCLE"] = 5] = "BOSS_CIRCLE";
 })(RandomEnemy || (RandomEnemy = {}));
 var GameScene = (function (_super) {
     __extends(GameScene, _super);
@@ -77,6 +78,10 @@ var GameScene = (function (_super) {
                 cw = cr; //width
                 ch = cr; //height
                 e = new CircleEnemy(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(0, 0, 255), 10, 50);
+                GameScene.enemy.push(e);
+                break;
+            case RandomEnemy.DOUBLE_RECT:
+                e = new DoubleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, Util.color(10, 130, 180), 50, 200);
                 GameScene.enemy.push(e);
                 break;
             case RandomEnemy.DOUBLE_CIRCLE:
