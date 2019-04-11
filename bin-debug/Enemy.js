@@ -60,17 +60,20 @@ var Enemy = (function (_super) {
         this.hpTextField.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.object.addChild(this.hpTextField);
     };
-    Enemy.prototype.setRectShape = function (dx, dy, width, height, color) {
+    Enemy.prototype.setRectShape = function (dx, dy, width, height, color, rotation) {
         var s = new egret.Shape();
         this.addShapes.push(s);
-        s.x = dx;
-        s.y = dy;
+        s.anchorOffsetX = this.object.anchorOffsetX;
+        s.anchorOffsetY = this.object.anchorOffsetY;
+        s.x = this.object.anchorOffsetX + dx;
+        s.y = this.object.anchorOffsetY + dy;
+        s.rotation = rotation || 0;
         s.graphics.beginFill(color);
         s.graphics.drawRect(0, 0, width, height);
         s.graphics.endFill();
         this.object.addChildAt(s, 0);
     };
-    Enemy.prototype.setCircleShape = function (dx, dy, radius, color) {
+    Enemy.prototype.setCircleShape = function (dx, dy, radius, color, rotation) {
         if (radius <= 0) {
             radius = 1;
             console.log("radiusが0以下です");
@@ -79,6 +82,7 @@ var Enemy = (function (_super) {
         this.addShapes.push(s);
         s.x = this.object.anchorOffsetX + dx;
         s.y = this.object.anchorOffsetY + dy;
+        s.rotation = rotation || 0;
         s.graphics.beginFill(color);
         s.graphics.drawCircle(0, 0, radius);
         s.graphics.endFill();
@@ -93,6 +97,7 @@ var Enemy = (function (_super) {
             _this.object.removeChild(s);
             s = null;
         });
+        this.object.removeChild(this.hpTextField);
     };
     //オーバーライドしてるので、delete関連は注意
     Enemy.prototype.delete = function () {
@@ -108,7 +113,7 @@ var RectEnemy = (function (_super) {
     __extends(RectEnemy, _super);
     function RectEnemy(x, y, width, height, color, hp, dropMoney) {
         var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
-        _this.setRectShape(0, 0, width, height, color);
+        _this.setRectShape(0, 0, width, height, color, 45);
         return _this;
     }
     return RectEnemy;
@@ -139,11 +144,35 @@ var DoubleRect = (function (_super) {
     __extends(DoubleRect, _super);
     function DoubleRect(x, y, width, height, color, hp, dropMoney) {
         var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
-        _this.setRectShape(-width / 4, -width / 4, width, height, color);
-        _this.setRectShape(width / 4, width / 4, width, height, color);
+        _this.setRectShape(-width / 4, -height / 4, width, height, color);
+        _this.setRectShape(width / 4, height / 4, width, height, color);
         return _this;
     }
     return DoubleRect;
 }(Enemy));
 __reflect(DoubleRect.prototype, "DoubleRect");
+var TripleCircle = (function (_super) {
+    __extends(TripleCircle, _super);
+    function TripleCircle(x, y, width, height, radius, color, hp, dropMoney) {
+        var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
+        _this.setCircleShape(0, radius / 1.5, radius, color);
+        _this.setCircleShape(radius / 1.5, 0, radius, color);
+        _this.setCircleShape(-radius / 1.5, 0, radius, color);
+        return _this;
+    }
+    return TripleCircle;
+}(Enemy));
+__reflect(TripleCircle.prototype, "TripleCircle");
+var TripleRect = (function (_super) {
+    __extends(TripleRect, _super);
+    function TripleRect(x, y, width, height, color, hp, dropMoney) {
+        var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
+        _this.setRectShape(0, height / 4, width, height, color);
+        _this.setRectShape(-width / 4, -height / 4, width, height, color);
+        _this.setRectShape(width / 4, height / 4, width, height, color);
+        return _this;
+    }
+    return TripleRect;
+}(Enemy));
+__reflect(TripleRect.prototype, "TripleRect");
 //# sourceMappingURL=Enemy.js.map

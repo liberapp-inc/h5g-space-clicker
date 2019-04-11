@@ -51,11 +51,13 @@ class DropMoney extends GameObject{
 
     text:egret.TextField = null;
     textColor : number = 0x00FF3B;
+    display : egret.DisplayObjectContainer;
 
     constructor(x:number, y:number, text:string, size:number, ratio:number, color:number, bold:boolean, display:egret.DisplayObjectContainer) {
         super();
 
         this.textColor = Util.color(0,255,0);
+        this.display = display;
 
         this.text = Util.myText(x, y, text, size, ratio, color, true);  
         this.text.width = display.width/ratio;
@@ -66,7 +68,8 @@ class DropMoney extends GameObject{
         MyTween.dropMoneyTextFadeOut(this.text, this);
     }
     
-    onDestroy() {
+    addDestroyMethod(){
+        this.display.removeChild(this.text);
     }
 
     updateContent() {

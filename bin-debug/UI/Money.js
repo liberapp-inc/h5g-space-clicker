@@ -51,6 +51,7 @@ var DropMoney = (function (_super) {
         _this.text = null;
         _this.textColor = 0x00FF3B;
         _this.textColor = Util.color(0, 255, 0);
+        _this.display = display;
         _this.text = Util.myText(x, y, text, size, ratio, color, true);
         _this.text.width = display.width / ratio;
         _this.text.height = display.height / ratio;
@@ -60,7 +61,8 @@ var DropMoney = (function (_super) {
         MyTween.dropMoneyTextFadeOut(_this.text, _this);
         return _this;
     }
-    DropMoney.prototype.onDestroy = function () {
+    DropMoney.prototype.addDestroyMethod = function () {
+        this.display.removeChild(this.text);
     };
     DropMoney.prototype.updateContent = function () {
     };

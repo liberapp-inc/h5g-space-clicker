@@ -58,19 +58,23 @@ abstract class Enemy extends GameObject{
         this.object.addChild(this.hpTextField);
     }
 
-    setRectShape(dx : number, dy : number, width : number, height : number, color:number){
+    setRectShape(dx : number, dy : number, width : number, height : number, color:number, rotation?:number){
 
         let s = new egret.Shape();
         this.addShapes.push(s);
-        s.x = dx;
-        s.y = dy;
+        s.anchorOffsetX = this.object.anchorOffsetX;
+        s.anchorOffsetY = this.object.anchorOffsetY;
+        s.x = this.object.anchorOffsetX + dx;
+        s.y = this.object.anchorOffsetY + dy;
+        s.rotation = rotation || 0;
+
         s.graphics.beginFill(color);
         s.graphics.drawRect(0, 0, width , height);
         s.graphics.endFill();
         this.object.addChildAt(s,0);
     }
 
-    setCircleShape(dx : number,dy : number, radius : number, color:number){
+    setCircleShape(dx : number,dy : number, radius : number, color:number, rotation?:number){
 
         if(radius <= 0){
             radius = 1;
@@ -81,6 +85,7 @@ abstract class Enemy extends GameObject{
         this.addShapes.push(s);
         s.x = this.object.anchorOffsetX + dx;
         s.y = this.object.anchorOffsetY + dy;
+        s.rotation = rotation || 0;
         s.graphics.beginFill(color);
         s.graphics.drawCircle(0, 0, radius);
         s.graphics.endFill();
@@ -98,6 +103,7 @@ abstract class Enemy extends GameObject{
                 this.object.removeChild(s);
                 s=null;
         });
+        this.object.removeChild(this.hpTextField);
     }
     //オーバーライドしてるので、delete関連は注意
     protected delete(){
@@ -113,7 +119,7 @@ class RectEnemy extends Enemy{
 
     constructor(x : number, y : number, width : number, height : number, color:number, hp:number, dropMoney:number) {
         super(x, y, width, height, color, hp, dropMoney);
-        this.setRectShape(0, 0, width, height, color);
+        this.setRectShape(0, 0, width, height, color, 45);
     }
 
 }
@@ -142,8 +148,32 @@ class DoubleRect extends Enemy{
 
     constructor(x : number, y : number, width : number, height : number, color:number, hp:number, dropMoney:number) {
         super(x, y, width, height, color, hp, dropMoney);
-        this.setRectShape(-width/4, -width/4, width, height, color);
-        this.setRectShape(width/4, width/4, width, height, color);
+        this.setRectShape(-width/4, -height/4, width, height, color);
+        this.setRectShape(width/4, height/4, width, height, color);
+
+    }
+
+
+}
+
+class TripleCircle extends Enemy{
+
+    constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
+        super(x, y, width, height, color, hp, dropMoney);
+        this.setCircleShape(0, radius/1.5, radius, color);
+        this.setCircleShape(radius/1.5, 0, radius, color);
+        this.setCircleShape(-radius/1.5, 0, radius, color);
+    }
+
+}
+
+class TripleRect extends Enemy{
+
+    constructor(x : number, y : number, width : number, height : number, color:number, hp:number, dropMoney:number) {
+        super(x, y, width, height, color, hp, dropMoney);
+        this.setRectShape(0, height/4, width, height, color);
+        this.setRectShape(-width/4, -height/4, width, height, color);
+        this.setRectShape(width/4, height/4, width, height, color);
 
     }
 
