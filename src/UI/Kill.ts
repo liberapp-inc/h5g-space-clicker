@@ -15,12 +15,6 @@ class Kill extends GameObject{
 
         this.textColor = Util.color(0,255,0);
 
-/*        let kill = window.localStorage.getItem("kill"); // string
-        if( kill == null ){
-            kill = "0";
-            window.localStorage.setItem("kill", kill);
-        }
-        this.kill = parseInt( kill );*/
         this.kill = Util.loadLocalStrage("kill", this.kill);
 
         this.text = Util.myText(0, 50, "KILL : " + this.kill.toString() + " / 1000", 100, 0.5, this.textColor, true);

@@ -19,6 +19,7 @@ var Enemy = (function (_super) {
     function Enemy(x, y, width, height, color, hp, dropMoney) {
         var _this = _super.call(this) || this;
         _this.object = null;
+        _this.initialY = 0;
         _this.dropMoney = 0;
         _this.hp = 0;
         _this.hpTextField = null;
@@ -49,6 +50,7 @@ var Enemy = (function (_super) {
         this.object.y = y;
         GameObject.display.addChild(this.object);
         GameObject.display.swapChildren(this.object, Player.object);
+        this.initialY = this.object.y;
     };
     Enemy.prototype.setHpText = function (x, y, width, height) {
         var size = 100;
@@ -90,6 +92,9 @@ var Enemy = (function (_super) {
     };
     Enemy.prototype.updateContent = function () {
         this.hpTextField.text = this.hp.toString();
+        if (this.initialY > this.object.y) {
+            this.object.y = this.initialY;
+        }
     };
     Enemy.prototype.addDestroyMethod = function () {
         var _this = this;
@@ -155,9 +160,10 @@ var TripleCircle = (function (_super) {
     __extends(TripleCircle, _super);
     function TripleCircle(x, y, width, height, radius, color, hp, dropMoney) {
         var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
-        _this.setCircleShape(0, radius / 1.5, radius, color);
-        _this.setCircleShape(radius / 1.5, 0, radius, color);
-        _this.setCircleShape(-radius / 1.5, 0, radius, color);
+        var interval = radius / 1;
+        _this.setCircleShape(0, interval, radius, color);
+        _this.setCircleShape(interval, 0, radius / 1.5, color);
+        _this.setCircleShape(-interval, 0, radius / 1.5, color);
         return _this;
     }
     return TripleCircle;
@@ -167,9 +173,11 @@ var TripleRect = (function (_super) {
     __extends(TripleRect, _super);
     function TripleRect(x, y, width, height, color, hp, dropMoney) {
         var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
-        _this.setRectShape(0, height / 4, width, height, color);
-        _this.setRectShape(-width / 4, -height / 4, width, height, color);
-        _this.setRectShape(width / 4, height / 4, width, height, color);
+        var intervalX = width * 1.35;
+        var intervalY = height * 1.35;
+        _this.setRectShape(0, 0, width, height, color, 45);
+        _this.setRectShape(-intervalX, intervalY, width, height, color, 45);
+        _this.setRectShape(intervalX, intervalY, width, height, color, 45);
         return _this;
     }
     return TripleRect;

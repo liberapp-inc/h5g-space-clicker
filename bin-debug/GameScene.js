@@ -15,10 +15,14 @@ var RandomEnemy;
     RandomEnemy[RandomEnemy["CIRCLE"] = 1] = "CIRCLE";
     RandomEnemy[RandomEnemy["DOUBLE_RECT"] = 2] = "DOUBLE_RECT";
     RandomEnemy[RandomEnemy["DOUBLE_CIRCLE"] = 3] = "DOUBLE_CIRCLE";
-    RandomEnemy[RandomEnemy["BOSS_RECT"] = 4] = "BOSS_RECT";
-    RandomEnemy[RandomEnemy["BOSS_CIRCLE"] = 5] = "BOSS_CIRCLE";
-    RandomEnemy[RandomEnemy["BOSS_DOUBLE_RECT"] = 6] = "BOSS_DOUBLE_RECT";
-    RandomEnemy[RandomEnemy["BOSS_DOUBLE_CIRCLE"] = 7] = "BOSS_DOUBLE_CIRCLE";
+    RandomEnemy[RandomEnemy["TRIPLE_RECT"] = 4] = "TRIPLE_RECT";
+    RandomEnemy[RandomEnemy["TRIPLE_CIRCLE"] = 5] = "TRIPLE_CIRCLE";
+    RandomEnemy[RandomEnemy["BOSS_RECT"] = 6] = "BOSS_RECT";
+    RandomEnemy[RandomEnemy["BOSS_CIRCLE"] = 7] = "BOSS_CIRCLE";
+    RandomEnemy[RandomEnemy["BOSS_DOUBLE_RECT"] = 8] = "BOSS_DOUBLE_RECT";
+    RandomEnemy[RandomEnemy["BOSS_DOUBLE_CIRCLE"] = 9] = "BOSS_DOUBLE_CIRCLE";
+    RandomEnemy[RandomEnemy["BOSS_TRIPLE_RECT"] = 10] = "BOSS_TRIPLE_RECT";
+    RandomEnemy[RandomEnemy["BOSS_TRIPLE_CIRCLE"] = 11] = "BOSS_TRIPLE_CIRCLE";
 })(RandomEnemy || (RandomEnemy = {}));
 var GameScene = (function (_super) {
     __extends(GameScene, _super);
@@ -34,7 +38,7 @@ var GameScene = (function (_super) {
     };
     GameScene.createEnemy = function () {
         var e;
-        var createEnemy = 0; //Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
+        var createEnemy = 11; //Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
         var enemyColor = 0xffffff;
         var enemyHP = 0;
         var enemyDropMoney = 0;
@@ -98,6 +102,17 @@ var GameScene = (function (_super) {
                 e = new DoubleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(0, 50, 55), 50, 200);
                 GameScene.enemy.push(e);
                 break;
+            case RandomEnemy.TRIPLE_RECT:
+                e = new TripleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, Util.color(10, 130, 180), 200, 3000);
+                GameScene.enemy.push(e);
+                break;
+            case RandomEnemy.TRIPLE_CIRCLE:
+                cr = Game.width / 8; //radius
+                cw = cr; //width
+                ch = cr; //height
+                e = new TripleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(0, 50, 55), 200, 3000);
+                GameScene.enemy.push(e);
+                break;
             case RandomEnemy.BOSS_RECT:
                 e = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 3.6, Game.height / 5.2, Util.color(255, 255, 0), 100, 1000);
                 GameScene.enemy.push(e);
@@ -118,6 +133,17 @@ var GameScene = (function (_super) {
                 cw = cr; //width
                 ch = cr; //height
                 e = new DoubleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 500, 1000);
+                GameScene.enemy.push(e);
+                break;
+            case RandomEnemy.BOSS_TRIPLE_RECT:
+                e = new TripleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, Util.color(255, 255, 0), 2000, 8000);
+                GameScene.enemy.push(e);
+                break;
+            case RandomEnemy.BOSS_TRIPLE_CIRCLE:
+                cr = Game.width / 8; //radius
+                cw = cr; //width
+                ch = cr; //height
+                e = new TripleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 2000, 8000);
                 GameScene.enemy.push(e);
                 break;
         }

@@ -7,6 +7,7 @@ enum DropItem{
 abstract class Enemy extends GameObject{
 
     public object : egret.DisplayObjectContainer = null;
+    public initialY : number = 0;
     public dropMoney : number = 0;
     public hp : number = 0;
     public hpTextField : egret.TextField = null;
@@ -44,7 +45,7 @@ abstract class Enemy extends GameObject{
         this.object.y = y;
         GameObject.display.addChild(this.object);
         GameObject.display.swapChildren(this.object,Player.object);
-
+        this.initialY = this.object.y;
     }
 
     setHpText(x : number, y : number, width : number, height : number){
@@ -95,6 +96,9 @@ abstract class Enemy extends GameObject{
 
     updateContent() {
         this.hpTextField.text = this.hp.toString();
+        if(this.initialY > this.object.y){
+            this.object.y = this.initialY;
+        }
 
     }
 
@@ -160,9 +164,10 @@ class TripleCircle extends Enemy{
 
     constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
         super(x, y, width, height, color, hp, dropMoney);
-        this.setCircleShape(0, radius/1.5, radius, color);
-        this.setCircleShape(radius/1.5, 0, radius, color);
-        this.setCircleShape(-radius/1.5, 0, radius, color);
+        const interval :number = radius/1;
+        this.setCircleShape(0, interval, radius, color);
+        this.setCircleShape(interval, 0, radius/1.5, color);
+        this.setCircleShape(-interval, 0, radius/1.5, color);
     }
 
 }
@@ -171,9 +176,11 @@ class TripleRect extends Enemy{
 
     constructor(x : number, y : number, width : number, height : number, color:number, hp:number, dropMoney:number) {
         super(x, y, width, height, color, hp, dropMoney);
-        this.setRectShape(0, height/4, width, height, color);
-        this.setRectShape(-width/4, -height/4, width, height, color);
-        this.setRectShape(width/4, height/4, width, height, color);
+        const intervalX :number = width*1.35;
+        const intervalY :number = height*1.35;
+        this.setRectShape(0, 0, width, height, color, 45);
+        this.setRectShape(-intervalX, intervalY, width, height, color, 45);
+        this.setRectShape(intervalX, intervalY, width, height, color, 45);
 
     }
 

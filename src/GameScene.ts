@@ -4,10 +4,14 @@ enum RandomEnemy{
     CIRCLE,
     DOUBLE_RECT,
     DOUBLE_CIRCLE,
+    TRIPLE_RECT,
+    TRIPLE_CIRCLE,
     BOSS_RECT,
     BOSS_CIRCLE,
     BOSS_DOUBLE_RECT,
     BOSS_DOUBLE_CIRCLE,
+    BOSS_TRIPLE_RECT,
+    BOSS_TRIPLE_CIRCLE,
 }
 
 class GameScene extends GameObject{
@@ -30,7 +34,7 @@ class GameScene extends GameObject{
 
     static createEnemy(){
         let e : Enemy;
-        let createEnemy : number = 0;//Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
+        let createEnemy : number = 11;//Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
         let enemyColor : number = 0xffffff;
         let enemyHP : number = 0;
         let enemyDropMoney : number = 0;
@@ -96,6 +100,17 @@ class GameScene extends GameObject{
             e = new DoubleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(0,50,55), 50, 200);
             GameScene.enemy.push(e);
             break;
+            case RandomEnemy.TRIPLE_RECT:
+            e = new TripleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, Util.color(10,130,180), 200, 3000);
+            GameScene.enemy.push(e);
+            break;
+            case RandomEnemy.TRIPLE_CIRCLE:
+            cr = Game.width/8;//radius
+            cw = cr;//width
+            ch = cr;//height
+            e = new TripleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(0,50,55), 200, 3000);
+            GameScene.enemy.push(e);
+            break;
             case RandomEnemy.BOSS_RECT:
             e = new RectEnemy(Game.width/2, Game.height/4, Game.width/3.6, Game.height/5.2, Util.color(255,255,0), 100, 1000);
             GameScene.enemy.push(e);
@@ -116,6 +131,17 @@ class GameScene extends GameObject{
             cw = cr;//width
             ch = cr;//height
             e = new DoubleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 500, 1000);
+            GameScene.enemy.push(e);
+            break;
+            case RandomEnemy.BOSS_TRIPLE_RECT:
+            e = new TripleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, Util.color(255,255,0), 2000, 8000);
+            GameScene.enemy.push(e);
+            break;
+            case RandomEnemy.BOSS_TRIPLE_CIRCLE:
+            cr = Game.width/8;//radius
+            cw = cr;//width
+            ch = cr;//height
+            e = new TripleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 2000, 8000);
             GameScene.enemy.push(e);
             break;
         }
