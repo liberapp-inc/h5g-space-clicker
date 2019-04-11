@@ -89,7 +89,7 @@ var Player = (function (_super) {
             }
             //Enemyとの接触判定(Enemyを一体ずつしか出さないならenemyをforEachする必要なし)
             GameScene.enemy.forEach(function (e) {
-                if (b.collisionFlag == false && e.object.y >= b.object.y && e.deadFlag == false) {
+                if (b.collisionFlag == false && e.deadFlag == false && e.object.y >= b.object.y && b.object.y >= 0) {
                     e.hp -= Player.bulletDamage;
                     MyTween.knockBack(e.object);
                     b.destroy();

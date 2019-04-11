@@ -15,12 +15,14 @@ var RandomEnemy;
     RandomEnemy[RandomEnemy["CIRCLE"] = 1] = "CIRCLE";
     RandomEnemy[RandomEnemy["DOUBLE_RECT"] = 2] = "DOUBLE_RECT";
     RandomEnemy[RandomEnemy["DOUBLE_CIRCLE"] = 3] = "DOUBLE_CIRCLE";
-    //TRIANGLE,
     RandomEnemy[RandomEnemy["BOSS_RECT"] = 4] = "BOSS_RECT";
     RandomEnemy[RandomEnemy["BOSS_CIRCLE"] = 5] = "BOSS_CIRCLE";
+    RandomEnemy[RandomEnemy["BOSS_DOUBLE_RECT"] = 6] = "BOSS_DOUBLE_RECT";
+    RandomEnemy[RandomEnemy["BOSS_DOUBLE_CIRCLE"] = 7] = "BOSS_DOUBLE_CIRCLE";
 })(RandomEnemy || (RandomEnemy = {}));
 var GameScene = (function (_super) {
     __extends(GameScene, _super);
+    /**/
     function GameScene() {
         var _this = _super.call(this) || this;
         GameScene.I = _this;
@@ -32,7 +34,7 @@ var GameScene = (function (_super) {
     };
     GameScene.createEnemy = function () {
         var e;
-        var createEnemy = 2; //Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
+        var createEnemy = 6; //Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
         var enemyColor = 0xffffff;
         var enemyHP = 0;
         var enemyDropMoney = 0;
@@ -45,9 +47,14 @@ var GameScene = (function (_super) {
             case 10:
                 createEnemy = RandomEnemy.BOSS_RECT;
                 break;
+            case 50:
+                createEnemy = RandomEnemy.BOSS_CIRCLE;
+                break;
             case 100:
+                createEnemy = RandomEnemy.BOSS_DOUBLE_RECT;
                 break;
             case 200:
+                createEnemy = RandomEnemy.BOSS_DOUBLE_CIRCLE;
                 break;
             case 300:
                 break;
@@ -100,6 +107,17 @@ var GameScene = (function (_super) {
                 cw = cr; //width
                 ch = cr; //height
                 e = new CircleEnemy(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 300, 2000);
+                GameScene.enemy.push(e);
+                break;
+            case RandomEnemy.BOSS_DOUBLE_RECT:
+                e = new DoubleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, Util.color(255, 255, 0), 500, 1000);
+                GameScene.enemy.push(e);
+                break;
+            case RandomEnemy.BOSS_DOUBLE_CIRCLE:
+                cr = Game.width / 8; //radius
+                cw = cr; //width
+                ch = cr; //height
+                e = new DoubleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 500, 1000);
                 GameScene.enemy.push(e);
                 break;
         }

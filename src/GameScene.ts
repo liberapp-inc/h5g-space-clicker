@@ -4,9 +4,10 @@ enum RandomEnemy{
     CIRCLE,
     DOUBLE_RECT,
     DOUBLE_CIRCLE,
-    //TRIANGLE,
     BOSS_RECT,
     BOSS_CIRCLE,
+    BOSS_DOUBLE_RECT,
+    BOSS_DOUBLE_CIRCLE,
 }
 
 class GameScene extends GameObject{
@@ -15,7 +16,7 @@ class GameScene extends GameObject{
 
     //public object : egret.DisplayObjectContainer = null;
     static enemy : Enemy[] = [];
-
+/**/
     constructor() {
         super();
         GameScene.I = this;
@@ -29,7 +30,7 @@ class GameScene extends GameObject{
 
     static createEnemy(){
         let e : Enemy;
-        let createEnemy : number = 2;//Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
+        let createEnemy : number = 6;//Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
         let enemyColor : number = 0xffffff;
         let enemyHP : number = 0;
         let enemyDropMoney : number = 0;
@@ -43,9 +44,14 @@ class GameScene extends GameObject{
             case 10 :
             createEnemy = RandomEnemy.BOSS_RECT;
             break;
+            case 50 :
+            createEnemy = RandomEnemy.BOSS_CIRCLE;
+            break;
             case 100 :
+            createEnemy = RandomEnemy.BOSS_DOUBLE_RECT;
             break;
             case 200 :
+            createEnemy = RandomEnemy.BOSS_DOUBLE_CIRCLE;
             break;
             case 300 :
             break;
@@ -99,6 +105,17 @@ class GameScene extends GameObject{
             cw = cr;//width
             ch = cr;//height
             e = new CircleEnemy(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 300, 2000);
+            GameScene.enemy.push(e);
+            break;
+            case RandomEnemy.BOSS_DOUBLE_RECT:
+            e = new DoubleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, Util.color(255,255,0), 500, 1000);
+            GameScene.enemy.push(e);
+            break;
+            case RandomEnemy.BOSS_DOUBLE_CIRCLE:
+            cr = Game.width/8;//radius
+            cw = cr;//width
+            ch = cr;//height
+            e = new DoubleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 500, 1000);
             GameScene.enemy.push(e);
             break;
         }

@@ -42,7 +42,7 @@ var Game = (function () {
         new LevelUpBulletDamageButton(Game.width / 6, Game.height / 1.1, Game.width / 4, Game.height / 10.5, Util.color(255, 0, 0), "Attack");
         new LevelUpBulletSpeedButton(Game.width / 2, Game.height / 1.1, Game.width / 4, Game.height / 10.5, Util.color(255, 0, 0), "Speed");
         new LevelUpSalaryButton(Game.width / 1.2, Game.height / 1.1, Game.width / 4, Game.height / 10.5, Util.color(255, 0, 0), "Salary");
-        new CheckDate();
+        new CheckDate(); //Playerよりも後にインスタンス化すること
         new GameScene();
     };
     return Game;

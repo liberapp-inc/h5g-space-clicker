@@ -7,16 +7,22 @@ enum DropItem{
 abstract class Enemy extends GameObject{
 
     public object : egret.DisplayObjectContainer = null;
-    public dropMoney : number = 10;
+    public dropMoney : number = 0;
     public hp : number = 0;
     public hpTextField : egret.TextField = null;
     public hpTextFieldColor : number = 0xff0000;
     public deadFlag : boolean = false;
+    
+    addShapes : egret.Shape[] = [];
 
-    constructor(x : number, y : number, width : number, height : number) {
+
+    constructor(x : number, y : number, width : number, height : number, color:number, hp:number, dropMoney:number) {
         super();
+        this.hp = hp;
+        this.dropMoney = dropMoney;
         this.setObject(x, y, width, height);
-        //this.setHpText(x, y, width, height);
+        this.setHpText(x, y, width, height);
+
 
     }
 
@@ -49,13 +55,36 @@ abstract class Enemy extends GameObject{
         this.hpTextField.height = this.object.height/ratio;
         this.hpTextField.textAlign = egret.HorizontalAlign.CENTER;
         this.hpTextField.verticalAlign = egret.VerticalAlign.MIDDLE;
-
-/*        this.hpTextField.anchorOffsetX += this.hpTextField.width/2;
-        this.hpTextField.anchorOffsetY += this.hpTextField.height/2;
-        this.hpTextField.x = 0;
-        this.hpTextField.y = 0;  */  
-
         this.object.addChild(this.hpTextField);
+    }
+
+    setRectShape(dx : number, dy : number, width : number, height : number, color:number){
+
+        let s = new egret.Shape();
+        this.addShapes.push(s);
+        s.x = dx;
+        s.y = dy;
+        s.graphics.beginFill(color);
+        s.graphics.drawRect(0, 0, width , height);
+        s.graphics.endFill();
+        this.object.addChildAt(s,0);
+    }
+
+    setCircleShape(dx : number,dy : number, radius : number, color:number){
+
+        if(radius <= 0){
+            radius = 1;
+            console.log("radiusが0以下です");
+        }
+
+        let s = new egret.Shape();
+        this.addShapes.push(s);
+        s.x = this.object.anchorOffsetX + dx;
+        s.y = this.object.anchorOffsetY + dy;
+        s.graphics.beginFill(color);
+        s.graphics.drawCircle(0, 0, radius);
+        s.graphics.endFill();
+        this.object.addChildAt(s,0);
     }
 
     addDestroyMethod(){
@@ -78,129 +107,39 @@ abstract class Enemy extends GameObject{
 class RectEnemy extends Enemy{
 
     constructor(x : number, y : number, width : number, height : number, color:number, hp:number, dropMoney:number) {
-        super(x, y, width, height);
-        //this.setObject(x, y, width, height);
-        this.setShape(x, y, width, height, color);
-        this.hp = hp;
-        this.dropMoney = dropMoney;
-        this.setHpText(x, y, width, height);
+        super(x, y, width, height, color, hp, dropMoney);
+        this.setRectShape(0, 0, width, height, color);
     }
-
-
-
-    private setShape(x : number, y : number, width : number, height : number, color:number){
-        if( this.shape ){
-            GameObject.display.removeChild(this.shape);        
-        }
-
-
-        this.shape = new egret.Shape();
-        this.shape.x = 0;
-        this.shape.y = 0;
-        this.shape.graphics.beginFill(color);
-        this.shape.graphics.drawRect(0, 0, width , height);
-        this.shape.graphics.endFill();
-        this.object.addChild(this.shape);
-
-        
-    }
-
 
 }
 
 class CircleEnemy extends Enemy{
-
+    
     constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
-        super(x, y, width, height);
-        this.setShape(x, y, radius, color);
-        this.hp = hp;
-        this.dropMoney = dropMoney;
-        this.setHpText(x, y, width, height);
+        super(x, y, width, height, color, hp, dropMoney);
+        this.setCircleShape(0, 0, radius, color);
 
-    }
-
-
-    private setShape(x : number, y : number, radius : number, color:number){
-        if( this.shape ){
-            GameObject.display.removeChild(this.shape);        
-        }
-        if(radius <= 0){
-            radius = 1;
-            console.log("radiusが0以下です");
-        }
-
-        this.shape = new egret.Shape();
-        this.shape.x = this.object.anchorOffsetX;
-        this.shape.y = this.object.anchorOffsetY;
-        this.shape.graphics.beginFill(color);
-        this.shape.graphics.drawCircle(0, 0, radius);
-        this.shape.graphics.endFill();
-        this.object.addChild(this.shape);
-    }
-
-
-}
-
-class DoubleCircle extends CircleEnemy{
-
-    shape2 : egret.Shape = null;
-
-    constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
-        super(x, y, width, height, radius, color, hp, dropMoney);
-        this.shape.x -= radius/1.5;
-        this.setShape2(x, y, radius, color);
-
-    }
-
-    private setShape2(x : number, y : number, radius : number, color:number){
-        if( this.shape2 ){
-            GameObject.display.removeChild(this.shape2);        
-        }
-        if(radius <= 0){
-            radius = 1;
-            console.log("radiusが0以下です");
-        }
-
-        this.shape2 = new egret.Shape();
-        this.shape2.x = this.object.anchorOffsetX + radius/1.5;
-        this.shape2.y = this.object.anchorOffsetY;
-        this.shape2.graphics.beginFill(color);
-        this.shape2.graphics.drawCircle(0, 0, radius);
-        this.shape2.graphics.endFill();
-        this.object.addChildAt(this.shape2,0);
     }
 
 }
 
-class DoubleRect extends RectEnemy{
+class DoubleCircle extends Enemy{
 
-    shape2 : egret.Shape = null;
+    constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
+        super(x, y, width, height, color, hp, dropMoney);
+        this.setCircleShape(-radius/1.5, 0, radius, color);
+        this.setCircleShape(radius/1.5, 0, radius, color);
+    }
+
+}
+
+class DoubleRect extends Enemy{
 
     constructor(x : number, y : number, width : number, height : number, color:number, hp:number, dropMoney:number) {
         super(x, y, width, height, color, hp, dropMoney);
-        this.shape.x -= width/4;
-        this.shape.y -= height/4;
-        this.setShape2(x, y, width, height, color);
+        this.setRectShape(-width/4, -width/4, width, height, color);
+        this.setRectShape(width/4, width/4, width, height, color);
 
-    }
-
-
-
-    private setShape2(x : number, y : number, width : number, height : number, color:number){
-        if( this.shape2 ){
-            GameObject.display.removeChild(this.shape2);        
-        }
-
-
-        this.shape2 = new egret.Shape();
-        this.shape2.x += width/4;
-        this.shape2.y += height/4;
-        this.shape2.graphics.beginFill(color);
-        this.shape2.graphics.drawRect(0, 0, width , height);
-        this.shape2.graphics.endFill();
-        this.object.addChild(this.shape2);
-
-        
     }
 
 
