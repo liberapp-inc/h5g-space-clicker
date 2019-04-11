@@ -84,13 +84,19 @@ var Enemy = (function (_super) {
         s.graphics.endFill();
         this.object.addChildAt(s, 0);
     };
-    Enemy.prototype.addDestroyMethod = function () {
-        Money.I.money += this.dropMoney;
-    };
     Enemy.prototype.updateContent = function () {
         this.hpTextField.text = this.hp.toString();
     };
+    Enemy.prototype.addDestroyMethod = function () {
+        var _this = this;
+        this.addShapes.forEach(function (s) {
+            _this.object.removeChild(s);
+            s = null;
+        });
+    };
+    //オーバーライドしてるので、delete関連は注意
     Enemy.prototype.delete = function () {
+        this.addDestroyMethod();
         if (this.shape) {
             GameObject.display.removeChild(this.object);
         }

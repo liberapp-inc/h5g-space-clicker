@@ -87,16 +87,21 @@ abstract class Enemy extends GameObject{
         this.object.addChildAt(s,0);
     }
 
-    addDestroyMethod(){
-        Money.I.money += this.dropMoney;
-    }
 
     updateContent() {
         this.hpTextField.text = this.hp.toString();
 
     }
 
+    addDestroyMethod(){
+        this.addShapes.forEach(s =>{
+                this.object.removeChild(s);
+                s=null;
+        });
+    }
+    //オーバーライドしてるので、delete関連は注意
     protected delete(){
+        this.addDestroyMethod();
         if( this.shape ){
             GameObject.display.removeChild(this.object);
         }

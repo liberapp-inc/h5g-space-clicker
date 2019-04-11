@@ -34,7 +34,7 @@ var GameScene = (function (_super) {
     };
     GameScene.createEnemy = function () {
         var e;
-        var createEnemy = 6; //Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
+        var createEnemy = Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
         var enemyColor = 0xffffff;
         var enemyHP = 0;
         var enemyDropMoney = 0;
