@@ -128,9 +128,7 @@ class Player extends GameObject{
 
     public shot(){
         let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/24, Game.height/16, Util.color(255,255,0));
-        Player.bullet.push(b);
-        console.log( "s");
-        
+        Player.bullet.push(b);       
     }
 
     public resetTimer(){
@@ -175,7 +173,7 @@ class Player extends GameObject{
                         e.hp = 0;
                         e.deadFlag = true;
                         Money.addMoney(e.dropMoney);
-                        new DropMoney(0,0, "MONEY\n+" + e.dropMoney.toString(), 70, 0.5, 0xff0000, true, e.object);
+                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 70, 0.5, 0xff0000, true, e.object);
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
                         MyTween.enemyFadeOut(e.object, e);

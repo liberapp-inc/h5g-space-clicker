@@ -54,8 +54,12 @@ var DropMoney = (function (_super) {
         _this.textColor = Util.color(0, 255, 0);
         _this.display = display;
         _this.text = Util.myText(x, y, text, size, ratio, color, true);
-        _this.text.width = display.width / ratio;
-        _this.text.height = display.height / ratio;
+        _this.text.width /= ratio;
+        _this.text.height /= ratio;
+        _this.text.anchorOffsetX = _this.text.width / 2;
+        _this.text.anchorOffsetY = _this.text.height / 2;
+        _this.text.x = _this.display.anchorOffsetX;
+        _this.text.y = _this.display.anchorOffsetY;
         _this.text.textAlign = egret.HorizontalAlign.CENTER;
         _this.text.verticalAlign = egret.VerticalAlign.MIDDLE;
         display.addChild(_this.text);

@@ -42,7 +42,7 @@ var GameScene = (function (_super) {
     };
     GameScene.createEnemy = function () {
         var e;
-        var createEnemy = 6; //Util.randomInt(RandomEnemy.RECT, GameScene.enemyLevel);
+        var createEnemy = 0; //Util.randomInt(RandomEnemy.RECT, GameScene.enemyLevel);
         var enemyColor = 0xffffff;
         var enemyHP = 0;
         var enemyDropMoney = 0;

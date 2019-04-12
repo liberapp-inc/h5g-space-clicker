@@ -39,7 +39,7 @@ class GameScene extends GameObject{
 
     static createEnemy(){
         let e : Enemy;
-        let createEnemy : number = 6;//Util.randomInt(RandomEnemy.RECT, GameScene.enemyLevel);
+        let createEnemy : number = 0;//Util.randomInt(RandomEnemy.RECT, GameScene.enemyLevel);
         let enemyColor : number = 0xffffff;
         let enemyHP : number = 0;
         let enemyDropMoney : number = 0;

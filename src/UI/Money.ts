@@ -60,8 +60,12 @@ class DropMoney extends GameObject{
         this.display = display;
 
         this.text = Util.myText(x, y, text, size, ratio, color, true);  
-        this.text.width = display.width/ratio;
-        this.text.height = display.height/ratio;
+        this.text.width  /= ratio;
+        this.text.height /= ratio;
+        this.text.anchorOffsetX = this.text.width /2;
+        this.text.anchorOffsetY = this.text.height/2;
+        this.text.x = this.display.anchorOffsetX; 
+        this.text.y = this.display.anchorOffsetY; 
         this.text.textAlign = egret.HorizontalAlign.CENTER;
         this.text.verticalAlign = egret.VerticalAlign.MIDDLE;
         display.addChild( this.text );
