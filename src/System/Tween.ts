@@ -91,6 +91,46 @@ class MyTween {
             });
     }
 
+    static slide(object : any, toPos:number, time_ms:number){
+
+        let objectPosX : number = object.x;
+        let toPosX :number = toPos;
+
+        egret.Tween.get(object) 
+            .to({x:objectPosX + toPosX}, time_ms)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+            });
+    }
+
+    static bossSlide(object : any, toPos:number, time_ms:number, fadeOutTime_ms :number){
+
+        let objectPosX : number = object.x;
+        let toPosX :number = toPos;
+
+        egret.Tween.get(object) 
+            .to({x:objectPosX + toPosX}, time_ms)
+            .to({alpha:0}, fadeOutTime_ms)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+                BossEffect.I.destroy();
+            });
+    }
+    
+
+    static bossTextSlide(object : egret.TextField, toPos:number, time_ms:number){
+
+        let objectPosX : number = object.x;
+        let toPosX :number = toPos;
+
+        egret.Tween.get(object) 
+            .to({x:objectPosX + toPosX}, time_ms)
+            .wait(2400)
+            .to({x:objectPosX + toPosX*3}, time_ms)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+            });
+    }
 
 
 }

@@ -41,6 +41,7 @@ class Game{
         new ResetButton(Game.width/1.18, Game.height/10, Game.width/4.5, Game.height/14, buttonColor, "Delete\nData");
         new CheckDate();//Playerよりも後にインスタンス化すること
         new GameScene();
+        new BossEffect();
 
     }
 

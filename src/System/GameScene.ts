@@ -20,7 +20,7 @@ enum RandomEnemy{
 class GameScene extends GameObject{
 
     static I : GameScene = null;
-    static enemyLevel : number = 0;
+    static enemyLevel : number = 1;
 
     //public object : egret.DisplayObjectContainer = null;
     static enemy : Enemy[] = [];
@@ -77,7 +77,7 @@ class GameScene extends GameObject{
             break;
             case 400 :
             createEnemy = RandomEnemy.BOSS_TRIPLE_CIRCLE;
-            GameScene.enemyLevel = RandomEnemy.BOSS_UMIBOUZU;
+            GameScene.enemyLevel = RandomEnemy.UMIBOUZU;
             Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
             break;
             case 500 :
@@ -98,31 +98,33 @@ class GameScene extends GameObject{
             cr = Game.width/8;//radius
             cw = cr;//width
             ch = cr;//height
-            e = new CircleEnemy(Game.width/2, Game.height/4, cw, ch, cr, 0xaaff56, 10, 50);
+            e = new CircleEnemy(Game.width/2, Game.height/4, cw, ch, cr, 0xaaff56, 15, 80);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.DOUBLE_RECT:
-            e = new DoubleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, 0x28ffff, 50, 200);
+            e = new DoubleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, 0x28ffff, 50, 300);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.DOUBLE_CIRCLE:
             cr = Game.width/8;//radius
             cw = cr;//width
             ch = cr;//height
-            e = new DoubleCircle(Game.width/2, Game.height/4, cw, ch, cr, 0xaaff56, 50, 200);
+            e = new DoubleCircle(Game.width/2, Game.height/4, cw, ch, cr, 0xaaff56, 80, 500);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.TRIPLE_RECT:
-            e = new TripleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, 0x28ffff, 200, 3000);
+            e = new TripleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, 0x28ffff, 200, 1000);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.TRIPLE_CIRCLE:
             cr = Game.width/8;//radius
             cw = cr;//width
             ch = cr;//height
-            e = new TripleCircle(Game.width/2, Game.height/4, cw, ch, cr, 0xaaff56, 200, 3000);
+            e = new TripleCircle(Game.width/2, Game.height/4, cw, ch, cr, 0xaaff56, 300, 1500);
             GameScene.enemy.push(e);
             break;
+
+            //Bossキャラ
             case RandomEnemy.UMIBOUZU:
             cr = Game.width/20;//radius
             cw = cr;//width
@@ -130,10 +132,8 @@ class GameScene extends GameObject{
             e = new Umibouzu(Game.width/2, Game.height/4, cw, ch, cr,0xffff28, 100, 1500);
             GameScene.enemy.push(e);
             break;
-
-            //Bossキャラ
             case RandomEnemy.BOSS_RECT:
-            e = new RectEnemy(Game.width/2, Game.height/4, Game.width/3.6, Game.height/5.2, Util.color(255,255,0), 100, 1000);
+            e = new RectEnemy(Game.width/2, Game.height/4, Game.width/3.6, Game.height/5.2, Util.color(255,255,0), 100, 1500);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.BOSS_CIRCLE:
@@ -144,32 +144,32 @@ class GameScene extends GameObject{
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.BOSS_DOUBLE_RECT:
-            e = new DoubleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, Util.color(255,255,0), 500, 1000);
+            e = new DoubleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, Util.color(255,255,0), 1000, 5000);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.BOSS_DOUBLE_CIRCLE:
             cr = Game.width/8;//radius
             cw = cr;//width
             ch = cr;//height
-            e = new DoubleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 500, 1000);
+            e = new DoubleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 2000, 7000);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.BOSS_TRIPLE_RECT:
-            e = new TripleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, Util.color(255,255,0), 2000, 8000);
+            e = new TripleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, Util.color(255,255,0), 5000, 10000);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.BOSS_TRIPLE_CIRCLE:
             cr = Game.width/8;//radius
             cw = cr;//width
             ch = cr;//height
-            e = new TripleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 2000, 8000);
+            e = new TripleCircle(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 7000, 15000);
             GameScene.enemy.push(e);
             break;
             case RandomEnemy.BOSS_UMIBOUZU:
             cr = Game.width/8;//radius
             cw = cr;//width
             ch = cr;//height
-            e = new Umibouzu(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 10000, 15000);
+            e = new Umibouzu(Game.width/2, Game.height/4, cw, ch, cr,Util.color(255,255,0), 10000, 20000);
             GameScene.enemy.push(e);
             break;
         }

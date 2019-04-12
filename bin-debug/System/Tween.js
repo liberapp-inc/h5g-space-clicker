@@ -76,6 +76,37 @@ var MyTween = (function () {
             egret.Tween.removeTweens(object);
         });
     };
+    MyTween.slide = function (object, toPos, time_ms) {
+        var objectPosX = object.x;
+        var toPosX = toPos;
+        egret.Tween.get(object)
+            .to({ x: objectPosX + toPosX }, time_ms)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+        });
+    };
+    MyTween.bossSlide = function (object, toPos, time_ms, fadeOutTime_ms) {
+        var objectPosX = object.x;
+        var toPosX = toPos;
+        egret.Tween.get(object)
+            .to({ x: objectPosX + toPosX }, time_ms)
+            .to({ alpha: 0 }, fadeOutTime_ms)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+            BossEffect.I.destroy();
+        });
+    };
+    MyTween.bossTextSlide = function (object, toPos, time_ms) {
+        var objectPosX = object.x;
+        var toPosX = toPos;
+        egret.Tween.get(object)
+            .to({ x: objectPosX + toPosX }, time_ms)
+            .wait(2400)
+            .to({ x: objectPosX + toPosX * 3 }, time_ms)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+        });
+    };
     return MyTween;
 }());
 __reflect(MyTween.prototype, "MyTween");

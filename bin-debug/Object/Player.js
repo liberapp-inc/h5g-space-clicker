@@ -45,7 +45,7 @@ var Player = (function (_super) {
         Player.salaryLevelUpCost = 100;
         Kill.I.kill = 0;
         Money.I.money = 0;
-        GameScene.enemyLevel = 0;
+        GameScene.enemyLevel = 1;
         //Player.I.resetTimer();
         Player.shotTimer.stop();
         Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER, this.shot, this);
