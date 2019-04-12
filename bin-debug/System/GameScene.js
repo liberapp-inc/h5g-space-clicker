@@ -86,7 +86,7 @@ var GameScene = (function (_super) {
                 break;
             case 500:
                 createEnemy = RandomEnemy.BOSS_UMIBOUZU;
-                GameScene.enemyLevel = RandomEnemy.FINAL;
+                GameScene.enemyLevel = RandomEnemy.BOSS_UMIBOUZU;
                 Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
                 break;
         }
@@ -132,7 +132,7 @@ var GameScene = (function (_super) {
                 ch = cr; //height
                 e = new Umibouzu(Game.width / 2, Game.height / 4, cw, ch, cr, 0xffff28, 100 + Kill.I.kill * 1, 1500);
                 GameScene.enemy.push(e);
-                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL) {
+                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
                     e.bossFlag = true;
                     new BossEntryEffect();
                 }
@@ -140,7 +140,7 @@ var GameScene = (function (_super) {
             case RandomEnemy.BOSS_RECT:
                 e = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 3.6, Game.height / 5.2, Util.color(255, 255, 0), 100 + Kill.I.kill * 1, 1500);
                 GameScene.enemy.push(e);
-                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL) {
+                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
                     e.bossFlag = true;
                     new BossEntryEffect();
                 }
@@ -151,7 +151,7 @@ var GameScene = (function (_super) {
                 ch = cr; //height
                 e = new CircleEnemy(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 300 + Kill.I.kill * 2, 2000);
                 GameScene.enemy.push(e);
-                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL) {
+                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
                     e.bossFlag = true;
                     new BossEntryEffect();
                 }
@@ -159,7 +159,7 @@ var GameScene = (function (_super) {
             case RandomEnemy.BOSS_DOUBLE_RECT:
                 e = new DoubleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, Util.color(255, 255, 0), 1000 + Kill.I.kill * 3, 5000);
                 GameScene.enemy.push(e);
-                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL) {
+                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
                     e.bossFlag = true;
                     new BossEntryEffect();
                 }
@@ -170,7 +170,7 @@ var GameScene = (function (_super) {
                 ch = cr; //height
                 e = new DoubleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 2000 + Kill.I.kill * 4, 7000);
                 GameScene.enemy.push(e);
-                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL) {
+                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
                     e.bossFlag = true;
                     new BossEntryEffect();
                 }
@@ -178,7 +178,7 @@ var GameScene = (function (_super) {
             case RandomEnemy.BOSS_TRIPLE_RECT:
                 e = new TripleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, Util.color(255, 255, 0), 5000 + Kill.I.kill * 5, 10000);
                 GameScene.enemy.push(e);
-                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL) {
+                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
                     e.bossFlag = true;
                     new BossEntryEffect();
                 }
@@ -189,7 +189,7 @@ var GameScene = (function (_super) {
                 ch = cr; //height
                 e = new TripleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 7000 + Kill.I.kill * 6, 15000);
                 GameScene.enemy.push(e);
-                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL) {
+                if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
                     e.bossFlag = true;
                     new BossEntryEffect();
                     GameScene.enemyLevel = RandomEnemy.UMIBOUZU; //これだけ特別
