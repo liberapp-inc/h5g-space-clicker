@@ -82,7 +82,7 @@ var GameScene = (function (_super) {
             case 400:
                 createEnemy = RandomEnemy.BOSS_TRIPLE_CIRCLE;
                 //GameScene.enemyLevel = RandomEnemy.UMIBOUZU;//これだけEnemy生成時にlevelを変更
-                Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
+                //Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
                 break;
             case 500:
                 createEnemy = RandomEnemy.BOSS_UMIBOUZU;
@@ -193,6 +193,7 @@ var GameScene = (function (_super) {
                     e.bossFlag = true;
                     new BossEntryEffect();
                     GameScene.enemyLevel = RandomEnemy.UMIBOUZU; //これだけ特別
+                    Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
                 }
                 break;
             case RandomEnemy.BOSS_UMIBOUZU:

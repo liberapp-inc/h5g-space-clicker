@@ -85,7 +85,7 @@ class GameScene extends GameObject{
             case 400 :
             createEnemy = RandomEnemy.BOSS_TRIPLE_CIRCLE;
             //GameScene.enemyLevel = RandomEnemy.UMIBOUZU;//これだけEnemy生成時にlevelを変更
-            Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
+            //Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
             break;
             case 500 :
             createEnemy = RandomEnemy.BOSS_UMIBOUZU;
@@ -93,10 +93,7 @@ class GameScene extends GameObject{
             Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
             break;
 
-        }
-
-
-
+        }       
 
 
         switch(createEnemy){
@@ -203,7 +200,7 @@ class GameScene extends GameObject{
                 e.bossFlag = true;
                 new BossEntryEffect();
                 GameScene.enemyLevel = RandomEnemy.UMIBOUZU;//これだけ特別
-
+                Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
             }            
             break;
             case RandomEnemy.BOSS_UMIBOUZU:
