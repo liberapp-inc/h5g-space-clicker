@@ -33,8 +33,8 @@ class Game{
         /* new メソッドを記入*/
         new Background();
         new Kill();
-        new Player(Game.width/2, Game.height/1.5, Game.width/3.4, Game.height/8, Util.color(220,20,60));
         new Money();
+        new Player(Game.width/2, Game.height/1.5, Game.width/3.4, Game.height/8, Util.color(220,20,60));
         new LevelUpBulletDamageButton(Game.width/6, Game.height/1.1, Game.width/4, Game.height/10.5, buttonColor, "Attack");
         new LevelUpBulletSpeedButton(Game.width/2, Game.height/1.1, Game.width/4, Game.height/10.5, buttonColor, "Speed");
         new LevelUpSalaryButton(Game.width/1.2, Game.height/1.1, Game.width/4, Game.height/10.5, buttonColor, "Salary");

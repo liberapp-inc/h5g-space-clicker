@@ -56,8 +56,12 @@ abstract class Enemy extends GameObject{
         const size :number = 100;
         const ratio :number = 0.5;
         this.hpTextField = Util.myText(0,0, this.hp.toString(), size, ratio, this.hpTextFieldColor, true);
-        this.hpTextField.width = this.object.width/ratio;
-        this.hpTextField.height = this.object.height/ratio;
+        this.hpTextField.width  /= ratio;
+        this.hpTextField.height /= ratio;
+        this.hpTextField.anchorOffsetX = this.hpTextField.width /2;
+        this.hpTextField.anchorOffsetY = this.hpTextField.height/2;
+        this.hpTextField.x = this.object.anchorOffsetX; 
+        this.hpTextField.y = this.object.anchorOffsetY; 
         this.hpTextField.textAlign = egret.HorizontalAlign.CENTER;
         this.hpTextField.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.object.addChild(this.hpTextField);

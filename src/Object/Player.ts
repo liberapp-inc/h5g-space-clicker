@@ -9,10 +9,6 @@ class Player extends GameObject{
     static bulletMoveSpeed : number = 5;
     static salary : number = 1;
 
-    //statusアップ系
-/*    static damageLevel :number = 100;
-    static speedLevel :number = 100;
-    static salaryLevel :number = 100;*/
     static damageLevelUpCost :number = 100;
     static speedLevelUpCost :number = 100;
     static salaryLevelUpCost :number = 100;
@@ -47,11 +43,15 @@ class Player extends GameObject{
         Player.speedLevelUpCost     = Util.loadLocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
         Player.salaryLevelUpCost    = Util.loadLocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
 
+        Kill.I.kill                 = Util.loadLocalStrage("Kill.I.kill", Kill.I.kill);
+        Money.I.money               = Util.loadLocalStrage("Money.I.money", Money.I.money);
+        GameScene.enemyLevel        = Util.loadLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
+
     }
 
     resetStatus(){
 
-        Player.bulletDamage         = 100;
+        Player.bulletDamage         = 1;
         Player.bulletMoveSpeed      = 5;
         Player.salary               = 1;
         Player.shotInterval         = 1000;
@@ -60,6 +60,7 @@ class Player extends GameObject{
         Player.salaryLevelUpCost    = 100;
         Kill.I.kill                 = 0;
         Money.I.money               = 0;
+        GameScene.enemyLevel        = 0;
 
         //Player.I.resetTimer();
         Player.shotTimer.stop();
@@ -77,6 +78,7 @@ class Player extends GameObject{
         Util.saveLocalStrage("Kill.I.kill", Kill.I.kill);
         Util.saveLocalStrage("Money.I.money", Money.I.money);
 
+        Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
         GameObject.transit = Game.init;
 
     }

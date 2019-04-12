@@ -31,9 +31,12 @@ var Player = (function (_super) {
         Player.damageLevelUpCost = Util.loadLocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
         Player.speedLevelUpCost = Util.loadLocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
         Player.salaryLevelUpCost = Util.loadLocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
+        Kill.I.kill = Util.loadLocalStrage("Kill.I.kill", Kill.I.kill);
+        Money.I.money = Util.loadLocalStrage("Money.I.money", Money.I.money);
+        GameScene.enemyLevel = Util.loadLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
     };
     Player.prototype.resetStatus = function () {
-        Player.bulletDamage = 100;
+        Player.bulletDamage = 1;
         Player.bulletMoveSpeed = 5;
         Player.salary = 1;
         Player.shotInterval = 1000;
@@ -42,6 +45,7 @@ var Player = (function (_super) {
         Player.salaryLevelUpCost = 100;
         Kill.I.kill = 0;
         Money.I.money = 0;
+        GameScene.enemyLevel = 0;
         //Player.I.resetTimer();
         Player.shotTimer.stop();
         Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER, this.shot, this);
@@ -54,6 +58,7 @@ var Player = (function (_super) {
         Util.saveLocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
         Util.saveLocalStrage("Kill.I.kill", Kill.I.kill);
         Util.saveLocalStrage("Money.I.money", Money.I.money);
+        Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
         GameObject.transit = Game.init;
     };
     Player.prototype.setPlayerObject = function (x, y, width, height) {
@@ -152,10 +157,6 @@ var Player = (function (_super) {
     Player.bulletDamage = 1;
     Player.bulletMoveSpeed = 5;
     Player.salary = 1;
-    //statusアップ系
-    /*    static damageLevel :number = 100;
-        static speedLevel :number = 100;
-        static salaryLevel :number = 100;*/
     Player.damageLevelUpCost = 100;
     Player.speedLevelUpCost = 100;
     Player.salaryLevelUpCost = 100;
