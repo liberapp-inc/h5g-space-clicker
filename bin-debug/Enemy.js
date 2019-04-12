@@ -30,6 +30,8 @@ var Enemy = (function (_super) {
         _this.dropMoney = dropMoney;
         _this.setObject(x, y, width, height);
         _this.setHpText(x, y, width, height);
+        //ノックバックでobjectが上に行ってしまった時に、初期の位置に戻す用
+        _this.initialY = _this.object.y;
         return _this;
     }
     Enemy.prototype.setObject = function (x, y, width, height) {
@@ -48,9 +50,9 @@ var Enemy = (function (_super) {
         this.object.anchorOffsetY += height / 2;
         this.object.x = x;
         this.object.y = y;
-        GameObject.display.addChild(this.object);
-        GameObject.display.swapChildren(this.object, Player.object);
-        this.initialY = this.object.y;
+        var index = GameObject.display.getChildIndex(Background.I.shape) + 1;
+        GameObject.display.addChildAt(this.object, index);
+        //GameObject.display.swapChildren(this.object,Player.object);
     };
     Enemy.prototype.setHpText = function (x, y, width, height) {
         var size = 100;
@@ -103,11 +105,7 @@ var Enemy = (function (_super) {
             s = null;
         });
         this.object.removeChild(this.hpTextField);
-    };
-    //オーバーライドしてるので、delete関連は注意
-    Enemy.prototype.delete = function () {
-        this.addDestroyMethod();
-        if (this.shape) {
+        if (this.object) {
             GameObject.display.removeChild(this.object);
         }
     };
@@ -183,4 +181,19 @@ var TripleRect = (function (_super) {
     return TripleRect;
 }(Enemy));
 __reflect(TripleRect.prototype, "TripleRect");
+var Umibouzu = (function (_super) {
+    __extends(Umibouzu, _super);
+    function Umibouzu(x, y, width, height, radius, color, hp, dropMoney) {
+        var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
+        var interval = radius * 1.5;
+        var eyeColor = Util.color(255, 0, 0);
+        _this.setCircleShape(interval, interval, radius / 1.5, eyeColor);
+        _this.setCircleShape(-interval, interval, radius / 1.5, eyeColor);
+        _this.setCircleShape(0, interval * 2, radius / 1.5, eyeColor);
+        _this.setCircleShape(0, 0, radius * 4, color);
+        return _this;
+    }
+    return Umibouzu;
+}(Enemy));
+__reflect(Umibouzu.prototype, "Umibouzu");
 //# sourceMappingURL=Enemy.js.map

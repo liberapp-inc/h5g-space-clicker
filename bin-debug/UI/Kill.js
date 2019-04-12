@@ -18,7 +18,7 @@ var Kill = (function (_super) {
         _this.textColor = 0x00FF3B;
         Kill.I = _this;
         _this.textColor = Util.color(0, 255, 0);
-        _this.kill = Util.loadLocalStrage("kill", _this.kill);
+        _this.kill = Util.loadLocalStrage("Kill.I.kill", Kill.I.kill);
         _this.text = Util.myText(0, 50, "KILL : " + _this.kill.toString() + " / 1000", 100, 0.5, _this.textColor, true);
         GameObject.display.addChild(_this.text);
         return _this;
@@ -32,7 +32,7 @@ var Kill = (function (_super) {
     };
     Kill.prototype.addKill = function () {
         this.kill += 1;
-        window.localStorage.setItem("kill", this.kill.toString());
+        Util.saveLocalStrage("Kill.I.kill", Kill.I.kill);
     };
     Kill.I = null; // singleton instance
     return Kill;

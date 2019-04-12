@@ -45,13 +45,22 @@ class Bullet extends GameObject{
         
     }
 
-    protected delete(){
+    addDestroyMethod(){
         if( this.shape ){
-            //this.object.removeChild(this.shape);
-            //this.shape = null;
+            this.object.removeChild(this.shape);
+            this.shape = null;
+        }
+        if( this.object ){
             GameObject.display.removeChild(this.object);
         }
     }
+
+/*    protected delete(){
+        if( this.object ){
+
+            GameObject.display.removeChild(this.object);
+        }
+    }*/
 
     updateContent(){
         //this.object.y -= 1;

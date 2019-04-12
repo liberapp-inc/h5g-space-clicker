@@ -42,13 +42,21 @@ var Bullet = (function (_super) {
         this.shape.graphics.endFill();
         this.object.addChild(this.shape);
     };
-    Bullet.prototype.delete = function () {
+    Bullet.prototype.addDestroyMethod = function () {
         if (this.shape) {
-            //this.object.removeChild(this.shape);
-            //this.shape = null;
+            this.object.removeChild(this.shape);
+            this.shape = null;
+        }
+        if (this.object) {
             GameObject.display.removeChild(this.object);
         }
     };
+    /*    protected delete(){
+            if( this.object ){
+    
+                GameObject.display.removeChild(this.object);
+            }
+        }*/
     Bullet.prototype.updateContent = function () {
         //this.object.y -= 1;
     };

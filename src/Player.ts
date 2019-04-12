@@ -49,6 +49,36 @@ class Player extends GameObject{
 
     }
 
+    resetStatus(){
+
+        Player.bulletDamage         = 1;
+        Player.bulletMoveSpeed      = 5;
+        Player.salary               = 1;
+        Player.shotInterval         = 1000;
+        Player.damageLevelUpCost    = 100;
+        Player.speedLevelUpCost     = 100;
+        Player.salaryLevelUpCost    = 100;
+        Kill.I.kill                 = 0;
+        Money.I.money               = 0;
+
+        Player.I.resetTimer();
+
+        Util.saveLocalStrage("Player.bulletDamage", Player.bulletDamage);
+        Util.saveLocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
+        Util.saveLocalStrage("Player.salary", Player.salary);
+        Util.saveLocalStrage("Player.shotInterval", Player.shotInterval);       
+
+        Util.saveLocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
+        Util.saveLocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
+        Util.saveLocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
+
+        Util.saveLocalStrage("Kill.I.kill", Kill.I.kill);
+        Util.saveLocalStrage("Money.I.money", Money.I.money);
+
+        GameObject.transit = Game.init;
+
+    }
+
     private setPlayerObject(x : number, y : number, width : number, height : number){
         Player.object = new egret.DisplayObjectContainer();
         Player.object.anchorOffsetX += width/2;
@@ -109,6 +139,17 @@ class Player extends GameObject{
 
     addDestroyMethod(){
         GameObject.display.removeEventListener( egret.TouchEvent.TOUCH_BEGIN, this.shot, this );
+        Player.shotTimer.stop();
+        Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER,this.shot,this);
+
+        if( this.shape ){
+            Player.object.removeChild(this.shape);
+            Player.object.removeChildren();
+            this.shape = null;
+        }
+        if( Player.object ){
+            GameObject.display.removeChild(Player.object);
+        }
     }
 
     updateContent(){

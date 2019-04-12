@@ -77,7 +77,7 @@ var Util = (function () {
         ];
         return tf;
     };
-    Util.savelocalStrage = function (key, saveValue) {
+    Util.saveLocalStrage = function (key, saveValue) {
         window.localStorage.setItem(key, saveValue.toString());
     };
     Util.loadLocalStrage = function (key, initialValue) {

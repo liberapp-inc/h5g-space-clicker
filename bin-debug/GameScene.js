@@ -23,6 +23,7 @@ var RandomEnemy;
     RandomEnemy[RandomEnemy["BOSS_DOUBLE_CIRCLE"] = 9] = "BOSS_DOUBLE_CIRCLE";
     RandomEnemy[RandomEnemy["BOSS_TRIPLE_RECT"] = 10] = "BOSS_TRIPLE_RECT";
     RandomEnemy[RandomEnemy["BOSS_TRIPLE_CIRCLE"] = 11] = "BOSS_TRIPLE_CIRCLE";
+    RandomEnemy[RandomEnemy["BOSS_Umibouzu"] = 12] = "BOSS_Umibouzu";
 })(RandomEnemy || (RandomEnemy = {}));
 var GameScene = (function (_super) {
     __extends(GameScene, _super);
@@ -38,7 +39,7 @@ var GameScene = (function (_super) {
     };
     GameScene.createEnemy = function () {
         var e;
-        var createEnemy = 11; //Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_CIRCLE);
+        var createEnemy = 0; //Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_Umibouzu);
         var enemyColor = 0xffffff;
         var enemyHP = 0;
         var enemyDropMoney = 0;
@@ -61,10 +62,13 @@ var GameScene = (function (_super) {
                 createEnemy = RandomEnemy.BOSS_DOUBLE_CIRCLE;
                 break;
             case 300:
+                createEnemy = RandomEnemy.BOSS_TRIPLE_RECT;
                 break;
             case 400:
+                createEnemy = RandomEnemy.BOSS_TRIPLE_CIRCLE;
                 break;
             case 500:
+                createEnemy = RandomEnemy.BOSS_Umibouzu;
                 break;
             case 600:
                 break;
@@ -99,7 +103,7 @@ var GameScene = (function (_super) {
                 cr = Game.width / 8; //radius
                 cw = cr; //width
                 ch = cr; //height
-                e = new DoubleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(0, 50, 55), 50, 200);
+                e = new DoubleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(0, 150, 55), 50, 200);
                 GameScene.enemy.push(e);
                 break;
             case RandomEnemy.TRIPLE_RECT:
@@ -144,6 +148,13 @@ var GameScene = (function (_super) {
                 cw = cr; //width
                 ch = cr; //height
                 e = new TripleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 2000, 8000);
+                GameScene.enemy.push(e);
+                break;
+            case RandomEnemy.BOSS_Umibouzu:
+                cr = Game.width / 8; //radius
+                cw = cr; //width
+                ch = cr; //height
+                e = new Umibouzu(Game.width / 2, Game.height / 4, cw, ch, cr, Util.color(255, 255, 0), 10000, 15000);
                 GameScene.enemy.push(e);
                 break;
         }

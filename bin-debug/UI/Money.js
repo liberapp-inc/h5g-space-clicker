@@ -19,12 +19,13 @@ var Money = (function (_super) {
         _this.textColor = 0x00FF3B;
         _this.textColor = Util.color(0, 255, 0);
         Money.I = _this;
-        var money = window.localStorage.getItem("money"); // string
-        if (money == null) {
-            money = "0";
-            window.localStorage.setItem("money", money);
-        }
-        _this.money = parseInt(money);
+        /*        let money = window.localStorage.getItem("money"); // string
+                
+                if( money == null ){
+                    money = "0";
+                    window.localStorage.setItem("money", money);
+                }*/
+        _this.money = Util.loadLocalStrage("Money.I.money", Money.I.money);
         _this.text = Util.myText(0, 0, "MONEY : 0", 100, 0.5, _this.textColor, true);
         GameObject.display.addChild(_this.text);
         return _this;
@@ -38,7 +39,7 @@ var Money = (function (_super) {
     };
     Money.addMoney = function (dropMoney) {
         Money.I.money += dropMoney;
-        window.localStorage.setItem("money", Money.I.money.toString());
+        Util.saveLocalStrage("Money.I.money", Money.I.money);
     };
     Money.I = null; // singleton instance
     return Money;

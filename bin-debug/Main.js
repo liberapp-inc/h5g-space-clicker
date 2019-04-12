@@ -34,14 +34,16 @@ var Game = (function () {
     Game.init = function () {
         this.height = egret.MainContext.instance.stage.stageHeight;
         this.width = egret.MainContext.instance.stage.stageWidth;
+        var buttonColor = Util.color(220, 20, 60);
         /* new メソッドを記入*/
         new Background();
         new Kill();
-        new Player(Game.width / 2, Game.height / 1.5, Game.width / 3.4, Game.height / 8, Util.color(255, 0, 0));
+        new Player(Game.width / 2, Game.height / 1.5, Game.width / 3.4, Game.height / 8, Util.color(220, 20, 60));
         new Money();
-        new LevelUpBulletDamageButton(Game.width / 6, Game.height / 1.1, Game.width / 4, Game.height / 10.5, Util.color(255, 0, 0), "Attack");
-        new LevelUpBulletSpeedButton(Game.width / 2, Game.height / 1.1, Game.width / 4, Game.height / 10.5, Util.color(255, 0, 0), "Speed");
-        new LevelUpSalaryButton(Game.width / 1.2, Game.height / 1.1, Game.width / 4, Game.height / 10.5, Util.color(255, 0, 0), "Salary");
+        new LevelUpBulletDamageButton(Game.width / 6, Game.height / 1.1, Game.width / 4, Game.height / 10.5, buttonColor, "Attack");
+        new LevelUpBulletSpeedButton(Game.width / 2, Game.height / 1.1, Game.width / 4, Game.height / 10.5, buttonColor, "Speed");
+        new LevelUpSalaryButton(Game.width / 1.2, Game.height / 1.1, Game.width / 4, Game.height / 10.5, buttonColor, "Salary");
+        new ResetButton(Game.width / 1.18, Game.height / 10, Game.width / 4.5, Game.height / 14, buttonColor, "Delete\nData");
         new CheckDate(); //Playerよりも後にインスタンス化すること
         new GameScene();
     };
@@ -54,7 +56,7 @@ var Background = (function (_super) {
         var _this = _super.call(this) || this;
         Background.I = _this;
         _this.shape = new egret.Shape();
-        _this.shape.graphics.beginFill(Util.color(0, 0, 0));
+        _this.shape.graphics.beginFill(Util.color(0, 10, 90));
         _this.shape.graphics.drawRect(0, 0, Game.width, Game.height);
         _this.shape.graphics.endFill();
         GameObject.display.addChild(_this.shape);

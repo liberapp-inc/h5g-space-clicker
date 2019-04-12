@@ -63,7 +63,7 @@ class CheckDate extends GameObject{
     salary(){
         Money.I.money += Player.salary;
         if(CheckDate.timerCounter >= 10){
-            window.localStorage.setItem("money", Money.I.money.toString());        
+        Util.saveLocalStrage("Money.I.money", Money.I.money);
         }
     }
 

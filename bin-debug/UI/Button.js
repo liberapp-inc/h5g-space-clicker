@@ -15,12 +15,11 @@ var Button = (function (_super) {
         _this.object = null;
         _this.indexText = null;
         _this.indexTextColor = 0xffffff;
-        //public cost : number = 0;
         _this.costText = null;
         _this.costTextColor = 0xffffff;
-        //public parameter : number = 0;
         _this.parameterText = null;
         _this.parameterTextColor = 0xffffff;
+        _this.unavailableMask = null;
         _this.setObject(x, y, width, height);
         _this.object.addEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.tap, _this);
         return _this;
@@ -43,6 +42,18 @@ var Button = (function (_super) {
         this.object.y = y;
         this.object.touchEnabled = true;
         GameObject.display.addChild(this.object);
+    };
+    Button.prototype.setShape = function (x, y, width, height, color) {
+        if (this.shape) {
+            GameObject.display.removeChild(this.shape);
+        }
+        this.shape = new egret.Shape();
+        this.shape.x = 0;
+        this.shape.y = 0;
+        this.shape.graphics.beginFill(color);
+        this.shape.graphics.drawRoundRect(0, 0, width, height, 30);
+        this.shape.graphics.endFill();
+        this.object.addChild(this.shape);
     };
     Button.prototype.setIndexText = function (x, y, width, height, index) {
         var size = 80;
@@ -75,7 +86,7 @@ var Button = (function (_super) {
         this.object.addChild(this.costText);
     };
     Button.prototype.delete = function () {
-        if (this.shape) {
+        if (this.object) {
             GameObject.display.removeChild(this.object);
         }
         if (this.object.hasEventListener) {
@@ -95,18 +106,22 @@ var LevelUpBulletDamageButton = (function (_super) {
         _this.setCostText(0, 0, width, height, Player.damageLevelUpCost);
         return _this;
     }
-    LevelUpBulletDamageButton.prototype.setShape = function (x, y, width, height, color) {
-        if (this.shape) {
-            GameObject.display.removeChild(this.shape);
-        }
-        this.shape = new egret.Shape();
-        this.shape.x = 0;
-        this.shape.y = 0;
-        this.shape.graphics.beginFill(color);
-        this.shape.graphics.drawRoundRect(0, 0, width, height, 30);
-        this.shape.graphics.endFill();
-        this.object.addChild(this.shape);
-    };
+    /*    setShape(x : number, y : number, width : number, height : number, color:number){
+            if( this.shape ){
+                GameObject.display.removeChild(this.shape);
+            }
+    
+    
+            this.shape = new egret.Shape();
+            this.shape.x = 0;
+            this.shape.y = 0;
+            this.shape.graphics.beginFill(color);
+            this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
+            this.shape.graphics.endFill();
+            this.object.addChild(this.shape);
+    
+            
+        }*/
     LevelUpBulletDamageButton.prototype.updateContent = function () {
         this.parameterText.text = Player.bulletDamage.toString();
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.damageLevelUpCost.toString();
@@ -116,8 +131,8 @@ var LevelUpBulletDamageButton = (function (_super) {
             Money.I.money -= Player.damageLevelUpCost;
             Player.bulletDamage += 1;
             Player.damageLevelUpCost += 100;
-            Util.savelocalStrage("Player.bulletDamage", Player.bulletDamage);
-            Util.savelocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
+            Util.saveLocalStrage("Player.bulletDamage", Player.bulletDamage);
+            Util.saveLocalStrage("Player.damageLevelUpCost", Player.damageLevelUpCost);
         }
     };
     return LevelUpBulletDamageButton;
@@ -133,18 +148,22 @@ var LevelUpBulletSpeedButton = (function (_super) {
         _this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
         return _this;
     }
-    LevelUpBulletSpeedButton.prototype.setShape = function (x, y, width, height, color) {
-        if (this.shape) {
-            GameObject.display.removeChild(this.shape);
-        }
-        this.shape = new egret.Shape();
-        this.shape.x = 0;
-        this.shape.y = 0;
-        this.shape.graphics.beginFill(color);
-        this.shape.graphics.drawRoundRect(0, 0, width, height, 30);
-        this.shape.graphics.endFill();
-        this.object.addChild(this.shape);
-    };
+    /*    setShape(x : number, y : number, width : number, height : number, color:number){
+            if( this.shape ){
+                GameObject.display.removeChild(this.shape);
+            }
+    
+    
+            this.shape = new egret.Shape();
+            this.shape.x = 0;
+            this.shape.y = 0;
+            this.shape.graphics.beginFill(color);
+            this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
+            this.shape.graphics.endFill();
+            this.object.addChild(this.shape);
+    
+            
+        }*/
     LevelUpBulletSpeedButton.prototype.updateContent = function () {
         this.parameterText.text = Player.bulletMoveSpeed.toString();
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.speedLevelUpCost.toString();
@@ -161,9 +180,9 @@ var LevelUpBulletSpeedButton = (function (_super) {
                 }
             }
             Player.I.resetTimer();
-            Util.savelocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
-            Util.savelocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
-            Util.savelocalStrage("Player.shotInterval", Player.shotInterval);
+            Util.saveLocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
+            Util.saveLocalStrage("Player.speedLevelUpCost", Player.speedLevelUpCost);
+            Util.saveLocalStrage("Player.shotInterval", Player.shotInterval);
         }
     };
     return LevelUpBulletSpeedButton;
@@ -179,20 +198,23 @@ var LevelUpSalaryButton = (function (_super) {
         _this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
         return _this;
     }
-    LevelUpSalaryButton.prototype.setShape = function (x, y, width, height, color) {
-        if (this.shape) {
-            GameObject.display.removeChild(this.shape);
-        }
-        this.shape = new egret.Shape();
-        this.shape.x = 0;
-        this.shape.y = 0;
-        this.shape.graphics.beginFill(color);
-        this.shape.graphics.drawRoundRect(0, 0, width, height, 30);
-        this.shape.graphics.endFill();
-        this.object.addChild(this.shape);
-    };
+    /*    setShape(x : number, y : number, width : number, height : number, color:number){
+            if( this.shape ){
+                GameObject.display.removeChild(this.shape);
+            }
+    
+            this.shape = new egret.Shape();
+            this.shape.x = 0;
+            this.shape.y = 0;
+            this.shape.graphics.beginFill(color);
+            this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
+            this.shape.graphics.endFill();
+            this.object.addChild(this.shape);
+    
+            
+        }*/
     LevelUpSalaryButton.prototype.updateContent = function () {
-        this.parameterText.text = Player.salary.toString();
+        this.parameterText.text = Player.salary.toString() + "/sec";
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.salaryLevelUpCost.toString();
     };
     LevelUpSalaryButton.prototype.tap = function () {
@@ -200,11 +222,50 @@ var LevelUpSalaryButton = (function (_super) {
             Money.I.money -= Player.salaryLevelUpCost;
             Player.salary += 1;
             Player.salaryLevelUpCost += 100;
-            Util.savelocalStrage("Player.salary", Player.salary);
-            Util.savelocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
+            Util.saveLocalStrage("Player.salary", Player.salary);
+            Util.saveLocalStrage("Player.salaryLevelUpCost", Player.salaryLevelUpCost);
         }
     };
     return LevelUpSalaryButton;
 }(Button));
 __reflect(LevelUpSalaryButton.prototype, "LevelUpSalaryButton");
+var ResetButton = (function (_super) {
+    __extends(ResetButton, _super);
+    function ResetButton(x, y, width, height, color, index) {
+        var _this = _super.call(this, x, y, width, height, index) || this;
+        _this.setShape(x, y, width, height, color);
+        _this.setIndexText(0, 0, width, height, index);
+        _this.shapeColor = color;
+        return _this;
+    }
+    /*   setShape(x : number, y : number, width : number, height : number, color:number){
+            if( this.shape ){
+                GameObject.display.removeChild(this.shape);
+            }
+    
+            this.shape = new egret.Shape();
+            this.shape.x = 0;
+            this.shape.y = 0;
+            this.shape.graphics.beginFill(color);
+            this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
+            this.shape.graphics.endFill();
+            this.object.addChild(this.shape);
+        }*/
+    ResetButton.prototype.setIndexText = function (x, y, width, height, index) {
+        var size = 60;
+        var ratio = 0.5;
+        this.indexText = Util.myText(x, y, index, size, ratio, this.indexTextColor, false);
+        this.indexText.width = this.object.width / ratio;
+        this.indexText.height = this.object.height / ratio;
+        this.indexText.textAlign = egret.HorizontalAlign.CENTER;
+        this.indexText.verticalAlign = egret.VerticalAlign.MIDDLE;
+        this.object.addChild(this.indexText);
+    };
+    ResetButton.prototype.tap = function () {
+        Player.I.resetStatus();
+    };
+    ResetButton.prototype.updateContent = function () { };
+    return ResetButton;
+}(Button));
+__reflect(ResetButton.prototype, "ResetButton");
 //# sourceMappingURL=Button.js.map

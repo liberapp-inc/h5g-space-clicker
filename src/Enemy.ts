@@ -23,8 +23,9 @@ abstract class Enemy extends GameObject{
         this.dropMoney = dropMoney;
         this.setObject(x, y, width, height);
         this.setHpText(x, y, width, height);
-
-
+        
+        //ノックバックでobjectが上に行ってしまった時に、初期の位置に戻す用
+        this.initialY = this.object.y;
     }
 
     protected setObject(x : number, y : number, width : number, height : number){
@@ -43,9 +44,12 @@ abstract class Enemy extends GameObject{
         this.object.anchorOffsetY += height/2;
         this.object.x = x;
         this.object.y = y;
-        GameObject.display.addChild(this.object);
-        GameObject.display.swapChildren(this.object,Player.object);
-        this.initialY = this.object.y;
+
+        let index : number = GameObject.display.getChildIndex(Background.I.shape) + 1;
+        GameObject.display.addChildAt(this.object, index);
+
+
+        //GameObject.display.swapChildren(this.object,Player.object);
     }
 
     setHpText(x : number, y : number, width : number, height : number){
@@ -108,14 +112,18 @@ abstract class Enemy extends GameObject{
                 s=null;
         });
         this.object.removeChild(this.hpTextField);
-    }
-    //オーバーライドしてるので、delete関連は注意
-    protected delete(){
-        this.addDestroyMethod();
-        if( this.shape ){
+
+        if( this.object ){
             GameObject.display.removeChild(this.object);
         }
     }
+    //オーバーライドしてるので、delete関連は注意
+/*    protected delete(){
+        this.addDestroyMethod();
+        if( this.object ){
+            GameObject.display.removeChild(this.object);
+        }
+    }*/
 
 }
 
@@ -185,4 +193,16 @@ class TripleRect extends Enemy{
     }
 
 
+}
+
+class Umibouzu extends Enemy{
+    constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
+        super(x, y, width, height, color, hp, dropMoney);
+        const interval :number = radius*1.5;
+        const eyeColor :number = Util.color(255,0,0);
+        this.setCircleShape(interval, interval, radius/1.5, eyeColor);
+        this.setCircleShape(-interval, interval, radius/1.5, eyeColor);
+        this.setCircleShape(0, interval*2, radius/1.5, eyeColor);
+        this.setCircleShape(0, 0, radius*4, color);
+    }
 }

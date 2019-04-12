@@ -57,7 +57,7 @@ var CheckDate = (function (_super) {
     CheckDate.prototype.salary = function () {
         Money.I.money += Player.salary;
         if (CheckDate.timerCounter >= 10) {
-            window.localStorage.setItem("money", Money.I.money.toString());
+            Util.saveLocalStrage("Money.I.money", Money.I.money);
         }
     };
     CheckDate.prototype.autoSaveText = function () {

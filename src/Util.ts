@@ -97,7 +97,7 @@ class Util{
         return tf;
     }
 
-    static savelocalStrage(key :string, saveValue : number){
+    static saveLocalStrage(key :string, saveValue : number){
         window.localStorage.setItem(key, saveValue.toString());
     }
 

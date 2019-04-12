@@ -17,13 +17,13 @@ class Money extends GameObject{
 
         Money.I = this;
 
-        let money = window.localStorage.getItem("money"); // string
+/*        let money = window.localStorage.getItem("money"); // string
         
         if( money == null ){
             money = "0";
             window.localStorage.setItem("money", money);
-        }
-        this.money = parseInt( money );
+        }*/
+        this.money = Util.loadLocalStrage("Money.I.money", Money.I.money);
 
         this.text = Util.myText(0, 0, "MONEY : 0", 100, 0.5, this.textColor, true);
         GameObject.display.addChild( this.text );
@@ -41,7 +41,7 @@ class Money extends GameObject{
 
     static addMoney(dropMoney : number){
         Money.I.money += dropMoney;
-        window.localStorage.setItem("money", Money.I.money.toString());        
+        Util.saveLocalStrage("Money.I.money", Money.I.money);
     }
 
 
