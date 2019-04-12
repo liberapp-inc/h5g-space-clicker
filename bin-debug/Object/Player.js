@@ -34,9 +34,11 @@ var Player = (function (_super) {
         Kill.I.kill = Util.loadLocalStrage("Kill.I.kill", Kill.I.kill);
         Money.I.money = Util.loadLocalStrage("Money.I.money", Money.I.money);
         GameScene.enemyLevel = Util.loadLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
+        Player.gameClear = Util.loadLocalStrage("Player.gameClear", Player.gameClear);
+        Kill.I.kill = 8;
     };
     Player.prototype.resetStatus = function () {
-        Player.bulletDamage = 500;
+        Player.bulletDamage = 1;
         Player.bulletMoveSpeed = 5;
         Player.salary = 1;
         Player.shotInterval = 1000;
@@ -46,6 +48,7 @@ var Player = (function (_super) {
         Kill.I.kill = 0;
         Money.I.money = 0;
         GameScene.enemyLevel = 1;
+        Player.gameClear = 0;
         //Player.I.resetTimer();
         Player.shotTimer.stop();
         Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER, this.shot, this);
@@ -59,6 +62,7 @@ var Player = (function (_super) {
         Util.saveLocalStrage("Kill.I.kill", Kill.I.kill);
         Util.saveLocalStrage("Money.I.money", Money.I.money);
         Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
+        Util.saveLocalStrage("Player.gameClear", Player.gameClear);
         GameObject.transit = Game.init;
     };
     Player.prototype.setPlayerObject = function (x, y, width, height) {
@@ -121,6 +125,7 @@ var Player = (function (_super) {
         }
     };
     Player.prototype.updateContent = function () {
+        var _this = this;
         Player.bullet.forEach(function (b) {
             b.object.y -= Player.bulletMoveSpeed;
             if (b.object.y < 0) {
@@ -140,8 +145,25 @@ var Player = (function (_super) {
                         new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, 0x00FF3B, false, e.object);
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
-                        MyTween.enemyFadeOut(e.object, e);
+                        if (e.lastBossFlag) {
+                            MyTween.lastBossFadeOut(e.object, e);
+                        }
+                        else {
+                            MyTween.enemyFadeOut(e.object, e);
+                        }
                         Kill.I.addKill();
+                        if (e.bossFlag) {
+                            new BossDeadEffect();
+                        }
+                        if (e.lastBossFlag) {
+                            e.lastBossFlag = false;
+                            Player.shotTimer.stop();
+                            Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER, _this.shot, _this);
+                            GameObject.display.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.shot, _this);
+                            Player.gameClear = 1;
+                            Util.saveLocalStrage("Player.gameClear", Player.gameClear);
+                            new GameClearEffect();
+                        }
                         //e.destroy();
                     }
                 }
@@ -159,6 +181,7 @@ var Player = (function (_super) {
     Player.damageLevelUpCost = 100;
     Player.speedLevelUpCost = 100;
     Player.salaryLevelUpCost = 100;
+    Player.gameClear = 0; //0で未クリア, 1でクリア
     return Player;
 }(GameObject));
 __reflect(Player.prototype, "Player");

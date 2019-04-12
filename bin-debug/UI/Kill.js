@@ -19,7 +19,7 @@ var Kill = (function (_super) {
         Kill.I = _this;
         _this.textColor = Util.color(0, 255, 0);
         _this.kill = Util.loadLocalStrage("Kill.I.kill", Kill.I.kill);
-        _this.text = Util.myText(0, 50, "KILL : " + _this.kill.toString() + " / 1000", 100, 0.5, _this.textColor, true);
+        _this.text = Util.myText(0, 50, "KILL : " + _this.kill.toString() + " / 500", 100, 0.5, _this.textColor, true);
         GameObject.display.addChild(_this.text);
         return _this;
     }
@@ -28,7 +28,7 @@ var Kill = (function (_super) {
         this.text = null;
     };
     Kill.prototype.updateContent = function () {
-        this.text.text = "KILL : " + this.kill.toString() + " / 1000";
+        this.text.text = "KILL : " + this.kill.toString() + " / 500";
     };
     Kill.prototype.addKill = function () {
         this.kill += 1;

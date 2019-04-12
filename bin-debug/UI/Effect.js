@@ -8,10 +8,10 @@ var __extends = this && this.__extends || function __extends(t, e) {
 for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
 r.prototype = e.prototype, t.prototype = new r();
 };
-//Effect終了後の削除はMyTween.BossSlideで行っている
-var BossEffect = (function (_super) {
-    __extends(BossEffect, _super);
-    function BossEffect() {
+//Effect終了後の削除はMyTween.backgroundFadeOutで行っている
+var BossEntryEffect = (function (_super) {
+    __extends(BossEntryEffect, _super);
+    function BossEntryEffect() {
         var _this = _super.call(this) || this;
         _this.upperObject = null;
         _this.lowerObject = null;
@@ -19,7 +19,7 @@ var BossEffect = (function (_super) {
         _this.leftText = null;
         _this.rightText = null;
         _this.textColor = 0xff0000;
-        BossEffect.I = _this;
+        BossEntryEffect.I = _this;
         _this.setBackground();
         _this.setObject();
         _this.setUpperShape(0, 0, Game.width / 6, Game.height / 12);
@@ -28,7 +28,7 @@ var BossEffect = (function (_super) {
         _this.setLeftText();
         return _this;
     }
-    BossEffect.prototype.setObject = function () {
+    BossEntryEffect.prototype.setObject = function () {
         this.upperObject = new egret.DisplayObjectContainer();
         this.lowerObject = new egret.DisplayObjectContainer();
         this.upperObject.x = Game.width;
@@ -36,7 +36,7 @@ var BossEffect = (function (_super) {
         GameObject.display.addChild(this.upperObject);
         GameObject.display.addChild(this.lowerObject);
     };
-    BossEffect.prototype.setUpperShape = function (x, y, width, height) {
+    BossEntryEffect.prototype.setUpperShape = function (x, y, width, height) {
         var color;
         for (var i = 0; i < 20; i++) {
             if (i % 2 == 0) {
@@ -53,7 +53,7 @@ var BossEffect = (function (_super) {
             MyTween.bossSlide(s, -2500, 3000, 1000);
         }
     };
-    BossEffect.prototype.setLowerShape = function (x, y, width, height) {
+    BossEntryEffect.prototype.setLowerShape = function (x, y, width, height) {
         var color;
         for (var i = 0; i < 50; i++) {
             if (i % 2 == 0) {
@@ -70,7 +70,7 @@ var BossEffect = (function (_super) {
             MyTween.bossSlide(s, 2500, 3000, 1000);
         }
     };
-    BossEffect.prototype.setLeftText = function () {
+    BossEntryEffect.prototype.setLeftText = function () {
         var size = 120;
         var ratio = 1;
         this.leftText = Util.myText(0, 0, "BO", size, ratio, this.textColor, true);
@@ -84,7 +84,7 @@ var BossEffect = (function (_super) {
         GameObject.display.addChild(this.leftText);
         MyTween.bossTextSlide(this.leftText, Game.width / 2, 300);
     };
-    BossEffect.prototype.setRightText = function () {
+    BossEntryEffect.prototype.setRightText = function () {
         var size = 120;
         var ratio = 1;
         this.rightText = Util.myText(0, 0, "SS", size, ratio, this.textColor, true);
@@ -98,7 +98,7 @@ var BossEffect = (function (_super) {
         GameObject.display.addChild(this.rightText);
         MyTween.bossTextSlide(this.rightText, -Game.width / 2, 300);
     };
-    BossEffect.prototype.setBackground = function () {
+    BossEntryEffect.prototype.setBackground = function () {
         var color = 0xffffe0;
         this.background = new egret.Shape();
         this.background.graphics.beginFill(color);
@@ -106,8 +106,9 @@ var BossEffect = (function (_super) {
         this.background.graphics.endFill();
         this.background.alpha = 0.1;
         GameObject.display.addChild(this.background);
+        MyTween.backgroundFadeOut(this.background, 1500);
     };
-    BossEffect.prototype.addDestroyMethod = function () {
+    BossEntryEffect.prototype.addDestroyMethod = function () {
         if (this.upperObject) {
             this.upperObject.removeChildren();
             GameObject.display.removeChild(this.upperObject);
@@ -120,9 +121,88 @@ var BossEffect = (function (_super) {
             GameObject.display.removeChild(this.background);
         }
     };
-    BossEffect.prototype.updateContent = function () { };
-    BossEffect.I = null;
-    return BossEffect;
+    BossEntryEffect.prototype.updateContent = function () { };
+    BossEntryEffect.I = null;
+    return BossEntryEffect;
 }(GameObject));
-__reflect(BossEffect.prototype, "BossEffect");
+__reflect(BossEntryEffect.prototype, "BossEntryEffect");
+var BossDeadEffect = (function (_super) {
+    __extends(BossDeadEffect, _super);
+    function BossDeadEffect() {
+        var _this = _super.call(this) || this;
+        _this.background = null;
+        BossDeadEffect.I = _this;
+        _this.setBackground();
+        return _this;
+    }
+    BossDeadEffect.prototype.setBackground = function () {
+        var color = 0xffffe0;
+        this.background = new egret.Shape();
+        this.background.graphics.beginFill(color);
+        this.background.graphics.drawRect(0, 0, Game.width, Game.height);
+        this.background.graphics.endFill();
+        this.background.alpha = 0.5;
+        GameObject.display.addChild(this.background);
+        MyTween.bossDeadEffect(this.background);
+    };
+    BossDeadEffect.prototype.addDestroyMethod = function () {
+        if (this.background) {
+            GameObject.display.removeChild(this.background);
+        }
+    };
+    BossDeadEffect.prototype.updateContent = function () { };
+    BossDeadEffect.I = null;
+    return BossDeadEffect;
+}(GameObject));
+__reflect(BossDeadEffect.prototype, "BossDeadEffect");
+var GameClearEffect = (function (_super) {
+    __extends(GameClearEffect, _super);
+    function GameClearEffect() {
+        var _this = _super.call(this) || this;
+        _this.background = null;
+        _this.text = null;
+        _this.textColor = Util.color(220, 20, 60);
+        GameClearEffect.I = _this;
+        _this.setBackground();
+        _this.setText();
+        return _this;
+    }
+    GameClearEffect.prototype.setBackground = function () {
+        var color = 0xffffe0;
+        this.background = new egret.Shape();
+        this.background.graphics.beginFill(color);
+        this.background.graphics.drawRect(0, 0, Game.width, Game.height);
+        this.background.graphics.endFill();
+        this.background.alpha = 0.5;
+        GameObject.display.addChild(this.background);
+        MyTween.gameClear(this.background, 1);
+    };
+    GameClearEffect.prototype.setText = function () {
+        var size = 60;
+        var ratio = 1;
+        this.text = Util.myText(0, 0, "Thank You for Playing", size, ratio, this.textColor, true);
+        this.text.width /= ratio;
+        this.text.height /= ratio;
+        this.text.anchorOffsetX = this.text.width / 2;
+        this.text.anchorOffsetY = this.text.height / 2;
+        this.text.x = Game.width / 2;
+        this.text.y = Game.height / 2;
+        this.text.alpha = 0.1;
+        GameObject.display.addChild(this.text);
+        MyTween.gameClear(this.text, 1);
+    };
+    GameClearEffect.prototype.tap = function () {
+        GameObject.transit = Game.init;
+    };
+    GameClearEffect.prototype.addDestroyMethod = function () {
+        GameObject.display.removeChild(this.text);
+        this.text = null;
+        GameObject.display.removeChild(this.background);
+        this.background = null;
+    };
+    GameClearEffect.prototype.updateContent = function () { };
+    GameClearEffect.I = null;
+    return GameClearEffect;
+}(GameObject));
+__reflect(GameClearEffect.prototype, "GameClearEffect");
 //# sourceMappingURL=Effect.js.map

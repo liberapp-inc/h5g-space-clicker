@@ -100,7 +100,21 @@ abstract class Button extends GameObject{
         this.object.addChild(this.costText);
     }
 
-    protected delete(){
+    addDestroyMethod(){
+        if( this.object.hasEventListener ){
+            this.object.removeEventListener( egret.TouchEvent.TOUCH_BEGIN, this.tap, this );
+        }
+        if( this.object ){
+            this.object.removeChild(this.shape);
+            this.object.removeChildren();
+            this.shape = null;
+        }
+        if( this.object ){
+            GameObject.display.removeChild(this.object);
+        }
+    }
+
+/*    protected delete(){
         if( this.object ){
             GameObject.display.removeChild(this.object);
         }
@@ -108,7 +122,7 @@ abstract class Button extends GameObject{
             this.object.removeEventListener( egret.TouchEvent.TOUCH_BEGIN, this.tap, this );
         }
 
-    }
+    }*/
 
     abstract tap() :void;
 
@@ -264,6 +278,15 @@ class ResetButton extends Button{
 
     }
 
-    updateContent(){}
+    updateContent(){
+        if(Player.gameClear == 1){
+            this.mask.alpha = 0;
+            this.object.touchEnabled = true;
+        }
+        else{
+            this.mask.alpha = 0.5;
+            this.object.touchEnabled = false;
+        }
+    }
 
 }

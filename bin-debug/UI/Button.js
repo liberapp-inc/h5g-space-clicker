@@ -97,12 +97,17 @@ var Button = (function (_super) {
         this.costText.verticalAlign = egret.VerticalAlign.MIDDLE;
         this.object.addChild(this.costText);
     };
-    Button.prototype.delete = function () {
-        if (this.object) {
-            GameObject.display.removeChild(this.object);
-        }
+    Button.prototype.addDestroyMethod = function () {
         if (this.object.hasEventListener) {
             this.object.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.tap, this);
+        }
+        if (this.object) {
+            this.object.removeChild(this.shape);
+            this.object.removeChildren();
+            this.shape = null;
+        }
+        if (this.object) {
+            GameObject.display.removeChild(this.object);
         }
     };
     return Button;
@@ -239,7 +244,16 @@ var ResetButton = (function (_super) {
         egret.Tween.removeAllTweens();
         Player.I.resetStatus();
     };
-    ResetButton.prototype.updateContent = function () { };
+    ResetButton.prototype.updateContent = function () {
+        if (Player.gameClear == 1) {
+            this.mask.alpha = 0;
+            this.object.touchEnabled = true;
+        }
+        else {
+            this.mask.alpha = 0.5;
+            this.object.touchEnabled = false;
+        }
+    };
     return ResetButton;
 }(Button));
 __reflect(ResetButton.prototype, "ResetButton");

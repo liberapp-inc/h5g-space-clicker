@@ -13,6 +13,8 @@ abstract class Enemy extends GameObject{
     public hpTextField : egret.TextField = null;
     public hpTextFieldColor : number = 0xff0000;
     public deadFlag : boolean = false;
+    public bossFlag : boolean = false;
+    public lastBossFlag : boolean = false;
     
     addShapes : egret.Shape[] = [];
 
@@ -128,13 +130,6 @@ abstract class Enemy extends GameObject{
             GameObject.display.removeChild(this.object);
         }
     }
-    //オーバーライドしてるので、delete関連は注意
-/*    protected delete(){
-        this.addDestroyMethod();
-        if( this.object ){
-            GameObject.display.removeChild(this.object);
-        }
-    }*/
 
 }
 
@@ -217,3 +212,4 @@ class Umibouzu extends Enemy{
         this.setCircleShape(0, 0, radius*4, color);
     }
 }
+

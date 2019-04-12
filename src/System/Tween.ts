@@ -38,6 +38,27 @@ class MyTween {
                 }
             });
     }
+
+    static lastBossFadeOut(object : any, objectClass?:any){
+
+        if(objectClass == undefined){
+            objectClass = null;
+        }
+
+        egret.Tween.get(object) 
+            .to({alpha:0.2}, 3000)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+
+                //destroyを実装しているクラスにだけ実行したかったが、
+                //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
+                //destroyできなかったので場合分けしていないので注意
+                if(objectClass != undefined || objectClass != null){
+                    objectClass.destroy();
+                    //GameScene.createEnemy();
+                }
+            });
+    }
     
     static knockBack(object : any){
 
@@ -113,7 +134,6 @@ class MyTween {
             .to({alpha:0}, fadeOutTime_ms)
             .call(()=> {
                 egret.Tween.removeTweens(object);
-                BossEffect.I.destroy();
             });
     }
     
@@ -132,6 +152,44 @@ class MyTween {
             });
     }
 
+    static backgroundFadeOut(object : any, fadeOutTime_ms : number){
 
+        egret.Tween.get(object)
+
+            .to({alpha:0.1}, 0)
+            .wait(4000)
+            .to({alpha:0}, fadeOutTime_ms)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+                BossEntryEffect.I.destroy();
+
+            });
+    }
+
+    static bossDeadEffect(object : any){
+
+        egret.Tween.get(object)
+
+            .to({alpha:0.5}, 50)
+            //.wait(200)
+            .to({alpha:0}, 2000)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+                BossDeadEffect.I.destroy();
+
+            });
+    }
+
+    static gameClear(object : any, alpha : number){
+
+        egret.Tween.get(object)
+
+            .to({alpha:alpha}, 5000)
+            .call(()=> {
+                egret.Tween.removeTweens(object);
+                GameObject.display.once( egret.TouchEvent.TOUCH_TAP, GameClearEffect.I.tap, this );
+
+            });
+    }
 }
 

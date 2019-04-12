@@ -13,6 +13,8 @@ class Player extends GameObject{
     static speedLevelUpCost :number = 100;
     static salaryLevelUpCost :number = 100;
 
+    static gameClear : number = 0;//0で未クリア, 1でクリア
+
     constructor(x : number, y : number, width : number, height : number, color:number) {
         super();
         Player.I = this;
@@ -46,12 +48,14 @@ class Player extends GameObject{
         Kill.I.kill                 = Util.loadLocalStrage("Kill.I.kill", Kill.I.kill);
         Money.I.money               = Util.loadLocalStrage("Money.I.money", Money.I.money);
         GameScene.enemyLevel        = Util.loadLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
+        Player.gameClear            = Util.loadLocalStrage("Player.gameClear", Player.gameClear);
+        Kill.I.kill = 8;
 
     }
 
     resetStatus(){
 
-        Player.bulletDamage         = 500;
+        Player.bulletDamage         = 1;
         Player.bulletMoveSpeed      = 5;
         Player.salary               = 1;
         Player.shotInterval         = 1000;
@@ -61,6 +65,8 @@ class Player extends GameObject{
         Kill.I.kill                 = 0;
         Money.I.money               = 0;
         GameScene.enemyLevel        = 1;
+        Player.gameClear            = 0;
+
 
         //Player.I.resetTimer();
         Player.shotTimer.stop();
@@ -79,6 +85,8 @@ class Player extends GameObject{
         Util.saveLocalStrage("Money.I.money", Money.I.money);
 
         Util.saveLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
+
+        Util.saveLocalStrage("Player.gameClear", Player.gameClear);
         GameObject.transit = Game.init;
 
     }
@@ -176,8 +184,26 @@ class Player extends GameObject{
                         new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, 0x00FF3B, false, e.object);
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
-                        MyTween.enemyFadeOut(e.object, e);
+                        if(e.lastBossFlag){
+                            MyTween.lastBossFadeOut(e.object, e);
+                        }
+                        else{
+                            MyTween.enemyFadeOut(e.object, e);
+                        }
                         Kill.I.addKill();
+                        
+                        if(e.bossFlag){
+                            new BossDeadEffect();           
+                        }
+                        if(e.lastBossFlag){
+                            e.lastBossFlag = false;
+                            Player.shotTimer.stop();
+                            Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER,this.shot,this);
+                            GameObject.display.removeEventListener( egret.TouchEvent.TOUCH_BEGIN, this.shot, this );
+                            Player.gameClear = 1;
+                            Util.saveLocalStrage("Player.gameClear", Player.gameClear);
+                            new GameClearEffect();
+                        }
 
                         //e.destroy();
                     }

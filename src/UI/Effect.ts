@@ -1,7 +1,7 @@
-//Effect終了後の削除はMyTween.BossSlideで行っている
-class BossEffect extends GameObject{
+//Effect終了後の削除はMyTween.backgroundFadeOutで行っている
+class BossEntryEffect extends GameObject{
 
-    static I : BossEffect = null;
+    static I : BossEntryEffect = null;
 
     upperObject : egret.DisplayObjectContainer = null;
     lowerObject : egret.DisplayObjectContainer = null;
@@ -11,7 +11,7 @@ class BossEffect extends GameObject{
     textColor : number = 0xff0000;
     constructor(){
         super();
-        BossEffect.I = this;
+        BossEntryEffect.I = this;
         this.setBackground();
         this.setObject();
         this.setUpperShape(0,0,Game.width/6, Game.height/12);
@@ -105,6 +105,7 @@ class BossEffect extends GameObject{
         this.background.graphics.endFill();
         this.background.alpha = 0.1;
         GameObject.display.addChild(this.background);
+        MyTween.backgroundFadeOut(this.background,1500);
     }
 
     addDestroyMethod(){
@@ -120,6 +121,107 @@ class BossEffect extends GameObject{
         if(this.background){
             GameObject.display.removeChild(this.background);
         }
+
+        
+
+    }
+
+    updateContent(){}
+
+
+}
+
+class BossDeadEffect extends GameObject{
+
+    static I : BossDeadEffect = null;
+
+    background : egret.Shape = null;
+
+    constructor(){
+        super();
+        BossDeadEffect.I = this;
+        this.setBackground();
+    }
+
+    setBackground(){
+        const color :number = 0xffffe0;
+        this.background = new egret.Shape();
+        this.background.graphics.beginFill(color);
+        this.background.graphics.drawRect(0, 0, Game.width, Game.height);
+        this.background.graphics.endFill();
+        this.background.alpha = 0.5;
+        GameObject.display.addChild(this.background);
+        MyTween.bossDeadEffect(this.background);
+    }
+
+    addDestroyMethod(){
+
+        if(this.background){
+            GameObject.display.removeChild(this.background);
+        }
+
+        
+
+    }
+
+    updateContent(){}
+
+
+}
+
+class GameClearEffect extends GameObject{
+
+    static I : GameClearEffect = null;
+    background : egret.Shape = null;
+
+    text : egret.TextField = null;
+    textColor : number = Util.color(220,20,60);
+    constructor(){
+        super();
+        GameClearEffect.I = this;
+        this.setBackground();
+        this.setText();
+
+    }
+
+    setBackground(){
+        const color :number = 0xffffe0;
+        this.background = new egret.Shape();
+        this.background.graphics.beginFill(color);
+        this.background.graphics.drawRect(0, 0, Game.width, Game.height);
+        this.background.graphics.endFill();
+        this.background.alpha = 0.5;
+        GameObject.display.addChild(this.background);
+        MyTween.gameClear(this.background, 1);
+    }
+
+    setText(){
+        const size :number = 60;
+        const ratio :number = 1;
+        this.text = Util.myText(0,0, "Thank You for Playing", size, ratio, this.textColor, true);
+        this.text.width  /= ratio;
+        this.text.height /= ratio;
+        this.text.anchorOffsetX = this.text.width/2;
+        this.text.anchorOffsetY = this.text.height/2;
+        this.text.x = Game.width/2; 
+        this.text.y = Game.height/2; 
+        this.text.alpha = 0.1;
+        GameObject.display.addChild(this.text);
+        MyTween.gameClear(this.text, 1);
+        
+    }
+
+    tap(){
+
+        GameObject.transit = Game.init;
+
+    }
+
+    addDestroyMethod(){
+        GameObject.display.removeChild( this.text );
+        this.text = null;
+        GameObject.display.removeChild( this.background );
+        this.background = null;
 
     }
 

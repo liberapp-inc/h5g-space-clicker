@@ -37,6 +37,23 @@ var MyTween = (function () {
             }
         });
     };
+    MyTween.lastBossFadeOut = function (object, objectClass) {
+        if (objectClass == undefined) {
+            objectClass = null;
+        }
+        egret.Tween.get(object)
+            .to({ alpha: 0.2 }, 3000)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+            //destroyを実装しているクラスにだけ実行したかったが、
+            //なぜかif(objectClass == RectEnemyやobjectClass == Enemy)すると
+            //destroyできなかったので場合分けしていないので注意
+            if (objectClass != undefined || objectClass != null) {
+                objectClass.destroy();
+                //GameScene.createEnemy();
+            }
+        });
+    };
     MyTween.knockBack = function (object) {
         var objectPosY = object.y;
         egret.Tween.get(object)
@@ -93,7 +110,6 @@ var MyTween = (function () {
             .to({ alpha: 0 }, fadeOutTime_ms)
             .call(function () {
             egret.Tween.removeTweens(object);
-            BossEffect.I.destroy();
         });
     };
     MyTween.bossTextSlide = function (object, toPos, time_ms) {
@@ -105,6 +121,34 @@ var MyTween = (function () {
             .to({ x: objectPosX + toPosX * 3 }, time_ms)
             .call(function () {
             egret.Tween.removeTweens(object);
+        });
+    };
+    MyTween.backgroundFadeOut = function (object, fadeOutTime_ms) {
+        egret.Tween.get(object)
+            .to({ alpha: 0.1 }, 0)
+            .wait(4000)
+            .to({ alpha: 0 }, fadeOutTime_ms)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+            BossEntryEffect.I.destroy();
+        });
+    };
+    MyTween.bossDeadEffect = function (object) {
+        egret.Tween.get(object)
+            .to({ alpha: 0.5 }, 50)
+            .to({ alpha: 0 }, 2000)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+            BossDeadEffect.I.destroy();
+        });
+    };
+    MyTween.gameClear = function (object, alpha) {
+        var _this = this;
+        egret.Tween.get(object)
+            .to({ alpha: alpha }, 5000)
+            .call(function () {
+            egret.Tween.removeTweens(object);
+            GameObject.display.once(egret.TouchEvent.TOUCH_TAP, GameClearEffect.I.tap, _this);
         });
     };
     return MyTween;
