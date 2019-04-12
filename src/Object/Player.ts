@@ -51,7 +51,7 @@ class Player extends GameObject{
 
     resetStatus(){
 
-        Player.bulletDamage         = 1;
+        Player.bulletDamage         = 500;
         Player.bulletMoveSpeed      = 5;
         Player.salary               = 1;
         Player.shotInterval         = 1000;
@@ -173,7 +173,7 @@ class Player extends GameObject{
                         e.hp = 0;
                         e.deadFlag = true;
                         Money.addMoney(e.dropMoney);
-                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 70, 0.5, 0xff0000, true, e.object);
+                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, 0x00FF3B, false, e.object);
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
                         MyTween.enemyFadeOut(e.object, e);

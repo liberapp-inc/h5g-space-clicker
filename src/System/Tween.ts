@@ -57,7 +57,7 @@ class MyTween {
         let objectPosY : number = object.y;
 
         egret.Tween.get(object) 
-            .to({y:objectPosY-100}  , 100)
+            .to({y:objectPosY-150}  , 100)
             .to({alpha:0.2}         , 900)
             .call(()=> {
                 egret.Tween.removeTweens(object);
