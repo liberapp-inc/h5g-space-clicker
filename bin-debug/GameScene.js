@@ -39,7 +39,7 @@ var GameScene = (function (_super) {
     };
     GameScene.createEnemy = function () {
         var e;
-        var createEnemy = 0; //Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_Umibouzu);
+        var createEnemy = Util.randomInt(RandomEnemy.RECT, RandomEnemy.TRIPLE_CIRCLE);
         var enemyColor = 0xffffff;
         var enemyHP = 0;
         var enemyDropMoney = 0;
@@ -160,6 +160,7 @@ var GameScene = (function (_super) {
         }
     };
     GameScene.prototype.addDestroyMethod = function () {
+        GameScene.enemy = [];
     };
     GameScene.prototype.updateContent = function () {
     };

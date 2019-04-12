@@ -35,7 +35,7 @@ class GameScene extends GameObject{
 
     static createEnemy(){
         let e : Enemy;
-        let createEnemy : number = 0;//Util.randomInt(RandomEnemy.RECT, RandomEnemy.BOSS_Umibouzu);
+        let createEnemy : number = Util.randomInt(RandomEnemy.RECT, RandomEnemy.TRIPLE_CIRCLE);
         let enemyColor : number = 0xffffff;
         let enemyHP : number = 0;
         let enemyDropMoney : number = 0;
@@ -161,6 +161,7 @@ class GameScene extends GameObject{
 
 
     addDestroyMethod(){
+        GameScene.enemy = [];
     }
 
 

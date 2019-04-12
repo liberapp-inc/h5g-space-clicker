@@ -107,12 +107,19 @@ abstract class Enemy extends GameObject{
     }
 
     addDestroyMethod(){
+
         this.addShapes.forEach(s =>{
                 this.object.removeChild(s);
                 s=null;
         });
-        this.object.removeChild(this.hpTextField);
+        
+        if(this.shape){
+            //this.object.removeChild(this.hpTextField);
+            this.object.removeChildren();
+            this.shape = null;
 
+        }
+        
         if( this.object ){
             GameObject.display.removeChild(this.object);
         }

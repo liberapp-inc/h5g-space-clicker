@@ -51,7 +51,7 @@ class Player extends GameObject{
 
     resetStatus(){
 
-        Player.bulletDamage         = 1;
+        Player.bulletDamage         = 100;
         Player.bulletMoveSpeed      = 5;
         Player.salary               = 1;
         Player.shotInterval         = 1000;
@@ -61,7 +61,9 @@ class Player extends GameObject{
         Kill.I.kill                 = 0;
         Money.I.money               = 0;
 
-        Player.I.resetTimer();
+        //Player.I.resetTimer();
+        Player.shotTimer.stop();
+        Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER,this.shot,this);
 
         Util.saveLocalStrage("Player.bulletDamage", Player.bulletDamage);
         Util.saveLocalStrage("Player.bulletMoveSpeed", Player.bulletMoveSpeed);
@@ -125,6 +127,8 @@ class Player extends GameObject{
     public shot(){
         let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/24, Game.height/16, Util.color(255,255,0));
         Player.bullet.push(b);
+        console.log( "s");
+        
     }
 
     public resetTimer(){

@@ -1,17 +1,14 @@
 abstract class Button extends GameObject{
 
     public object : egret.DisplayObjectContainer = null;
-
     public indexText : egret.TextField = null;
     public indexTextColor : number = 0xffffff;
-
     public costText : egret.TextField = null;
     public costTextColor : number = 0xffffff;
-
     public parameterText : egret.TextField = null;
     public parameterTextColor : number = 0xffffff;
-
-    public unavailableMask : egret.Shape = null;
+    public mask : egret.Shape = null;
+    public onMask : boolean = false;
 
     constructor(x : number, y : number, width : number, height : number, index : string){
         super();
@@ -54,6 +51,20 @@ abstract class Button extends GameObject{
         this.shape.graphics.endFill();
         this.object.addChild(this.shape);
     }
+
+    setMask(x : number, y : number, width : number, height : number){
+
+        const color : number = Util.color(0,0,0);
+        this.mask = new egret.Shape();
+        this.mask.x = 0;
+        this.mask.y = 0;
+        this.mask.alpha = 0;
+        this.mask.graphics.beginFill(color);
+        this.mask.graphics.drawRoundRect(0, 0, width , height, 30);
+        this.mask.graphics.endFill();
+        this.object.addChild(this.mask);
+    }
+    
 
     setIndexText(x : number, y : number, width : number, height : number, index:string){
         const size :number = 80;
@@ -111,12 +122,20 @@ class LevelUpBulletDamageButton extends Button{
         this.setIndexText(0, -100, width, height, index);
         this.setParameterText(0, -50, width, height, Player.bulletDamage);
         this.setCostText(0, 0, width, height, Player.damageLevelUpCost);
+        this.setMask(x, y, width, height);
+
     }
 
 
     updateContent(){
         this.parameterText.text = Player.bulletDamage.toString();
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.damageLevelUpCost.toString();
+        if(Money.I.money >= Player.damageLevelUpCost){
+            this.mask.alpha = 0;
+        }
+        else{
+            this.mask.alpha = 0.5;
+        }
     }
 
     tap(){
@@ -140,12 +159,19 @@ class LevelUpBulletSpeedButton extends Button{
         this.setIndexText(0, -100, width, height, index);
         this.setParameterText(0, -50, width, height, Player.bulletMoveSpeed);
         this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
+        this.setMask(x, y, width, height);
     }
 
 
     updateContent(){
         this.parameterText.text = Player.bulletMoveSpeed.toString();
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.speedLevelUpCost.toString();
+        if(Money.I.money >= Player.speedLevelUpCost){
+            this.mask.alpha = 0;
+        }
+        else{
+            this.mask.alpha = 0.5;
+        }
     }
 
     tap(){
@@ -176,12 +202,20 @@ class LevelUpSalaryButton extends Button{
         this.setIndexText(0, -100, width, height, index);
         this.setParameterText(0, -50, width, height, Player.bulletMoveSpeed);
         this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
+        this.setMask(x, y, width, height);
+
     }
 
 
     updateContent(){
         this.parameterText.text = Player.salary.toString() + "/sec";
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.salaryLevelUpCost.toString();
+        if(Money.I.money >= Player.salaryLevelUpCost){
+            this.mask.alpha = 0;
+        }
+        else{
+            this.mask.alpha = 0.5;
+        }
     }
 
     tap(){
@@ -206,6 +240,7 @@ class ResetButton extends Button{
         this.setShape(x, y, width, height, color);
         this.setIndexText(0, 0, width, height, index);
         this.shapeColor = color;
+        this.setMask(x, y, width, height);
 
         
 
@@ -224,6 +259,7 @@ class ResetButton extends Button{
     }
 
     tap(){
+        egret.Tween.removeAllTweens();
         Player.I.resetStatus();
 
     }

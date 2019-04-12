@@ -23,7 +23,7 @@ var Kill = (function (_super) {
         GameObject.display.addChild(_this.text);
         return _this;
     }
-    Kill.prototype.onDestroy = function () {
+    Kill.prototype.addDestroyMethod = function () {
         GameObject.display.removeChild(this.text);
         this.text = null;
     };

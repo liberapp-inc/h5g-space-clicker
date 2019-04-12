@@ -54,6 +54,10 @@ var CheckDate = (function (_super) {
         this.autoSaveText();
     };
     CheckDate.prototype.updateContent = function () { };
+    CheckDate.prototype.addDestroyMethod = function () {
+        CheckDate.dateTimer.stop();
+        CheckDate.dateTimer.removeEventListener(egret.TimerEvent.TIMER, this.save, this);
+    };
     CheckDate.prototype.salary = function () {
         Money.I.money += Player.salary;
         if (CheckDate.timerCounter >= 10) {

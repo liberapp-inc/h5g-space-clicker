@@ -30,7 +30,7 @@ var Money = (function (_super) {
         GameObject.display.addChild(_this.text);
         return _this;
     }
-    Money.prototype.onDestroy = function () {
+    Money.prototype.addDestroyMethod = function () {
         GameObject.display.removeChild(this.text);
         this.text = null;
     };

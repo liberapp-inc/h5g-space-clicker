@@ -23,7 +23,7 @@ class Kill extends GameObject{
 
     }
     
-    onDestroy() {
+    addDestroyMethod() {
         GameObject.display.removeChild( this.text );
         this.text = null;
 

@@ -60,6 +60,12 @@ class CheckDate extends GameObject{
 
     updateContent(){}
 
+    addDestroyMethod(){
+        CheckDate.dateTimer.stop();
+        CheckDate.dateTimer.removeEventListener(egret.TimerEvent.TIMER,this.save,this);
+
+    }
+
     salary(){
         Money.I.money += Player.salary;
         if(CheckDate.timerCounter >= 10){

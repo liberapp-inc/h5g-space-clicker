@@ -19,7 +19,8 @@ var Button = (function (_super) {
         _this.costTextColor = 0xffffff;
         _this.parameterText = null;
         _this.parameterTextColor = 0xffffff;
-        _this.unavailableMask = null;
+        _this.mask = null;
+        _this.onMask = false;
         _this.setObject(x, y, width, height);
         _this.object.addEventListener(egret.TouchEvent.TOUCH_BEGIN, _this.tap, _this);
         return _this;
@@ -54,6 +55,17 @@ var Button = (function (_super) {
         this.shape.graphics.drawRoundRect(0, 0, width, height, 30);
         this.shape.graphics.endFill();
         this.object.addChild(this.shape);
+    };
+    Button.prototype.setMask = function (x, y, width, height) {
+        var color = Util.color(0, 0, 0);
+        this.mask = new egret.Shape();
+        this.mask.x = 0;
+        this.mask.y = 0;
+        this.mask.alpha = 0;
+        this.mask.graphics.beginFill(color);
+        this.mask.graphics.drawRoundRect(0, 0, width, height, 30);
+        this.mask.graphics.endFill();
+        this.object.addChild(this.mask);
     };
     Button.prototype.setIndexText = function (x, y, width, height, index) {
         var size = 80;
@@ -104,27 +116,18 @@ var LevelUpBulletDamageButton = (function (_super) {
         _this.setIndexText(0, -100, width, height, index);
         _this.setParameterText(0, -50, width, height, Player.bulletDamage);
         _this.setCostText(0, 0, width, height, Player.damageLevelUpCost);
+        _this.setMask(x, y, width, height);
         return _this;
     }
-    /*    setShape(x : number, y : number, width : number, height : number, color:number){
-            if( this.shape ){
-                GameObject.display.removeChild(this.shape);
-            }
-    
-    
-            this.shape = new egret.Shape();
-            this.shape.x = 0;
-            this.shape.y = 0;
-            this.shape.graphics.beginFill(color);
-            this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
-            this.shape.graphics.endFill();
-            this.object.addChild(this.shape);
-    
-            
-        }*/
     LevelUpBulletDamageButton.prototype.updateContent = function () {
         this.parameterText.text = Player.bulletDamage.toString();
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.damageLevelUpCost.toString();
+        if (Money.I.money >= Player.damageLevelUpCost) {
+            this.mask.alpha = 0;
+        }
+        else {
+            this.mask.alpha = 0.5;
+        }
     };
     LevelUpBulletDamageButton.prototype.tap = function () {
         if (Money.I.money >= Player.damageLevelUpCost) {
@@ -146,27 +149,18 @@ var LevelUpBulletSpeedButton = (function (_super) {
         _this.setIndexText(0, -100, width, height, index);
         _this.setParameterText(0, -50, width, height, Player.bulletMoveSpeed);
         _this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
+        _this.setMask(x, y, width, height);
         return _this;
     }
-    /*    setShape(x : number, y : number, width : number, height : number, color:number){
-            if( this.shape ){
-                GameObject.display.removeChild(this.shape);
-            }
-    
-    
-            this.shape = new egret.Shape();
-            this.shape.x = 0;
-            this.shape.y = 0;
-            this.shape.graphics.beginFill(color);
-            this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
-            this.shape.graphics.endFill();
-            this.object.addChild(this.shape);
-    
-            
-        }*/
     LevelUpBulletSpeedButton.prototype.updateContent = function () {
         this.parameterText.text = Player.bulletMoveSpeed.toString();
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.speedLevelUpCost.toString();
+        if (Money.I.money >= Player.speedLevelUpCost) {
+            this.mask.alpha = 0;
+        }
+        else {
+            this.mask.alpha = 0.5;
+        }
     };
     LevelUpBulletSpeedButton.prototype.tap = function () {
         if (Money.I.money >= Player.speedLevelUpCost) {
@@ -196,26 +190,18 @@ var LevelUpSalaryButton = (function (_super) {
         _this.setIndexText(0, -100, width, height, index);
         _this.setParameterText(0, -50, width, height, Player.bulletMoveSpeed);
         _this.setCostText(0, 0, width, height, Player.speedLevelUpCost);
+        _this.setMask(x, y, width, height);
         return _this;
     }
-    /*    setShape(x : number, y : number, width : number, height : number, color:number){
-            if( this.shape ){
-                GameObject.display.removeChild(this.shape);
-            }
-    
-            this.shape = new egret.Shape();
-            this.shape.x = 0;
-            this.shape.y = 0;
-            this.shape.graphics.beginFill(color);
-            this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
-            this.shape.graphics.endFill();
-            this.object.addChild(this.shape);
-    
-            
-        }*/
     LevelUpSalaryButton.prototype.updateContent = function () {
         this.parameterText.text = Player.salary.toString() + "/sec";
         this.costText.text = "Lv.UP\n" + " MONEY\n" + Player.salaryLevelUpCost.toString();
+        if (Money.I.money >= Player.salaryLevelUpCost) {
+            this.mask.alpha = 0;
+        }
+        else {
+            this.mask.alpha = 0.5;
+        }
     };
     LevelUpSalaryButton.prototype.tap = function () {
         if (Money.I.money >= Player.salaryLevelUpCost) {
@@ -236,21 +222,9 @@ var ResetButton = (function (_super) {
         _this.setShape(x, y, width, height, color);
         _this.setIndexText(0, 0, width, height, index);
         _this.shapeColor = color;
+        _this.setMask(x, y, width, height);
         return _this;
     }
-    /*   setShape(x : number, y : number, width : number, height : number, color:number){
-            if( this.shape ){
-                GameObject.display.removeChild(this.shape);
-            }
-    
-            this.shape = new egret.Shape();
-            this.shape.x = 0;
-            this.shape.y = 0;
-            this.shape.graphics.beginFill(color);
-            this.shape.graphics.drawRoundRect(0, 0, width , height, 30);
-            this.shape.graphics.endFill();
-            this.object.addChild(this.shape);
-        }*/
     ResetButton.prototype.setIndexText = function (x, y, width, height, index) {
         var size = 60;
         var ratio = 0.5;
@@ -262,6 +236,7 @@ var ResetButton = (function (_super) {
         this.object.addChild(this.indexText);
     };
     ResetButton.prototype.tap = function () {
+        egret.Tween.removeAllTweens();
         Player.I.resetStatus();
     };
     ResetButton.prototype.updateContent = function () { };
