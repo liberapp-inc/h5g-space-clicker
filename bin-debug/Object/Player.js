@@ -35,7 +35,6 @@ var Player = (function (_super) {
         Money.I.money = Util.loadLocalStrage("Money.I.money", Money.I.money);
         GameScene.enemyLevel = Util.loadLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
         Player.gameClear = Util.loadLocalStrage("Player.gameClear", Player.gameClear);
-        Kill.I.kill = 8;
     };
     Player.prototype.resetStatus = function () {
         Player.bulletDamage = 1;
@@ -49,7 +48,6 @@ var Player = (function (_super) {
         Money.I.money = 0;
         GameScene.enemyLevel = 1;
         Player.gameClear = 0;
-        //Player.I.resetTimer();
         Player.shotTimer.stop();
         Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER, this.shot, this);
         Util.saveLocalStrage("Player.bulletDamage", Player.bulletDamage);
@@ -85,8 +83,8 @@ var Player = (function (_super) {
         this.shape.graphics.drawRect(0, 0, width, height);
         this.shape.graphics.endFill();
         //砲台部分をつくるため、背景色と同じ色を重ねている
-        var leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width / 3, this.shape.height / 2, Util.color(0, 0, 0));
-        var rightMaskShape = this.setMask(this.shape.x + this.shape.width * 2 / 3, this.shape.y, this.shape.width / 3, this.shape.height / 2, Util.color(0, 0, 0));
+        var leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width / 3, this.shape.height / 2, Util.color(0, 10, 90));
+        var rightMaskShape = this.setMask(this.shape.x + this.shape.width * 2 / 3, this.shape.y, this.shape.width / 3, this.shape.height / 2, Util.color(0, 10, 90));
         Player.object.addChild(this.shape);
         Player.object.addChild(leftMaskShape);
         Player.object.addChild(rightMaskShape);
@@ -103,6 +101,8 @@ var Player = (function (_super) {
     Player.prototype.shot = function () {
         var b = new Bullet(Game.width / 2, Game.height / 1.6, Game.width / 24, Game.height / 16, Util.color(255, 255, 0));
         Player.bullet.push(b);
+        var newArray = Player.bullet.filter(function (b) { return b.collisionFlag !== true; });
+        Player.bullet = newArray;
     };
     Player.prototype.resetTimer = function () {
         Player.shotTimer.stop();
@@ -115,6 +115,7 @@ var Player = (function (_super) {
         GameObject.display.removeEventListener(egret.TouchEvent.TOUCH_BEGIN, this.shot, this);
         Player.shotTimer.stop();
         Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER, this.shot, this);
+        Player.bullet = [];
         if (this.shape) {
             Player.object.removeChild(this.shape);
             Player.object.removeChildren();
@@ -130,10 +131,11 @@ var Player = (function (_super) {
             b.object.y -= Player.bulletMoveSpeed;
             if (b.object.y < 0) {
                 b.destroy();
+                b.collisionFlag = true;
             }
             //Enemyとの接触判定(Enemyを一体ずつしか出さないならenemyをforEachする必要なし)
             GameScene.enemy.forEach(function (e) {
-                if (b.collisionFlag == false && e.deadFlag == false && e.object.y >= b.object.y && b.object.y >= 0) {
+                if (b.collisionFlag == false && e.deadFlag == false && e.object.y >= b.object.y && b.object.y >= e.object.y - e.object.height / 2) {
                     e.hp -= Player.bulletDamage;
                     MyTween.knockBack(e.object);
                     b.destroy();

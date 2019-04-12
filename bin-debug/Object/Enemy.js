@@ -106,6 +106,11 @@ var Enemy = (function (_super) {
     };
     Enemy.prototype.addDestroyMethod = function () {
         var _this = this;
+        egret.Tween.removeTweens(this.object);
+        if (this.hpTextField) {
+            this.object.removeChild(this.hpTextField);
+            this.hpTextField = null;
+        }
         this.addShapes.forEach(function (s) {
             _this.object.removeChild(s);
             s = null;

@@ -49,7 +49,6 @@ class Player extends GameObject{
         Money.I.money               = Util.loadLocalStrage("Money.I.money", Money.I.money);
         GameScene.enemyLevel        = Util.loadLocalStrage("GameScene.enemyLevel", GameScene.enemyLevel);
         Player.gameClear            = Util.loadLocalStrage("Player.gameClear", Player.gameClear);
-        Kill.I.kill = 8;
 
     }
 
@@ -67,8 +66,6 @@ class Player extends GameObject{
         GameScene.enemyLevel        = 1;
         Player.gameClear            = 0;
 
-
-        //Player.I.resetTimer();
         Player.shotTimer.stop();
         Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER,this.shot,this);
 
@@ -115,8 +112,8 @@ class Player extends GameObject{
 
 
         //砲台部分をつくるため、背景色と同じ色を重ねている
-        let leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(0, 0, 0));
-        let rightMaskShape = this.setMask(this.shape.x + this.shape.width *2/3 , this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(0, 0, 0));
+        let leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(0,10,90));
+        let rightMaskShape = this.setMask(this.shape.x + this.shape.width *2/3 , this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(0,10,90));
         Player.object.addChild(this.shape);
         Player.object.addChild(leftMaskShape);
         Player.object.addChild(rightMaskShape);
@@ -136,7 +133,9 @@ class Player extends GameObject{
 
     public shot(){
         let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/24, Game.height/16, Util.color(255,255,0));
-        Player.bullet.push(b);       
+        Player.bullet.push(b);
+        const newArray :Bullet[] = Player.bullet.filter(b => b.collisionFlag !== true);
+        Player.bullet = newArray;
     }
 
     public resetTimer(){
@@ -154,6 +153,8 @@ class Player extends GameObject{
         Player.shotTimer.stop();
         Player.shotTimer.removeEventListener(egret.TimerEvent.TIMER,this.shot,this);
 
+        Player.bullet = [];
+
         if( this.shape ){
             Player.object.removeChild(this.shape);
             Player.object.removeChildren();
@@ -169,10 +170,11 @@ class Player extends GameObject{
             b.object.y -= Player.bulletMoveSpeed;
             if(b.object.y < 0){
                 b.destroy();
+                b.collisionFlag = true;
             }
             //Enemyとの接触判定(Enemyを一体ずつしか出さないならenemyをforEachする必要なし)
             GameScene.enemy.forEach(e =>{
-                if(b.collisionFlag == false && e.deadFlag == false && e.object.y >= b.object.y && b.object.y >= 0){
+                if(b.collisionFlag == false && e.deadFlag == false && e.object.y >= b.object.y && b.object.y >= e.object.y - e.object.height/2){
                     e.hp -= Player.bulletDamage;
                     MyTween.knockBack(e.object);
                     b.destroy();

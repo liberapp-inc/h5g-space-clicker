@@ -279,14 +279,14 @@ class ResetButton extends Button{
     }
 
     updateContent(){
-        if(Player.gameClear == 1){
+/*        if(Player.gameClear == 1){
             this.mask.alpha = 0;
             this.object.touchEnabled = true;
         }
         else{
             this.mask.alpha = 0.5;
             this.object.touchEnabled = false;
-        }
+        }*/
     }
 
 }

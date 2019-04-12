@@ -245,14 +245,14 @@ var ResetButton = (function (_super) {
         Player.I.resetStatus();
     };
     ResetButton.prototype.updateContent = function () {
-        if (Player.gameClear == 1) {
-            this.mask.alpha = 0;
-            this.object.touchEnabled = true;
-        }
-        else {
-            this.mask.alpha = 0.5;
-            this.object.touchEnabled = false;
-        }
+        /*        if(Player.gameClear == 1){
+                    this.mask.alpha = 0;
+                    this.object.touchEnabled = true;
+                }
+                else{
+                    this.mask.alpha = 0.5;
+                    this.object.touchEnabled = false;
+                }*/
     };
     return ResetButton;
 }(Button));

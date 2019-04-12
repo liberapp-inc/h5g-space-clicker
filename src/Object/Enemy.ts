@@ -114,9 +114,16 @@ abstract class Enemy extends GameObject{
 
     addDestroyMethod(){
 
+        egret.Tween.removeTweens(this.object);
+        if(this.hpTextField){
+            this.object.removeChild(this.hpTextField);
+            this.hpTextField = null;
+
+        }
+
         this.addShapes.forEach(s =>{
-                this.object.removeChild(s);
-                s=null;
+            this.object.removeChild(s);
+            s=null;
         });
         
         if(this.shape){
