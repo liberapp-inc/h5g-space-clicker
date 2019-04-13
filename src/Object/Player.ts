@@ -169,7 +169,7 @@ class Player extends GameObject{
         Player.bullet.forEach(b => {
             //bulletSpeedが速すぎると、弾が当たり判定に収まらず、当たらないことがあるので移動スピードを強制補正
             let bSpeed : number = Player.bulletMoveSpeed;
-            if(bSpeed > 20){bSpeed = 20;}
+            if(bSpeed > 30){bSpeed = 30;}
 
             b.object.y -= bSpeed;
             //b.object.y -= Player.bulletMoveSpeed;

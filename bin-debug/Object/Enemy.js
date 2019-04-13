@@ -200,12 +200,12 @@ var Umibouzu = (function (_super) {
     __extends(Umibouzu, _super);
     function Umibouzu(x, y, width, height, radius, color, hp, dropMoney) {
         var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
-        var interval = radius * 1.5;
+        var interval = radius * 1.5 / 20;
         var eyeColor = Util.color(162, 43, 71);
-        _this.setCircleShape(interval, interval, radius / 1.5, eyeColor);
-        _this.setCircleShape(-interval, interval, radius / 1.5, eyeColor);
-        _this.setCircleShape(0, interval * 2, radius / 1.5, eyeColor);
-        _this.setCircleShape(0, 0, radius * 4, color);
+        _this.setCircleShape(interval, interval, radius / 1.5 / 20, eyeColor);
+        _this.setCircleShape(-interval, interval, radius / 1.5 / 20, eyeColor);
+        _this.setCircleShape(0, interval * 2, radius / 1.5 / 20, eyeColor);
+        _this.setCircleShape(0, 0, radius * 4 / 20, color);
         return _this;
     }
     return Umibouzu;

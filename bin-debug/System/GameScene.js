@@ -129,10 +129,10 @@ var GameScene = (function (_super) {
                 break;
             //Bossキャラ
             case RandomEnemy.UMIBOUZU:
-                cr = Game.width / 20; //radius
+                cr = Game.width; //radius
                 cw = cr; //width
                 ch = cr; //height
-                e = new Umibouzu(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 100 + Kill.I.kill * 1, 1500);
+                e = new Umibouzu(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 100 + Kill.I.kill * 1, 1500 + Kill.I.kill * 1);
                 GameScene.enemy.push(e);
                 if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
                     e.bossFlag = true;
@@ -200,7 +200,7 @@ var GameScene = (function (_super) {
                 break;
             case RandomEnemy.BOSS_UMIBOUZU:
                 new BossEntryEffect();
-                cr = Game.width / 8; //radius
+                cr = Game.width / 8 * 20; //radius
                 cw = cr; //width
                 ch = cr; //height
                 e = new Umibouzu(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 100000, 200000);
