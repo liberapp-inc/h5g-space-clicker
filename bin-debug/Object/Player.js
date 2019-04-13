@@ -37,14 +37,14 @@ var Player = (function (_super) {
         Player.gameClear = Util.loadLocalStrage("Player.gameClear", Player.gameClear);
     };
     Player.prototype.resetStatus = function () {
-        Player.bulletDamage = 1000;
+        Player.bulletDamage = 1;
         Player.bulletMoveSpeed = 5;
         Player.salary = 1;
         Player.shotInterval = 1000;
         Player.damageLevelUpCost = 100;
         Player.speedLevelUpCost = 100;
         Player.salaryLevelUpCost = 100;
-        Kill.I.kill = 398;
+        Kill.I.kill = 0;
         Money.I.money = 0;
         GameScene.enemyLevel = 1;
         Player.gameClear = 0;
