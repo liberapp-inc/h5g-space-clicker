@@ -54,14 +54,14 @@ class Player extends GameObject{
 
     resetStatus(){
 
-        Player.bulletDamage         = 1;
+        Player.bulletDamage         = 1000;
         Player.bulletMoveSpeed      = 5;
         Player.salary               = 1;
         Player.shotInterval         = 1000;
         Player.damageLevelUpCost    = 100;
         Player.speedLevelUpCost     = 100;
         Player.salaryLevelUpCost    = 100;
-        Kill.I.kill                 = 0;
+        Kill.I.kill                 = 398;
         Money.I.money               = 0;
         GameScene.enemyLevel        = 1;
         Player.gameClear            = 0;
@@ -112,8 +112,8 @@ class Player extends GameObject{
 
 
         //砲台部分をつくるため、背景色と同じ色を重ねている
-        let leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(0,10,90));
-        let rightMaskShape = this.setMask(this.shape.x + this.shape.width *2/3 , this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(0,10,90));
+        let leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(6, 7, 28));
+        let rightMaskShape = this.setMask(this.shape.x + this.shape.width *2/3 , this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(6, 7, 28));
         Player.object.addChild(this.shape);
         Player.object.addChild(leftMaskShape);
         Player.object.addChild(rightMaskShape);
@@ -132,7 +132,7 @@ class Player extends GameObject{
     }
 
     public shot(){
-        let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/24, Game.height/16, Util.color(255,255,0));
+        let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/24, Game.height/16, Util.color(214,175,56));
         Player.bullet.push(b);
         const newArray :Bullet[] = Player.bullet.filter(b => b.collisionFlag !== true);
         Player.bullet = newArray;
@@ -169,7 +169,7 @@ class Player extends GameObject{
         Player.bullet.forEach(b => {
             //bulletSpeedが速すぎると、弾が当たり判定に収まらず、当たらないことがあるので移動スピードを強制補正
             let bSpeed : number = Player.bulletMoveSpeed;
-            if(bSpeed > 30){bSpeed = 30;}
+            if(bSpeed > 20){bSpeed = 20;}
 
             b.object.y -= bSpeed;
             //b.object.y -= Player.bulletMoveSpeed;
@@ -188,7 +188,7 @@ class Player extends GameObject{
                         e.hp = 0;
                         e.deadFlag = true;
                         Money.addMoney(e.dropMoney);
-                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, 0x00FF3B, false, e.object);
+                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, Util.color(90,205,39), false, e.object);
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
                         if(e.lastBossFlag){

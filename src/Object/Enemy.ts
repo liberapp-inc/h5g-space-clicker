@@ -11,7 +11,7 @@ abstract class Enemy extends GameObject{
     public dropMoney : number = 0;
     public hp : number = 0;
     public hpTextField : egret.TextField = null;
-    public hpTextFieldColor : number = 0xff0000;
+    public hpTextFieldColor : number = Util.color(162,43,71);
     public deadFlag : boolean = false;
     public bossFlag : boolean = false;
     public lastBossFlag : boolean = false;
@@ -212,7 +212,7 @@ class Umibouzu extends Enemy{
     constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
         super(x, y, width, height, color, hp, dropMoney);
         const interval :number = radius*1.5;
-        const eyeColor :number = Util.color(255,0,0);
+        const eyeColor :number = Util.color(162,43,71);
         this.setCircleShape(interval, interval, radius/1.5, eyeColor);
         this.setCircleShape(-interval, interval, radius/1.5, eyeColor);
         this.setCircleShape(0, interval*2, radius/1.5, eyeColor);

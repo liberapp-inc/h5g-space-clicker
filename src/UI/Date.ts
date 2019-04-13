@@ -9,7 +9,7 @@ class CheckDate extends GameObject{
     static timerCounter :number = 0;
 
     text:egret.TextField = null;
-    textColor : number = 0xffffff;
+    textColor : number = Util.color(222,230,251);
 
     private s :number = 0;//現在時刻 - 最終記録時間 sec
 

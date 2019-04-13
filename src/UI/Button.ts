@@ -2,11 +2,11 @@ abstract class Button extends GameObject{
 
     public object : egret.DisplayObjectContainer = null;
     public indexText : egret.TextField = null;
-    public indexTextColor : number = 0xffffff;
+    public indexTextColor : number = Util.color(222,230,251);
     public costText : egret.TextField = null;
-    public costTextColor : number = 0xffffff;
+    public costTextColor : number = Util.color(222,230,251);
     public parameterText : egret.TextField = null;
-    public parameterTextColor : number = 0xffffff;
+    public parameterTextColor : number = Util.color(222,230,251);
     public mask : egret.Shape = null;
     public onMask : boolean = false;
 

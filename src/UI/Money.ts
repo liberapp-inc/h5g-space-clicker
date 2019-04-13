@@ -13,7 +13,7 @@ class Money extends GameObject{
     constructor() {
         super();
 
-        this.textColor = Util.color(0,255,0);
+        this.textColor = Util.color(222,230,251);
 
         Money.I = this;
 
@@ -56,7 +56,7 @@ class DropMoney extends GameObject{
     constructor(x:number, y:number, text:string, size:number, ratio:number, color:number, bold:boolean, display:egret.DisplayObjectContainer) {
         super();
 
-        this.textColor = Util.color(0,255,0);
+        this.textColor = Util.color(90,205,39);
         this.display = display;
 
         this.text = Util.myText(x, y, text, size, ratio, color, true);  

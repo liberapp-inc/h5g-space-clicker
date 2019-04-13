@@ -29,7 +29,7 @@ class Game{
         
         this.height = egret.MainContext.instance.stage.stageHeight;
         this.width  = egret.MainContext.instance.stage.stageWidth;
-        const buttonColor :number = Util.color(220,20,60);
+        const buttonColor :number = Util.color(162,43,71);
         /* new メソッドを記入*/
         new Background();
         new Kill();
@@ -56,7 +56,7 @@ class Background extends GameObject{
         super();
         Background.I = this;
         this.shape = new egret.Shape();
-        this.shape.graphics.beginFill(Util.color(0,10,90));
+        this.shape.graphics.beginFill(Util.color(6,10,55));
         this.shape.graphics.drawRect(0, 0, Game.width, Game.height);
         this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);

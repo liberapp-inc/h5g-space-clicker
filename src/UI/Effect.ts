@@ -98,14 +98,14 @@ class BossEntryEffect extends GameObject{
     }
 
     setBackground(){
-        const color :number = 0xffffe0;
+        const color :number = Util.color(255,204,141);
         this.background = new egret.Shape();
         this.background.graphics.beginFill(color);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
         this.background.graphics.endFill();
         this.background.alpha = 0.1;
         GameObject.display.addChild(this.background);
-        MyTween.backgroundFadeOut(this.background,1500);
+        MyTween.backgroundFadeOut(this.background,500);
     }
 
     addDestroyMethod(){
@@ -144,7 +144,7 @@ class BossDeadEffect extends GameObject{
     }
 
     setBackground(){
-        const color :number = 0xffffe0;
+        const color :number = Util.color(255,204,141);
         this.background = new egret.Shape();
         this.background.graphics.beginFill(color);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
@@ -175,7 +175,7 @@ class GameClearEffect extends GameObject{
     background : egret.Shape = null;
 
     text : egret.TextField = null;
-    textColor : number = Util.color(220,20,60);
+    textColor : number = Util.color(162,43,71);
     constructor(){
         super();
         GameClearEffect.I = this;
@@ -185,7 +185,7 @@ class GameClearEffect extends GameObject{
     }
 
     setBackground(){
-        const color :number = 0xffffe0;
+        const color :number = Util.color(255,204,141);
         this.background = new egret.Shape();
         this.background.graphics.beginFill(color);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
