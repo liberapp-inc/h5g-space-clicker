@@ -34,7 +34,7 @@ var Game = (function () {
     Game.init = function () {
         this.height = egret.MainContext.instance.stage.stageHeight;
         this.width = egret.MainContext.instance.stage.stageWidth;
-        var buttonColor = Util.color(162, 43, 71);
+        var buttonColor = Util.color(254, 0, 0);
         /* new メソッドを記入*/
         new Background();
         new Kill();
@@ -54,7 +54,7 @@ var Background = (function (_super) {
     __extends(Background, _super);
     function Background() {
         var _this = _super.call(this) || this;
-        _this.color = Util.color(15, 13, 62);
+        _this.color = Util.color(0, 0, 0);
         Background.I = _this;
         _this.shape = new egret.Shape();
         _this.shape.graphics.beginFill(_this.color);

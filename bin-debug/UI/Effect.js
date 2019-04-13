@@ -16,9 +16,10 @@ var BossEntryEffect = (function (_super) {
         _this.upperObject = null;
         _this.lowerObject = null;
         _this.background = null;
+        _this.backgroundColor = Util.color(255, 240, 230);
         _this.leftText = null;
         _this.rightText = null;
-        _this.textColor = Util.color(162, 43, 71);
+        _this.textColor = Util.color(254, 0, 0);
         BossEntryEffect.I = _this;
         _this.setBackground();
         _this.setObject();
@@ -40,10 +41,10 @@ var BossEntryEffect = (function (_super) {
         var color;
         for (var i = 0; i < 30; i++) {
             if (i % 2 == 0) {
-                color = Util.color(6, 7, 28);
+                color = Util.color(0, 0, 0);
             }
             else {
-                color = Util.color(255, 204, 141);
+                color = Util.color(255, 240, 39);
             }
             var s = new egret.Shape();
             s.graphics.beginFill(color);
@@ -57,10 +58,10 @@ var BossEntryEffect = (function (_super) {
         var color;
         for (var i = 0; i < 30; i++) {
             if (i % 2 == 0) {
-                color = Util.color(6, 7, 28);
+                color = Util.color(0, 0, 0);
             }
             else {
-                color = Util.color(255, 204, 141);
+                color = Util.color(255, 240, 39);
             }
             var s = new egret.Shape();
             s.graphics.beginFill(color);
@@ -99,9 +100,8 @@ var BossEntryEffect = (function (_super) {
         MyTween.bossTextSlide(this.rightText, -Game.width / 2, 300);
     };
     BossEntryEffect.prototype.setBackground = function () {
-        var color = Util.color(255, 204, 141);
         this.background = new egret.Shape();
-        this.background.graphics.beginFill(color);
+        this.background.graphics.beginFill(this.backgroundColor);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
         this.background.graphics.endFill();
         this.background.alpha = 0.1;
@@ -131,14 +131,14 @@ var BossDeadEffect = (function (_super) {
     function BossDeadEffect() {
         var _this = _super.call(this) || this;
         _this.background = null;
+        _this.backgroundColor = Util.color(230, 230, 230);
         BossDeadEffect.I = _this;
         _this.setBackground();
         return _this;
     }
     BossDeadEffect.prototype.setBackground = function () {
-        var color = Util.color(255, 204, 141);
         this.background = new egret.Shape();
-        this.background.graphics.beginFill(color);
+        this.background.graphics.beginFill(this.backgroundColor);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
         this.background.graphics.endFill();
         this.background.alpha = 0.5;
@@ -160,17 +160,17 @@ var GameClearEffect = (function (_super) {
     function GameClearEffect() {
         var _this = _super.call(this) || this;
         _this.background = null;
+        _this.backgroundColor = Util.color(230, 230, 230);
         _this.text = null;
-        _this.textColor = Util.color(162, 43, 71);
+        _this.textColor = Util.color(0, 0, 0);
         GameClearEffect.I = _this;
         _this.setBackground();
         _this.setText();
         return _this;
     }
     GameClearEffect.prototype.setBackground = function () {
-        var color = Util.color(255, 204, 141);
         this.background = new egret.Shape();
-        this.background.graphics.beginFill(color);
+        this.background.graphics.beginFill(this.backgroundColor);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
         this.background.graphics.endFill();
         this.background.alpha = 0.5;

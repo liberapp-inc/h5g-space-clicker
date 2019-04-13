@@ -132,7 +132,7 @@ class Player extends GameObject{
     }
 
     public shot(){
-        let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/24, Game.height/16, Util.color(214,175,56));
+        let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/24, Game.height/16, Util.color(255,240,39));
         Player.bullet.push(b);
         const newArray :Bullet[] = Player.bullet.filter(b => b.collisionFlag !== true);
         Player.bullet = newArray;
@@ -188,7 +188,7 @@ class Player extends GameObject{
                         e.hp = 0;
                         e.deadFlag = true;
                         Money.addMoney(e.dropMoney);
-                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, Util.color(202,255,149), false, e.object);
+                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, Util.color(0,254,252), false, e.object);
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
                         if(e.lastBossFlag){

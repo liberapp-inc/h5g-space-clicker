@@ -14,11 +14,11 @@ var Button = (function (_super) {
         var _this = _super.call(this) || this;
         _this.object = null;
         _this.indexText = null;
-        _this.indexTextColor = Util.color(216, 213, 244);
+        _this.indexTextColor = Util.color(230, 230, 230);
         _this.costText = null;
-        _this.costTextColor = Util.color(222, 230, 251);
+        _this.costTextColor = Util.color(230, 230, 230);
         _this.parameterText = null;
-        _this.parameterTextColor = Util.color(222, 230, 251);
+        _this.parameterTextColor = Util.color(230, 230, 230);
         _this.mask = null;
         _this.onMask = false;
         _this.setObject(x, y, width, height);

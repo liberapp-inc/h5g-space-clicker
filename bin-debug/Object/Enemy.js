@@ -23,7 +23,7 @@ var Enemy = (function (_super) {
         _this.dropMoney = 0;
         _this.hp = 0;
         _this.hpTextField = null;
-        _this.hpTextFieldColor = Util.color(162, 43, 71);
+        _this.hpTextFieldColor = Util.color(230, 230, 230);
         _this.deadFlag = false;
         _this.bossFlag = false;
         _this.lastBossFlag = false;
@@ -201,7 +201,7 @@ var Umibouzu = (function (_super) {
     function Umibouzu(x, y, width, height, radius, color, hp, dropMoney) {
         var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
         var interval = radius * 1.5 / 20;
-        var eyeColor = Util.color(162, 43, 71);
+        var eyeColor = Util.color(254, 0, 0);
         _this.setCircleShape(interval, interval, radius / 1.5 / 20, eyeColor);
         _this.setCircleShape(-interval, interval, radius / 1.5 / 20, eyeColor);
         _this.setCircleShape(0, interval * 2, radius / 1.5 / 20, eyeColor);

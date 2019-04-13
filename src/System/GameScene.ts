@@ -44,9 +44,10 @@ class GameScene extends GameObject{
 
         let e : Enemy;
         let createEnemy : number = Util.randomInt(RandomEnemy.RECT, GameScene.enemyLevel);
-        let rectEnemyColor : number =  Util.color(240,187,243);
-        let circleEnemyColor : number =  Util.color(240,187,243);
-        let bossColor : number = Util.color(214,175,56);
+        let rectEnemyColor : number =  Util.color(0,254,0);
+        let circleEnemyColor : number =  Util.color(255,100,255);
+        let bossColor : number = Util.color(255,240,39);
+        let bossHpTextColor : number = Util.color(254,0,0);
         let enemyHP : number = 0;
         let enemyDropMoney : number = 0;
 
@@ -141,6 +142,7 @@ class GameScene extends GameObject{
             ch = cr;//height
             e = new Umibouzu(Game.width/2, Game.height/4, cw, ch, cr,bossColor, 100+ Kill.I.kill*1, 1500+ Kill.I.kill*1);
             GameScene.enemy.push(e);
+            e.hpTextField.textColor = bossHpTextColor;
             if(GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU){
                 e.bossFlag = true;
                 new BossEntryEffect();
@@ -149,6 +151,7 @@ class GameScene extends GameObject{
             case RandomEnemy.BOSS_RECT:
             e = new RectEnemy(Game.width/2, Game.height/4, Game.width/3.6, Game.height/5.2, bossColor, 100+ Kill.I.kill*1, 1500);
             GameScene.enemy.push(e);
+            e.hpTextField.textColor = bossHpTextColor;
             if(GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU){
                 e.bossFlag = true;
                 new BossEntryEffect();
@@ -160,6 +163,7 @@ class GameScene extends GameObject{
             ch = cr;//height
             e = new CircleEnemy(Game.width/2, Game.height/4, cw, ch, cr,bossColor, 300+ Kill.I.kill*2, 2000);
             GameScene.enemy.push(e);
+            e.hpTextField.textColor = bossHpTextColor;
             if(GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU){
                 e.bossFlag = true;
                 new BossEntryEffect();
@@ -168,6 +172,7 @@ class GameScene extends GameObject{
             case RandomEnemy.BOSS_DOUBLE_RECT:
             e = new DoubleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, bossColor, 1000+ Kill.I.kill*3, 5000);
             GameScene.enemy.push(e);
+            e.hpTextField.textColor = bossHpTextColor;
             if(GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU){
                 e.bossFlag = true;
                 new BossEntryEffect();
@@ -179,6 +184,7 @@ class GameScene extends GameObject{
             ch = cr;//height
             e = new DoubleCircle(Game.width/2, Game.height/4, cw, ch, cr,bossColor, 2000+ Kill.I.kill*4, 7000);
             GameScene.enemy.push(e);
+            e.hpTextField.textColor = bossHpTextColor;
             if(GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU){
                 e.bossFlag = true;
                 new BossEntryEffect();
@@ -187,6 +193,7 @@ class GameScene extends GameObject{
             case RandomEnemy.BOSS_TRIPLE_RECT:
             e = new TripleRect(Game.width/2, Game.height/4, Game.width/6, Game.height/8, bossColor, 5000+ Kill.I.kill*5, 10000);
             GameScene.enemy.push(e);
+            e.hpTextField.textColor = bossHpTextColor;
             if(GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU){
                 e.bossFlag = true;
                 new BossEntryEffect();
@@ -198,6 +205,7 @@ class GameScene extends GameObject{
             ch = cr;//height
             e = new TripleCircle(Game.width/2, Game.height/4, cw, ch, cr,bossColor, 7000+ Kill.I.kill*6, 15000);
             GameScene.enemy.push(e);
+            e.hpTextField.textColor = bossHpTextColor;
             if(GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU){
                 e.bossFlag = true;
                 new BossEntryEffect();
@@ -212,6 +220,7 @@ class GameScene extends GameObject{
             ch = cr;//height
             e = new Umibouzu(Game.width/2, Game.height/4, cw, ch, cr,bossColor, 100000, 200000);
             GameScene.enemy.push(e);
+            e.hpTextField.textColor = bossHpTextColor;
             e.bossFlag = true;
             e.lastBossFlag = true;
             break;

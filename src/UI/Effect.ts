@@ -6,9 +6,11 @@ class BossEntryEffect extends GameObject{
     upperObject : egret.DisplayObjectContainer = null;
     lowerObject : egret.DisplayObjectContainer = null;
     background : egret.Shape = null;
+    backgroundColor : number = Util.color(255,240,230);
     leftText : egret.TextField = null;
     rightText : egret.TextField = null;
-    textColor : number = Util.color(162,43,71);
+    textColor : number = Util.color(254,0,0);
+
     constructor(){
         super();
         BossEntryEffect.I = this;
@@ -34,10 +36,10 @@ class BossEntryEffect extends GameObject{
         let color : number;
         for(let i = 0; i < 30; i++){
             if(i%2 == 0){
-                color = Util.color(6,7,28);
+                color = Util.color(0,0,0);
             }
             else{
-                color = Util.color(255,204,141);
+                color = Util.color(255,240,39);
             }
             let s = new egret.Shape();
             s.graphics.beginFill(color);
@@ -52,10 +54,10 @@ class BossEntryEffect extends GameObject{
         let color : number;
         for(let i = 0; i < 30; i++){
             if(i%2 == 0){
-                color = Util.color(6,7,28);
+                color = Util.color(0,0,0);
             }
             else{
-                color = Util.color(255,204,141);
+                color = Util.color(255,240,39);
             }
             let s = new egret.Shape();
             s.graphics.beginFill(color);
@@ -98,9 +100,8 @@ class BossEntryEffect extends GameObject{
     }
 
     setBackground(){
-        const color :number = Util.color(255,204,141);
         this.background = new egret.Shape();
-        this.background.graphics.beginFill(color);
+        this.background.graphics.beginFill(this.backgroundColor);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
         this.background.graphics.endFill();
         this.background.alpha = 0.1;
@@ -136,6 +137,8 @@ class BossDeadEffect extends GameObject{
     static I : BossDeadEffect = null;
 
     background : egret.Shape = null;
+    backgroundColor : number = Util.color(230,230,230);
+
 
     constructor(){
         super();
@@ -144,9 +147,8 @@ class BossDeadEffect extends GameObject{
     }
 
     setBackground(){
-        const color :number = Util.color(255,204,141);
         this.background = new egret.Shape();
-        this.background.graphics.beginFill(color);
+        this.background.graphics.beginFill(this.backgroundColor);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
         this.background.graphics.endFill();
         this.background.alpha = 0.5;
@@ -173,9 +175,11 @@ class GameClearEffect extends GameObject{
 
     static I : GameClearEffect = null;
     background : egret.Shape = null;
+    backgroundColor : number = Util.color(230,230,230);
+
 
     text : egret.TextField = null;
-    textColor : number = Util.color(162,43,71);
+    textColor : number = Util.color(0,0,0);
     constructor(){
         super();
         GameClearEffect.I = this;
@@ -185,9 +189,8 @@ class GameClearEffect extends GameObject{
     }
 
     setBackground(){
-        const color :number = Util.color(255,204,141);
         this.background = new egret.Shape();
-        this.background.graphics.beginFill(color);
+        this.background.graphics.beginFill(this.backgroundColor);
         this.background.graphics.drawRect(0, 0, Game.width, Game.height);
         this.background.graphics.endFill();
         this.background.alpha = 0.5;
