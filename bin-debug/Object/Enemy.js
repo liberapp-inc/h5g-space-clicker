@@ -174,9 +174,9 @@ var TripleCircle = (function (_super) {
     function TripleCircle(x, y, width, height, radius, color, hp, dropMoney) {
         var _this = _super.call(this, x, y, width, height, color, hp, dropMoney) || this;
         var interval = radius / 1;
-        _this.setCircleShape(0, interval, radius, color);
-        _this.setCircleShape(interval, 0, radius / 1.5, color);
-        _this.setCircleShape(-interval, 0, radius / 1.5, color);
+        _this.setCircleShape(0, 0, radius, color);
+        _this.setCircleShape(interval, -interval, radius / 1.5, color);
+        _this.setCircleShape(-interval, -interval, radius / 1.5, color);
         return _this;
     }
     return TripleCircle;

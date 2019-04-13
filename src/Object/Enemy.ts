@@ -186,9 +186,9 @@ class TripleCircle extends Enemy{
     constructor(x : number, y : number, width : number, height : number, radius : number, color:number, hp:number, dropMoney:number) {
         super(x, y, width, height, color, hp, dropMoney);
         const interval :number = radius/1;
-        this.setCircleShape(0, interval, radius, color);
-        this.setCircleShape(interval, 0, radius/1.5, color);
-        this.setCircleShape(-interval, 0, radius/1.5, color);
+        this.setCircleShape(0, 0, radius, color);
+        this.setCircleShape(interval, -interval, radius/1.5, color);
+        this.setCircleShape(-interval, -interval, radius/1.5, color);
     }
 
 }

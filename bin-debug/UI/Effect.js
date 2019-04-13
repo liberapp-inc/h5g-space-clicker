@@ -18,7 +18,7 @@ var BossEntryEffect = (function (_super) {
         _this.background = null;
         _this.leftText = null;
         _this.rightText = null;
-        _this.textColor = 0xff0000;
+        _this.textColor = Util.color(162, 43, 71);
         BossEntryEffect.I = _this;
         _this.setBackground();
         _this.setObject();
@@ -38,12 +38,12 @@ var BossEntryEffect = (function (_super) {
     };
     BossEntryEffect.prototype.setUpperShape = function (x, y, width, height) {
         var color;
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 30; i++) {
             if (i % 2 == 0) {
-                color = 0x000000;
+                color = Util.color(6, 7, 28);
             }
             else {
-                color = 0xffff00;
+                color = Util.color(255, 204, 141);
             }
             var s = new egret.Shape();
             s.graphics.beginFill(color);
@@ -55,12 +55,12 @@ var BossEntryEffect = (function (_super) {
     };
     BossEntryEffect.prototype.setLowerShape = function (x, y, width, height) {
         var color;
-        for (var i = 0; i < 50; i++) {
+        for (var i = 0; i < 30; i++) {
             if (i % 2 == 0) {
-                color = 0x000000;
+                color = Util.color(6, 7, 28);
             }
             else {
-                color = 0xffff00;
+                color = Util.color(255, 204, 141);
             }
             var s = new egret.Shape();
             s.graphics.beginFill(color);
@@ -106,7 +106,7 @@ var BossEntryEffect = (function (_super) {
         this.background.graphics.endFill();
         this.background.alpha = 0.1;
         GameObject.display.addChild(this.background);
-        MyTween.backgroundFadeOut(this.background, 500);
+        MyTween.backgroundFadeOut(this.background, 300);
     };
     BossEntryEffect.prototype.addDestroyMethod = function () {
         if (this.upperObject) {

@@ -34,11 +34,11 @@ class Game{
         new Background();
         new Kill();
         new Money();
-        new Player(Game.width/2, Game.height/1.5, Game.width/3.4, Game.height/8, Util.color(220,20,60));
+        new Player(Game.width/2, Game.height/1.5, Game.width/3.4, Game.height/8, buttonColor);
         new LevelUpBulletDamageButton(Game.width/6, Game.height/1.1, Game.width/4, Game.height/10.5, buttonColor, "Attack");
         new LevelUpBulletSpeedButton(Game.width/2, Game.height/1.1, Game.width/4, Game.height/10.5, buttonColor, "Speed");
         new LevelUpSalaryButton(Game.width/1.2, Game.height/1.1, Game.width/4, Game.height/10.5, buttonColor, "Salary");
-        new ResetButton(Game.width/1.18, Game.height/10, Game.width/4.5, Game.height/14, buttonColor, "Delete\nData");
+        new ResetButton(Game.width/1.18, Game.height/9.8, Game.width/4.5, Game.height/14, buttonColor, "Delete\nData");
         new CheckDate();//Playerよりも後にインスタンス化すること
         new GameScene();
 
@@ -51,12 +51,12 @@ class Game{
 class Background extends GameObject{
 
     static I : Background = null;
-
+    color :number = Util.color(15,13,62);
     constructor() {
         super();
         Background.I = this;
         this.shape = new egret.Shape();
-        this.shape.graphics.beginFill(Util.color(6,10,55));
+        this.shape.graphics.beginFill(this.color);
         this.shape.graphics.drawRect(0, 0, Game.width, Game.height);
         this.shape.graphics.endFill();
         GameObject.display.addChild(this.shape);

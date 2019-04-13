@@ -112,8 +112,8 @@ class Player extends GameObject{
 
 
         //砲台部分をつくるため、背景色と同じ色を重ねている
-        let leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(6, 7, 28));
-        let rightMaskShape = this.setMask(this.shape.x + this.shape.width *2/3 , this.shape.y, this.shape.width/3, this.shape.height/2, Util.color(6, 7, 28));
+        let leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width/3, this.shape.height/2, Background.I.color);
+        let rightMaskShape = this.setMask(this.shape.x + this.shape.width *2/3 , this.shape.y, this.shape.width/3, this.shape.height/2, Background.I.color);
         Player.object.addChild(this.shape);
         Player.object.addChild(leftMaskShape);
         Player.object.addChild(rightMaskShape);
@@ -188,7 +188,7 @@ class Player extends GameObject{
                         e.hp = 0;
                         e.deadFlag = true;
                         Money.addMoney(e.dropMoney);
-                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, Util.color(90,205,39), false, e.object);
+                        new DropMoney(e.object.x, e.object.y, "+ " + e.dropMoney.toString() + " MONEY", 80, 0.5, Util.color(202,255,149), false, e.object);
                         //enemyFadeOut(フェードアウトしたいオブジェクト, e.destroy)としたかったが、
                         //e.destroyが即座に実行されてしまったため、直感的ではないがクラスを一旦取得し、destroyを実行
                         if(e.lastBossFlag){

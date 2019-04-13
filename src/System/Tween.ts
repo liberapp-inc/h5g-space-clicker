@@ -156,9 +156,10 @@ class MyTween {
 
         egret.Tween.get(object)
 
-            .to({alpha:0.1}, 0)
-            .wait(4000)
+            .to({alpha:0.5}, 0)
+            .wait(50)
             .to({alpha:0}, fadeOutTime_ms)
+            .wait(3950)
             .call(()=> {
                 egret.Tween.removeTweens(object);
                 BossEntryEffect.I.destroy();

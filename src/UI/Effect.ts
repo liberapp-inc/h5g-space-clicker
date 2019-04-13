@@ -8,7 +8,7 @@ class BossEntryEffect extends GameObject{
     background : egret.Shape = null;
     leftText : egret.TextField = null;
     rightText : egret.TextField = null;
-    textColor : number = 0xff0000;
+    textColor : number = Util.color(162,43,71);
     constructor(){
         super();
         BossEntryEffect.I = this;
@@ -32,12 +32,12 @@ class BossEntryEffect extends GameObject{
 
     setUpperShape(x : number, y : number, width : number, height : number){
         let color : number;
-        for(let i = 0; i < 20; i++){
+        for(let i = 0; i < 30; i++){
             if(i%2 == 0){
-                color = 0x000000;
+                color = Util.color(6,7,28);
             }
             else{
-                color = 0xffff00;
+                color = Util.color(255,204,141);
             }
             let s = new egret.Shape();
             s.graphics.beginFill(color);
@@ -50,12 +50,12 @@ class BossEntryEffect extends GameObject{
 
     setLowerShape(x : number, y : number, width : number, height : number){
         let color : number;
-        for(let i = 0; i < 50; i++){
+        for(let i = 0; i < 30; i++){
             if(i%2 == 0){
-                color = 0x000000;
+                color = Util.color(6,7,28);
             }
             else{
-                color = 0xffff00;
+                color = Util.color(255,204,141);
             }
             let s = new egret.Shape();
             s.graphics.beginFill(color);
@@ -105,7 +105,7 @@ class BossEntryEffect extends GameObject{
         this.background.graphics.endFill();
         this.background.alpha = 0.1;
         GameObject.display.addChild(this.background);
-        MyTween.backgroundFadeOut(this.background,500);
+        MyTween.backgroundFadeOut(this.background,300);
     }
 
     addDestroyMethod(){
