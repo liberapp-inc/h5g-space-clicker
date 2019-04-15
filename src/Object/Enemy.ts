@@ -106,6 +106,10 @@ abstract class Enemy extends GameObject{
 
     updateContent() {
         this.hpTextField.text = this.hp.toString();
+        
+        //Boss戦のとき、Bossを倒す前に画面を閉じるとなぜかknockbackが効かなくなる。
+        //以下の位置補正を無効にするとknockbackが機能するけど、連射スピードが速いと敵が画面外へ
+        //new BossEntryEffect();を無効にすると機能したのでTweenの重複も考えられる
         if(this.initialY > this.object.y){
             this.object.y = this.initialY;
         }

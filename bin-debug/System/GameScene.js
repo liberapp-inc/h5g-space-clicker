@@ -133,7 +133,7 @@ var GameScene = (function (_super) {
                 cr = Game.width; //radius
                 cw = cr; //width
                 ch = cr; //height
-                e = new Umibouzu(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 100 + Kill.I.kill * 1, 1500 + Kill.I.kill * 1);
+                e = new Umibouzu(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 150 + Kill.I.kill * 1, 2000 + Kill.I.kill * 1);
                 GameScene.enemy.push(e);
                 e.hpTextField.textColor = bossHpTextColor;
                 if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
@@ -142,7 +142,7 @@ var GameScene = (function (_super) {
                 }
                 break;
             case RandomEnemy.BOSS_RECT:
-                e = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 3.6, Game.height / 5.2, bossColor, 100 + Kill.I.kill * 1, 1500);
+                e = new RectEnemy(Game.width / 2, Game.height / 4, Game.width / 3.6, Game.height / 5.2, bossColor, 150 + Kill.I.kill * 1, 1500 + Kill.I.kill * 1);
                 GameScene.enemy.push(e);
                 e.hpTextField.textColor = bossHpTextColor;
                 if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
@@ -154,7 +154,7 @@ var GameScene = (function (_super) {
                 cr = Game.width / 5; //radius
                 cw = cr; //width
                 ch = cr; //height
-                e = new CircleEnemy(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 300 + Kill.I.kill * 2, 2000);
+                e = new CircleEnemy(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 400 + Kill.I.kill * 2, 2000 + Kill.I.kill * 2);
                 GameScene.enemy.push(e);
                 e.hpTextField.textColor = bossHpTextColor;
                 if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
@@ -163,7 +163,7 @@ var GameScene = (function (_super) {
                 }
                 break;
             case RandomEnemy.BOSS_DOUBLE_RECT:
-                e = new DoubleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, bossColor, 1000 + Kill.I.kill * 3, 5000);
+                e = new DoubleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, bossColor, 1000 + Kill.I.kill * 3, 5000 + Kill.I.kill * 3);
                 GameScene.enemy.push(e);
                 e.hpTextField.textColor = bossHpTextColor;
                 if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
@@ -175,7 +175,7 @@ var GameScene = (function (_super) {
                 cr = Game.width / 8; //radius
                 cw = cr; //width
                 ch = cr; //height
-                e = new DoubleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 2000 + Kill.I.kill * 4, 7000);
+                e = new DoubleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 2000 + Kill.I.kill * 4, 7000 + Kill.I.kill * 4);
                 GameScene.enemy.push(e);
                 e.hpTextField.textColor = bossHpTextColor;
                 if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
@@ -184,7 +184,7 @@ var GameScene = (function (_super) {
                 }
                 break;
             case RandomEnemy.BOSS_TRIPLE_RECT:
-                e = new TripleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, bossColor, 5000 + Kill.I.kill * 5, 10000);
+                e = new TripleRect(Game.width / 2, Game.height / 4, Game.width / 6, Game.height / 8, bossColor, 5000 + Kill.I.kill * 5, 10000 + Kill.I.kill * 5);
                 GameScene.enemy.push(e);
                 e.hpTextField.textColor = bossHpTextColor;
                 if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {
@@ -196,7 +196,7 @@ var GameScene = (function (_super) {
                 cr = Game.width / 8; //radius
                 cw = cr; //width
                 ch = cr; //height
-                e = new TripleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 7000 + Kill.I.kill * 6, 15000);
+                e = new TripleCircle(Game.width / 2, Game.height / 4, cw, ch, cr, bossColor, 7000 + Kill.I.kill * 6, 15000 + Kill.I.kill * 6);
                 GameScene.enemy.push(e);
                 e.hpTextField.textColor = bossHpTextColor;
                 if (GameScene.enemyLevel != RandomEnemy.UMIBOUZU && GameScene.enemyLevel != RandomEnemy.FINAL && GameScene.enemyLevel != RandomEnemy.BOSS_UMIBOUZU) {

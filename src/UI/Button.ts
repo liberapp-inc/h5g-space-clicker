@@ -4,7 +4,7 @@ abstract class Button extends GameObject{
     public indexText : egret.TextField = null;
     public indexTextColor : number = Util.color(230,230,230);
     public costText : egret.TextField = null;
-    public costTextColor : number = Util.color(230,230,230);
+    public costTextColor : number = Util.color(0,0,0);
     public parameterText : egret.TextField = null;
     public parameterTextColor : number = Util.color(230,230,230);
     public mask : egret.Shape = null;
@@ -114,15 +114,6 @@ abstract class Button extends GameObject{
         }
     }
 
-/*    protected delete(){
-        if( this.object ){
-            GameObject.display.removeChild(this.object);
-        }
-        if( this.object.hasEventListener ){
-            this.object.removeEventListener( egret.TouchEvent.TOUCH_BEGIN, this.tap, this );
-        }
-
-    }*/
 
     abstract tap() :void;
 
@@ -264,7 +255,7 @@ class ResetButton extends Button{
     setIndexText(x : number, y : number, width : number, height : number, index:string){
         const size :number = 60;
         const ratio :number = 0.5;
-        this.indexText = Util.myText(x,y, index, size, ratio, this.indexTextColor, false);
+        this.indexText = Util.myText(x,y, index, size, ratio, this.costTextColor, false);
         this.indexText.width = this.object.width/ratio;
         this.indexText.height = this.object.height/ratio;
         this.indexText.textAlign = egret.HorizontalAlign.CENTER;
@@ -272,21 +263,23 @@ class ResetButton extends Button{
         this.object.addChild(this.indexText);
     }
 
+
     tap(){
-        egret.Tween.removeAllTweens();
-        Player.I.resetStatus();
+        //Player.I.resetStatus();
+        new CautionPanel(0,0,Game.width,Game.height);
+        CautionPanel.onPanel = true;
 
     }
 
     updateContent(){
-/*        if(Player.gameClear == 1){
+        if(CautionPanel.onPanel == false){
             this.mask.alpha = 0;
             this.object.touchEnabled = true;
         }
         else{
             this.mask.alpha = 0.5;
             this.object.touchEnabled = false;
-        }*/
+        }
     }
 
 }

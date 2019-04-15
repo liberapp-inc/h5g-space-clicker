@@ -15,7 +15,7 @@ var CheckDate = (function (_super) {
     function CheckDate() {
         var _this = _super.call(this) || this;
         _this.text = null;
-        _this.textColor = Util.color(222, 230, 251);
+        _this.textColor = Util.color(230, 230, 230);
         _this.s = 0; //現在時刻 - 最終記録時間 sec
         CheckDate.I = _this;
         _this.getDate();

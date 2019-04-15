@@ -84,7 +84,7 @@ var Player = (function (_super) {
         this.shape.graphics.endFill();
         //砲台部分をつくるため、背景色と同じ色を重ねている
         var leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width / 3, this.shape.height / 2, Background.I.color);
-        var rightMaskShape = this.setMask(this.shape.x + this.shape.width * 2 / 3, this.shape.y, this.shape.width / 3, this.shape.height / 2, Background.I.color);
+        var rightMaskShape = this.setMask(this.shape.x + this.shape.width * 2 / 3 + 1, this.shape.y, this.shape.width / 3, this.shape.height / 2, Background.I.color);
         Player.object.addChild(this.shape);
         Player.object.addChild(leftMaskShape);
         Player.object.addChild(rightMaskShape);
@@ -99,7 +99,7 @@ var Player = (function (_super) {
         return mask;
     };
     Player.prototype.shot = function () {
-        var b = new Bullet(Game.width / 2, Game.height / 1.6, Game.width / 24, Game.height / 16, Util.color(255, 240, 39));
+        var b = new Bullet(Game.width / 2, Game.height / 1.6, Game.width / 30, Game.height / 16, Util.color(254, 0, 0));
         Player.bullet.push(b);
         var newArray = Player.bullet.filter(function (b) { return b.collisionFlag !== true; });
         Player.bullet = newArray;

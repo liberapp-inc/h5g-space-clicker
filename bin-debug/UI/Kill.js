@@ -17,7 +17,7 @@ var Kill = (function (_super) {
         //textBest:egret.TextField = null;
         _this.textColor = 0x00FF3B;
         Kill.I = _this;
-        _this.textColor = Util.color(222, 230, 251);
+        _this.textColor = Util.color(230, 230, 230);
         _this.kill = Util.loadLocalStrage("Kill.I.kill", Kill.I.kill);
         _this.text = Util.myText(0, 50, "KILL : " + _this.kill.toString() + " / 500", 100, 0.5, _this.textColor, true);
         GameObject.display.addChild(_this.text);

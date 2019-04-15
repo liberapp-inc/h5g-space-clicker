@@ -17,7 +17,7 @@ var Money = (function (_super) {
         _this.text = null;
         _this.textBest = null;
         _this.textColor = 0x00FF3B;
-        _this.textColor = Util.color(222, 230, 251);
+        _this.textColor = Util.color(230, 230, 230);
         Money.I = _this;
         /*        let money = window.localStorage.getItem("money"); // string
                 
@@ -50,8 +50,7 @@ var DropMoney = (function (_super) {
     function DropMoney(x, y, text, size, ratio, color, bold, display) {
         var _this = _super.call(this) || this;
         _this.text = null;
-        _this.textColor = 0x00FF3B;
-        _this.textColor = Util.color(90, 205, 39);
+        //this.textColor = Util.color(90,205,39);
         _this.display = display;
         _this.text = Util.myText(x, y, text, size, ratio, color, true);
         _this.text.width /= ratio;

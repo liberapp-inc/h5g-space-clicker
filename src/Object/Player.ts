@@ -113,7 +113,7 @@ class Player extends GameObject{
 
         //砲台部分をつくるため、背景色と同じ色を重ねている
         let leftMaskShape = this.setMask(this.shape.x, this.shape.y, this.shape.width/3, this.shape.height/2, Background.I.color);
-        let rightMaskShape = this.setMask(this.shape.x + this.shape.width *2/3 , this.shape.y, this.shape.width/3, this.shape.height/2, Background.I.color);
+        let rightMaskShape = this.setMask(this.shape.x + this.shape.width *2/3 + 1, this.shape.y, this.shape.width/3, this.shape.height/2, Background.I.color);
         Player.object.addChild(this.shape);
         Player.object.addChild(leftMaskShape);
         Player.object.addChild(rightMaskShape);
@@ -132,7 +132,7 @@ class Player extends GameObject{
     }
 
     public shot(){
-        let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/24, Game.height/16, Util.color(255,240,39));
+        let b: Bullet =new Bullet(Game.width/2, Game.height/1.6, Game.width/30, Game.height/16, Util.color(254,0,0));
         Player.bullet.push(b);
         const newArray :Bullet[] = Player.bullet.filter(b => b.collisionFlag !== true);
         Player.bullet = newArray;

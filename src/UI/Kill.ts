@@ -13,7 +13,7 @@ class Kill extends GameObject{
         super();
         Kill.I = this;
 
-        this.textColor = Util.color(222,230,251);
+        this.textColor = Util.color(230,230,230);
 
         this.kill = Util.loadLocalStrage("Kill.I.kill", Kill.I.kill);
 

@@ -16,7 +16,7 @@ var Button = (function (_super) {
         _this.indexText = null;
         _this.indexTextColor = Util.color(230, 230, 230);
         _this.costText = null;
-        _this.costTextColor = Util.color(230, 230, 230);
+        _this.costTextColor = Util.color(0, 0, 0);
         _this.parameterText = null;
         _this.parameterTextColor = Util.color(230, 230, 230);
         _this.mask = null;
@@ -233,7 +233,7 @@ var ResetButton = (function (_super) {
     ResetButton.prototype.setIndexText = function (x, y, width, height, index) {
         var size = 60;
         var ratio = 0.5;
-        this.indexText = Util.myText(x, y, index, size, ratio, this.indexTextColor, false);
+        this.indexText = Util.myText(x, y, index, size, ratio, this.costTextColor, false);
         this.indexText.width = this.object.width / ratio;
         this.indexText.height = this.object.height / ratio;
         this.indexText.textAlign = egret.HorizontalAlign.CENTER;
@@ -241,18 +241,19 @@ var ResetButton = (function (_super) {
         this.object.addChild(this.indexText);
     };
     ResetButton.prototype.tap = function () {
-        egret.Tween.removeAllTweens();
-        Player.I.resetStatus();
+        //Player.I.resetStatus();
+        new CautionPanel(0, 0, Game.width, Game.height);
+        CautionPanel.onPanel = true;
     };
     ResetButton.prototype.updateContent = function () {
-        /*        if(Player.gameClear == 1){
-                    this.mask.alpha = 0;
-                    this.object.touchEnabled = true;
-                }
-                else{
-                    this.mask.alpha = 0.5;
-                    this.object.touchEnabled = false;
-                }*/
+        if (CautionPanel.onPanel == false) {
+            this.mask.alpha = 0;
+            this.object.touchEnabled = true;
+        }
+        else {
+            this.mask.alpha = 0.5;
+            this.object.touchEnabled = false;
+        }
     };
     return ResetButton;
 }(Button));
