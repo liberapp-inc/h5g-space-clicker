@@ -1,0 +1,6 @@
+{
+  "title": "スペースクリッカー",
+  "lead": "インベーダーをタップで破壊するクリッカーゲームです。能力を上げて様々なボスを倒そう。Salaryを上げると、画面を閉じてもMoneyが上昇します。しばらく放置してから遊んでもOK。",
+  "description": "【操作方法】¥¥n画面をタップ：弾を連射¥¥n¥¥n【ステータス】¥¥nAttack：弾丸の攻撃力が向上¥¥nSpeed：弾丸の連射速度が向上¥¥nSalary：1秒あたりに獲得できるMoney",
+  "copyright": "SqumariGames, Liberapp"
+}
